@@ -1,0 +1,15 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\bin\Debug\AMARENT.exe.config
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\bin\Debug\AMARENT.exe
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\bin\Debug\AMARENT.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\bin\Debug\ClassLibrary.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\bin\Debug\ClassLibrary.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.Properties.Resources.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.UI_Login.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.UI_Menu.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.csproj.GenerateResource.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.csproj.Up2Date
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.exe
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\AMARENT\AMARENT\obj\Debug\AMARENT.exe.config
