@@ -1,0 +1,49 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\AMARENT.exe.config
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\AMARENT.exe
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\AMARENT.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\BE.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\BLL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\BE.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\BLL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\Servicios.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\bin\Debug\DAL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.exe.config
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.Properties.Resources.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_44MM.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_Usuarios_44MM.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Login_44MM.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Menu_44MM.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.GenerateResource.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.Up2Date
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.exe
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Cambiar_Clave_44MM.resources
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Bitacora_Eventos_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.AssemblyReference.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.Properties.Resources.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Cambiar_Clave_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Bitacora_Eventos_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_Usuarios_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Login_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Menu_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.GenerateResource.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.CoreCompileInputs.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.exe
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\AMARENT.exe.config
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\AMARENT.exe
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\AMARENT.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\BE.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\BLL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\Servicios.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\DAL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\BE.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\BLL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\Servicios.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\DAL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\UI_44MM.csproj.Up2Date

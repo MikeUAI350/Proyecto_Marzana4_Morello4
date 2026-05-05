@@ -1,0 +1,9 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\bin\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\bin\Debug\DAL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\bin\Debug\BE.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\bin\Debug\BE.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\obj\Debug\DAL_M4M4.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\obj\Debug\DAL_M4M4.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\obj\Debug\DAL_M4M4.csproj.Up2Date
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\obj\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\DAL\obj\Debug\DAL.pdb

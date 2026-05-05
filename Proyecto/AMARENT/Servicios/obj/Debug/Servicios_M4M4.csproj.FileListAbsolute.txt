@@ -1,0 +1,9 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_M4M4.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_M4M4.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\DAL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicio.A7FE20E5.Up2Date

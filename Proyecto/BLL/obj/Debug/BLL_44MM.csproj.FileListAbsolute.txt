@@ -1,0 +1,24 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\BLL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\BLL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\BE.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\Servicios.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\BE.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\bin\Debug\DAL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.Up2Date
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\obj\Debug\BLL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BLL\obj\Debug\BLL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BLL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BLL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BE.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\DAL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BE.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\DAL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.AssemblyReference.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.CoreCompileInputs.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.Up2Date
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL.pdb

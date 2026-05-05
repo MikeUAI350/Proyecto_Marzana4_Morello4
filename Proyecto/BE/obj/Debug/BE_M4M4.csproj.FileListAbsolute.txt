@@ -1,0 +1,6 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\bin\Debug\BE.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\bin\Debug\BE.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\obj\Debug\BE_M4M4.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\obj\Debug\BE_M4M4.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\obj\Debug\BE.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\BE\obj\Debug\BE.pdb

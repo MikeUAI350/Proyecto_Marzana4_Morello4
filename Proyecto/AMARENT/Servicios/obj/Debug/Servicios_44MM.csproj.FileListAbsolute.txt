@@ -1,0 +1,18 @@
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\DAL.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\bin\Debug\DAL.pdb
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.AssemblyReference.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.CoreCompileInputs.cache
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicio.5F0C4F0D.Up2Date
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.dll
+C:\Users\Public\Escuela\Universidad\3-1\INGENIERÍA DE SOFTWARE\Proyecto_Marzana4_Morello4\0-1\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\DAL.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\DAL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.AssemblyReference.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.CoreCompileInputs.cache
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicio.5F0C4F0D.Up2Date
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.pdb
