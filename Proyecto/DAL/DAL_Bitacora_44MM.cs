@@ -20,7 +20,15 @@ namespace DAL
 
         public DAL_Bitacora_44MM()
         {
+            Recuperar_Bitacora();
+        }
+
+        public void Recuperar_Bitacora()
+        {
             query = Conexion_44MM.Instancia.Conectar(nombre_tabla);
+            tabla_datos = Conexion_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
+            DataColumn p = tabla_datos.Columns["Cod_Operacion"];
+            tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
 
         public void Registrar_Evento(string login, DateTime fecha, string modulo, string evento, int criticidad)

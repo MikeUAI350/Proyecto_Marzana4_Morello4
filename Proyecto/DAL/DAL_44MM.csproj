@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Conexion_44MM.cs" />
     <Compile Include="DAL_Bitacora_44MM.cs" />
-    <Compile Include="DAL_Gestion_Usuarios_44MM.cs" />
     <Compile Include="DAL_Usuario_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
