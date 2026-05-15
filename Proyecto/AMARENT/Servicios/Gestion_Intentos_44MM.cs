@@ -72,11 +72,9 @@ namespace Servicios
             }
 
             sr.Dispose();
-            sr.DiscardBufferedData();
             sr.Close();
 
             fs.Dispose();
-            fs.Flush();
             fs.Close();
         }
 
@@ -122,7 +120,6 @@ namespace Servicios
                 sw.WriteLine(linea);
             }
             sw.Dispose();
-            sw.Flush();
             sw.Close();
         }
     }

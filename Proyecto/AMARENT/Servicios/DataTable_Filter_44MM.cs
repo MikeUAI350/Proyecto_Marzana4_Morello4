@@ -66,7 +66,7 @@ namespace Servicios
                 TimeSpan diferencia_inicial = fecha - fecha_inicial;
                 TimeSpan diferencia_final = fecha_final - fecha;
 
-                if (diferencia_inicial.TotalDays <= 1 && diferencia_final.TotalDays <= 1 && fecha.Date >= fecha_inicial.Date && fecha.Date <= fecha_final.Date)
+                if (diferencia_inicial.TotalDays >= 0 && diferencia_final.TotalDays >= 0 && fecha.Date >= fecha_inicial.Date && fecha.Date <= fecha_final.Date)
                 {
                     DataRow new_row = dt.NewRow();
                     foreach (DataColumn column in tabla_original.Columns)

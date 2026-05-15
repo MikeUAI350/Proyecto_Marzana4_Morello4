@@ -116,13 +116,17 @@ namespace AMARENT
         private void Activar_Menus(bool act)
         {
             adminToolStripMenuItem.Visible = true;
+            maestroToolStripMenuItem.Visible = true;
             pN1ToolStripMenuItem.Visible = true;
             pN2ToolStripMenuItem.Visible = true;
+            reporteToolStripMenuItem.Visible = true;
             ayudaToolStripMenuItem.Visible = true;
 
             adminToolStripMenuItem.Enabled = true;
+            maestroToolStripMenuItem.Enabled = true;
             pN1ToolStripMenuItem.Enabled = true;
             pN2ToolStripMenuItem.Enabled = true;
+            reporteToolStripMenuItem.Enabled = true;
             ayudaToolStripMenuItem.Enabled = true;
         }
         #endregion

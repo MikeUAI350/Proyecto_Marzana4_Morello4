@@ -26,7 +26,10 @@ namespace AMARENT
             DataTable tabla_usuarios = Bitacora_44MM.Instancia.Gestionar_Bitacora();
             tabla_datos = tabla_usuarios;
 
-            dataGridView_lista.DataSource = tabla_datos;
+            DateTime filtro = DateTime.Now.Subtract(TimeSpan.FromDays(3));
+            DataTable tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla_usuarios, "Fecha", filtro, DateTime.Now);
+
+            dataGridView_lista.DataSource = tabla;
 
             celda_actual = dataGridView_lista.Rows[0].Cells[0];
         }
