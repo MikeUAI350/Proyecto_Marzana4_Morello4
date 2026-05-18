@@ -13,7 +13,7 @@ namespace AMARENT
 {
     public partial class UI_Gestion_Usuarios_44MM : Form
     {
-        private BLL_Gestion_Usuario_44MM bll = new BLL_Gestion_Usuario_44MM();
+        private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
         private DataTable tabla_usuarios;
         private DataTable tabla_activos;
         private DataTable tabla_bloqueados;

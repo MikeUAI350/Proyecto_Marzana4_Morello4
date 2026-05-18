@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Servicios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace AMARENT
 {
     public partial class UI_Gestion_44MM : Form
     {
-        private Servicios.BLL_Gestion_Usuario_44MM gestion_usuario = new Servicios.BLL_Gestion_Usuario_44MM();
+        private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
         private string finalidad;
         private DataRow informacion;
         public UI_Gestion_44MM(string fin, DataRow row)

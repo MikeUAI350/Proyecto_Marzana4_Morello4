@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_lista = new System.Windows.Forms.DataGridView();
             this.textBox_modulo = new System.Windows.Forms.TextBox();
             this.dateTimePicker_fecha_final = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_fecha_inicial = new System.Windows.Forms.DateTimePicker();
@@ -36,6 +36,7 @@
             this.textBox_evento = new System.Windows.Forms.TextBox();
             this.numericUpDown_criticidad = new System.Windows.Forms.NumericUpDown();
             this.groupBox_filtro = new System.Windows.Forms.GroupBox();
+            this.checkBox_usar_fechas = new System.Windows.Forms.CheckBox();
             this.label_criticidad = new System.Windows.Forms.Label();
             this.label_fecha_final = new System.Windows.Forms.Label();
             this.label_fecha_inicial = new System.Windows.Forms.Label();
@@ -46,22 +47,25 @@
             this.button_aplicar = new System.Windows.Forms.Button();
             this.button_limpiar = new System.Windows.Forms.Button();
             this.groupBox_controles = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.saveFileDialog_tabla_bitacora = new System.Windows.Forms.SaveFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_criticidad)).BeginInit();
             this.groupBox_filtro.SuspendLayout();
             this.groupBox_controles.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView_lista
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridView1.Location = new System.Drawing.Point(230, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(570, 450);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView_lista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_lista.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridView_lista.Location = new System.Drawing.Point(230, 0);
+            this.dataGridView_lista.Name = "dataGridView_lista";
+            this.dataGridView_lista.RowHeadersVisible = false;
+            this.dataGridView_lista.RowHeadersWidth = 51;
+            this.dataGridView_lista.RowTemplate.Height = 24;
+            this.dataGridView_lista.Size = new System.Drawing.Size(570, 450);
+            this.dataGridView_lista.TabIndex = 0;
             // 
             // textBox_modulo
             // 
@@ -100,7 +104,7 @@
             // 
             // numericUpDown_criticidad
             // 
-            this.numericUpDown_criticidad.Location = new System.Drawing.Point(6, 257);
+            this.numericUpDown_criticidad.Location = new System.Drawing.Point(6, 283);
             this.numericUpDown_criticidad.Name = "numericUpDown_criticidad";
             this.numericUpDown_criticidad.Size = new System.Drawing.Size(200, 22);
             this.numericUpDown_criticidad.TabIndex = 6;
@@ -108,6 +112,7 @@
             // groupBox_filtro
             // 
             this.groupBox_filtro.AutoSize = true;
+            this.groupBox_filtro.Controls.Add(this.checkBox_usar_fechas);
             this.groupBox_filtro.Controls.Add(this.label_criticidad);
             this.groupBox_filtro.Controls.Add(this.numericUpDown_criticidad);
             this.groupBox_filtro.Controls.Add(this.label_fecha_final);
@@ -120,17 +125,27 @@
             this.groupBox_filtro.Controls.Add(this.label_login);
             this.groupBox_filtro.Controls.Add(this.textBox_login);
             this.groupBox_filtro.Controls.Add(this.textBox_modulo);
-            this.groupBox_filtro.Location = new System.Drawing.Point(12, 12);
+            this.groupBox_filtro.Location = new System.Drawing.Point(12, 1);
             this.groupBox_filtro.Name = "groupBox_filtro";
-            this.groupBox_filtro.Size = new System.Drawing.Size(212, 300);
+            this.groupBox_filtro.Size = new System.Drawing.Size(212, 326);
             this.groupBox_filtro.TabIndex = 7;
             this.groupBox_filtro.TabStop = false;
             this.groupBox_filtro.Text = "Filtros";
             // 
+            // checkBox_usar_fechas
+            // 
+            this.checkBox_usar_fechas.AutoSize = true;
+            this.checkBox_usar_fechas.Location = new System.Drawing.Point(6, 241);
+            this.checkBox_usar_fechas.Name = "checkBox_usar_fechas";
+            this.checkBox_usar_fechas.Size = new System.Drawing.Size(110, 20);
+            this.checkBox_usar_fechas.TabIndex = 10;
+            this.checkBox_usar_fechas.Text = "Usar_Fechas";
+            this.checkBox_usar_fechas.UseVisualStyleBackColor = true;
+            // 
             // label_criticidad
             // 
             this.label_criticidad.AutoSize = true;
-            this.label_criticidad.Location = new System.Drawing.Point(6, 238);
+            this.label_criticidad.Location = new System.Drawing.Point(6, 264);
             this.label_criticidad.Name = "label_criticidad";
             this.label_criticidad.Size = new System.Drawing.Size(63, 16);
             this.label_criticidad.TabIndex = 9;
@@ -189,6 +204,7 @@
             this.button_imprimir.TabIndex = 10;
             this.button_imprimir.Text = "Imprimir";
             this.button_imprimir.UseVisualStyleBackColor = true;
+            this.button_imprimir.Click += new System.EventHandler(this.button_imprimir_Click);
             // 
             // button_aplicar
             // 
@@ -198,6 +214,7 @@
             this.button_aplicar.TabIndex = 11;
             this.button_aplicar.Text = "Aplicar";
             this.button_aplicar.UseVisualStyleBackColor = true;
+            this.button_aplicar.Click += new System.EventHandler(this.button_aplicar_Click);
             // 
             // button_limpiar
             // 
@@ -214,12 +231,17 @@
             this.groupBox_controles.Controls.Add(this.button_limpiar);
             this.groupBox_controles.Controls.Add(this.button_imprimir);
             this.groupBox_controles.Controls.Add(this.button_aplicar);
-            this.groupBox_controles.Location = new System.Drawing.Point(12, 315);
+            this.groupBox_controles.Location = new System.Drawing.Point(12, 327);
             this.groupBox_controles.Name = "groupBox_controles";
             this.groupBox_controles.Size = new System.Drawing.Size(87, 123);
             this.groupBox_controles.TabIndex = 13;
             this.groupBox_controles.TabStop = false;
             this.groupBox_controles.Text = "Controles";
+            // 
+            // saveFileDialog_tabla_bitacora
+            // 
+            this.saveFileDialog_tabla_bitacora.DefaultExt = "pdf";
+            this.saveFileDialog_tabla_bitacora.RestoreDirectory = true;
             // 
             // UI_Bitacora_Eventos_44MM
             // 
@@ -229,10 +251,10 @@
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_controles);
             this.Controls.Add(this.groupBox_filtro);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_lista);
             this.Name = "UI_Bitacora_Eventos_44MM";
             this.Text = "UI_Gestion_Bitacora_44MM";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_criticidad)).EndInit();
             this.groupBox_filtro.ResumeLayout(false);
             this.groupBox_filtro.PerformLayout();
@@ -244,7 +266,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_lista;
         private System.Windows.Forms.TextBox textBox_modulo;
         private System.Windows.Forms.DateTimePicker dateTimePicker_fecha_final;
         private System.Windows.Forms.DateTimePicker dateTimePicker_fecha_inicial;
@@ -262,5 +284,7 @@
         private System.Windows.Forms.Button button_aplicar;
         private System.Windows.Forms.Button button_imprimir;
         private System.Windows.Forms.GroupBox groupBox_controles;
+        private System.Windows.Forms.CheckBox checkBox_usar_fechas;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_tabla_bitacora;
     }
 }

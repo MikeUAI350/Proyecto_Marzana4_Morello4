@@ -1,0 +1,38 @@
+{
+  "UI_Menu_44MM": {
+    "Text": "Formulario Principal"
+  },
+  "usuariotoolStripMenuItem": {
+    "Text": "Usuario"
+  },
+  "loginToolStripMenuItem": {
+    "Text": "Iniciar Sesion"
+  }
+  "cambiarIdiomaToolStripMenuItem": {
+    "Text": "Cambiar Idioma"
+  }
+  "españolToolStripMenuItem": {
+    "Text": "Español"
+  }
+  "inglesToolStripMenuItem": {
+    "Text": "Ingles"
+  }
+  "cambiarClaveToolStripMenuItem": {
+    "Text": "Cambiar Clave"
+  }
+  "logoutToolStripMenuItem": {
+    "Text": "Cerrar Sesion"
+  }
+  "adminToolStripMenuItem": {
+    "Text": "Admin"
+  }
+  "gestionDeUsuariosToolStripMenuItem": {
+    "Text": "Gestion de Usuarios"
+  }
+  "bitacoraDeEventosToolStripMenuItem": {
+    "Text": "Bitacora de Eventos"
+  }
+  "ayudaToolStripMenuItem": {
+    "Text": "Ayuda"
+  }
+}
