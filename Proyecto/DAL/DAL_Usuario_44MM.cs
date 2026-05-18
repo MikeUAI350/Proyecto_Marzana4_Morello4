@@ -192,7 +192,7 @@ namespace DAL
             else
             {
                 propiedad2 = "Password";
-                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, password, nombre_tabla);
+                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, password, propiedad2, nombre_tabla);
                 if (exito == false)
                 {
                     return (false, mensaje);

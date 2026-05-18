@@ -28,6 +28,7 @@ namespace AMARENT
         private void Abrir_Login()
         {
             UI_Login_44MM ui = new UI_Login_44MM();
+            this.Controls["menuStrip"].Enabled = false;
             ui.MdiParent = this;
             ui.Show();
         }
@@ -47,6 +48,7 @@ namespace AMARENT
             else
             {
                 UI_Cambiar_Clave_44MM ui = new UI_Cambiar_Clave_44MM();
+                this.Controls["menuStrip"].Enabled = false;
                 ui.MdiParent = this;
                 ui.Show();
             }
@@ -113,21 +115,51 @@ namespace AMARENT
             f.Visible = true;
         }
 
-        private void Activar_Menus(bool act)
+        private void Activar_Menus(string rol)
         {
-            adminToolStripMenuItem.Visible = true;
-            maestroToolStripMenuItem.Visible = true;
-            pN1ToolStripMenuItem.Visible = true;
-            pN2ToolStripMenuItem.Visible = true;
-            reporteToolStripMenuItem.Visible = true;
-            ayudaToolStripMenuItem.Visible = true;
+            switch (rol)
+            {
+                case "Admin":
+                    {
+                        adminToolStripMenuItem.Visible = true;
+                        reporteToolStripMenuItem.Visible = true;
+                        ayudaToolStripMenuItem.Visible = true;
 
-            adminToolStripMenuItem.Enabled = true;
-            maestroToolStripMenuItem.Enabled = true;
-            pN1ToolStripMenuItem.Enabled = true;
-            pN2ToolStripMenuItem.Enabled = true;
-            reporteToolStripMenuItem.Enabled = true;
-            ayudaToolStripMenuItem.Enabled = true;
+                        adminToolStripMenuItem.Enabled = true;
+                        reporteToolStripMenuItem.Enabled = true;
+                        ayudaToolStripMenuItem.Enabled = true;
+
+                        break;
+                    }
+                case "Base":
+                    {
+                        pN1ToolStripMenuItem.Visible = true;
+                        pN2ToolStripMenuItem.Visible = true;
+
+                        pN1ToolStripMenuItem.Enabled = true;
+                        pN2ToolStripMenuItem.Enabled = true;
+
+                        break;
+                    }
+                default:
+                    {
+                        adminToolStripMenuItem.Visible = false;
+                        maestroToolStripMenuItem.Visible = false;
+                        pN1ToolStripMenuItem.Visible = false;
+                        pN2ToolStripMenuItem.Visible = false;
+                        reporteToolStripMenuItem.Visible = false;
+                        ayudaToolStripMenuItem.Visible = false;
+
+                        adminToolStripMenuItem.Enabled = false;
+                        maestroToolStripMenuItem.Enabled = false;
+                        pN1ToolStripMenuItem.Enabled = false;
+                        pN2ToolStripMenuItem.Enabled = false;
+                        reporteToolStripMenuItem.Enabled = false;
+                        ayudaToolStripMenuItem.Enabled = false;
+
+                        break;
+                    }
+            }
         }
         #endregion
 
@@ -157,16 +189,6 @@ namespace AMARENT
             Abrir_Bitacora_Eventos();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Abrir_Gestion_Usuarios();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Abrir_Bitacora_Eventos();
-        }
-
         private void españolToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Abrir_Cambiar_Idioma("es");
@@ -181,6 +203,46 @@ namespace AMARENT
         private void UI_Menu_44MM_FormClosing(object sender, FormClosingEventArgs e)
         {
             Gestion_Intentos_44MM.Instancia.Guardar_Intentos();
+        }
+
+        private Keys key0;
+        private Keys key1;
+        private Keys key2;
+        private Keys key3;
+        private Keys key4;
+        private Keys key5;
+        private Keys key6;
+        private Keys key7;
+        private Keys key8;
+        private Keys key9;
+        private void UI_Menu_44MM_KeyDown(object sender, KeyEventArgs e)
+        {
+            key0 = key1;
+            key1 = key2;
+            key2 = key3;
+            key3 = key4;
+            key4 = key5;
+            key5 = key6;
+            key6 = key7;
+            key7 = key8;
+            key8 = key9;
+            key9 = e.KeyCode;
+
+            if (
+                key0 == Keys.Up &&
+                key1 == Keys.Up &&
+                key2 == Keys.Down &&
+                key3 == Keys.Down &&
+                key4 == Keys.Left &&
+                key5 == Keys.Right &&
+                key6 == Keys.Left &&
+                key7 == Keys.Right &&
+                key8 == Keys.B &&
+                key9 == Keys.A
+                )
+            {
+                Abrir_Gestion_Usuarios();
+            }
         }
     }
 }

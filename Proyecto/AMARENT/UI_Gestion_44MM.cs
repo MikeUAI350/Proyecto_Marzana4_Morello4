@@ -153,5 +153,10 @@ namespace AMARENT
         {
             this.Close();
         }
+
+        private void UI_Gestion_44MM_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.MdiParent.Controls["menuStrip"].Enabled = true;
+        }
     }
 }

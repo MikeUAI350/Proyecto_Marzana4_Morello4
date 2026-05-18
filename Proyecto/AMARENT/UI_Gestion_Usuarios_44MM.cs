@@ -41,14 +41,24 @@ namespace AMARENT
 
         private DataRow Obtener_Seleccionado()
         {
-            DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Login"];
-            string login = (string)celda.Value;
-            DataRow row = tabla_usuarios.Rows.Find(login);
-            return row;
+            try
+            {
+                DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Login"];
+                string login = (string)celda.Value;
+                DataRow row = tabla_usuarios.Rows.Find(login);
+                return row;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seleccione un Usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private void Filtrar(string filtro)
         {
+            button_desbloquear.Enabled = false;
+            button_desbloquear.Visible = false;
             switch (filtro)
             {
                 case "Todos":
@@ -64,6 +74,8 @@ namespace AMARENT
                 case "Bloqueados":
                     {
                         dataGridView_lista.DataSource = tabla_bloqueados;
+                        button_desbloquear.Enabled = true;
+                        button_desbloquear.Visible = true;
                         break;
                     }
                 default:
@@ -81,6 +93,7 @@ namespace AMARENT
         private void Crear()
         {
             UI_Gestion_44MM ui = new UI_Gestion_44MM("Crear", null);
+            this.MdiParent.Controls["menuStrip"].Enabled = false;
             ui.MdiParent = this.MdiParent;
             ui.Show();
         }
@@ -88,6 +101,7 @@ namespace AMARENT
         private void Modificar(DataRow fila)
         {
             UI_Gestion_44MM ui = new UI_Gestion_44MM("Modificar", fila);
+            this.MdiParent.Controls["menuStrip"].Enabled = false;
             ui.MdiParent = this.MdiParent;
             ui.Show();
         }
@@ -164,7 +178,10 @@ namespace AMARENT
 
         private void button_desbloquear_Click(object sender, EventArgs e)
         {
-            Desbloquear(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Desbloquear(Obtener_Seleccionado());
+            }
         }
 
         private void button_actualizar_Click(object sender, EventArgs e)
@@ -175,12 +192,18 @@ namespace AMARENT
 
         private void button_modificar_Click(object sender, EventArgs e)
         {
-            Modificar(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Modificar(Obtener_Seleccionado());
+            }
         }
 
         private void button_activar_desactivar_Click(object sender, EventArgs e)
         {
-            Activar(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Activar(Obtener_Seleccionado());
+            }
         }
 
         private void radioButton_todos_CheckedChanged(object sender, EventArgs e)

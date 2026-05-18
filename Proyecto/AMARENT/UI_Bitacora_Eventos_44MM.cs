@@ -18,10 +18,10 @@ namespace AMARENT
         public UI_Bitacora_Eventos_44MM()
         {
             InitializeComponent();
-            Iniciar_Grillas();
+            Actualizar_Grillas();
         }
 
-        private void Iniciar_Grillas()
+        private void Actualizar_Grillas()
         {
             DataTable tabla_usuarios = Bitacora_44MM.Instancia.Gestionar_Bitacora();
             tabla_datos = tabla_usuarios;
@@ -32,6 +32,22 @@ namespace AMARENT
             dataGridView_lista.DataSource = tabla;
 
             celda_actual = dataGridView_lista.Rows[0].Cells[0];
+        }
+
+        private DataRow Obtener_Seleccionado()
+        {
+            try
+            {
+                DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Cod_Operacion"];
+                int cod_ope = (int)celda.Value;
+                DataRow row = tabla_datos.Rows.Find(cod_ope);
+                return row;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seleccione una Fila", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private void Filtrar_Contenido()
@@ -66,6 +82,10 @@ namespace AMARENT
             {
                 tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", fecha_inicial, fecha_final);
             }
+            else
+            {
+                tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", DateTime.Now.Subtract(TimeSpan.FromDays(3)), DateTime.Now);
+            }
 
             dataGridView_lista.DataSource = tabla;
         }
@@ -92,6 +112,29 @@ namespace AMARENT
             }
         }
 
+        private void Obtener_Login(DataRow fila)
+        {
+            DataRow fila_rec = Bitacora_44MM.Instancia.Obtener_Login((string)fila["Login"]);
+
+            textBox_nombre.Text = (string)fila_rec["Nombre"];
+            textBox_apellido.Text = (string)fila_rec["Apellido"];
+        }
+
+        private void Limpiar_Filtros()
+        {
+            textBox_login.Text = "";
+            textBox_modulo.Text = "";
+            textBox_evento.Text = "";
+            dateTimePicker_fecha_inicial.Value = DateTime.Now;
+            dateTimePicker_fecha_final.Value = DateTime.Now;
+            checkBox_usar_fechas.Checked = false;
+            numericUpDown_criticidad.Value = 0;
+            textBox_nombre.Text = "";
+            textBox_apellido.Text = "";
+
+            Filtrar_Contenido();
+        }
+
         private void button_aplicar_Click(object sender, EventArgs e)
         {
             Filtrar_Contenido();
@@ -100,6 +143,25 @@ namespace AMARENT
         private void button_imprimir_Click(object sender, EventArgs e)
         {
             Imprimir_Contenido();
+        }
+
+        private void button_limpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar_Filtros();
+        }
+
+        private void button_actualizar_Click(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+
+        private void dataGridView_lista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (Obtener_Seleccionado() != null)
+            {
+                Obtener_Login(Obtener_Seleccionado());
+            }
         }
     }
 }

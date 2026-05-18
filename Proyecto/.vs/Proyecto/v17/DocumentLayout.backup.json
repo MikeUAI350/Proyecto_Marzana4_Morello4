@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|c:\\users\\mikem\\source\\repos\\proyecto_marzana4_morello4\\proyecto\\amarent\\ui_bitacora_eventos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_bitacora_eventos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|c:\\users\\mikem\\source\\repos\\proyecto_marzana4_morello4\\proyecto\\amarent\\ui_gestion_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_gestion_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_bitacora_eventos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_bitacora_eventos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_gestion_usuarios_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_gestion_usuarios_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\servicios\\bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|solutionrelative:amarent\\servicios\\bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_gestion_usuarios_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_gestion_usuarios_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\dal\\dal_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|solutionrelative:dal\\dal_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\servicios\\datatable_filter_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|solutionrelative:amarent\\servicios\\datatable_filter_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|c:\\users\\mikem\\source\\repos\\proyecto_marzana4_morello4\\proyecto\\amarent\\servicios\\gestion_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|solutionrelative:amarent\\servicios\\gestion_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\servicios\\bll_usuario_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|solutionrelative:amarent\\servicios\\bll_usuario_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,81 +49,79 @@
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Gestion_Intentos_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "RelativeToolTip": "AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwEkAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T22:05:49.161Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DataTable_Filter_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\DataTable_Filter_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\Servicios\\DataTable_Filter_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\DataTable_Filter_44MM.cs",
-              "RelativeToolTip": "AMARENT\\Servicios\\DataTable_Filter_44MM.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAgwFIAAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "UI_Gestion_44MM.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\UI_Gestion_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_44MM.cs [Dise\u00F1o]",
+              "RelativeToolTip": "AMARENT\\UI_Gestion_44MM.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T21:41:55.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T19:39:38.606Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UI_Gestion_Usuarios_44MM.cs",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "RelativeToolTip": "AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAgwKoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T19:39:34.193Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Bitacora_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Bitacora_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\Servicios\\Bitacora_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Bitacora_44MM.cs",
-              "RelativeToolTip": "AMARENT\\Servicios\\Bitacora_44MM.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAewDcAAAAhAAAAAAAAAA==",
+              "Title": "UI_Gestion_Usuarios_44MM.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\UI_Gestion_Usuarios_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Gestion_Usuarios_44MM.cs [Dise\u00F1o]",
+              "RelativeToolTip": "AMARENT\\UI_Gestion_Usuarios_44MM.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T21:40:12Z",
+              "WhenOpened": "2026-05-18T19:39:32.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BLL_Usuario_44MM.cs",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\BLL_Usuario_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\Servicios\\BLL_Usuario_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\BLL_Usuario_44MM.cs",
+              "RelativeToolTip": "AMARENT\\Servicios\\BLL_Usuario_44MM.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAiwA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T18:34:03.867Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "DAL_Bitacora_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Bitacora_44MM.cs",
-              "RelativeDocumentMoniker": "DAL\\DAL_Bitacora_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Bitacora_44MM.cs",
-              "RelativeToolTip": "DAL\\DAL_Bitacora_44MM.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBkAAAAUAAAAAAAAAA==",
+              "Title": "UI_Menu_44MM.cs",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\UI_Menu_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs",
+              "RelativeToolTip": "AMARENT\\UI_Menu_44MM.cs",
+              "ViewState": "AgIAAOkAAAAAAAAAAAAnwPQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T21:40:03.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:32:02.281Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UI_Bitacora_Eventos_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "RelativeToolTip": "AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAIA9wCYAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "UI_Menu_44MM.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs",
+              "RelativeDocumentMoniker": "AMARENT\\UI_Menu_44MM.cs",
+              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs [Dise\u00F1o]",
+              "RelativeToolTip": "AMARENT\\UI_Menu_44MM.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T21:39:49.782Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UI_Bitacora_Eventos_44MM.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\UI_Bitacora_Eventos_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Bitacora_Eventos_44MM.cs [Dise\u00F1o]",
-              "RelativeToolTip": "AMARENT\\UI_Bitacora_Eventos_44MM.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-15T21:39:48.434Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2026-05-18T18:32:01.163Z"
             }
           ]
         }

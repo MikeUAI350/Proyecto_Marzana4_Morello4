@@ -90,7 +90,7 @@
             // 
             // button_salir
             // 
-            this.button_salir.Location = new System.Drawing.Point(12, 415);
+            this.button_salir.Location = new System.Drawing.Point(13, 145);
             this.button_salir.Name = "button_salir";
             this.button_salir.Size = new System.Drawing.Size(75, 23);
             this.button_salir.TabIndex = 7;
@@ -102,7 +102,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(148, 181);
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.label_mensaje);
@@ -113,6 +114,7 @@
             this.Controls.Add(this.textBox_login);
             this.Name = "UI_Login_44MM";
             this.Text = "UI_Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UI_Login_44MM_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
