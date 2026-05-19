@@ -56,5 +56,11 @@ namespace DAL
             }
             conexion.Close();
         }
+
+        public DataTable Obtener_Login(string login)
+        {
+            DataTable dt = Conexion_44MM.Instancia.Seleccionar("Usuario", "Login", login);
+            return dt;
+        }
     }
 }

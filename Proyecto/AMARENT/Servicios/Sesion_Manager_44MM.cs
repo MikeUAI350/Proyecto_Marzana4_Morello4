@@ -49,13 +49,13 @@ namespace Servicios
         public static void Quitar_Cuenta()
         {
             Usuario = null;
-            Instancia.Iniciado = false;
+            Instancia.Rol = null;
         }
 
         public static void Set(BE_Usuario_44MM cuenta)
         {
             Usuario = cuenta;
-            Instancia.Iniciado = true;
+            Instancia.Rol = cuenta.Rol;
         }
 
         public static BE_Usuario_44MM Get()
@@ -71,26 +71,27 @@ namespace Servicios
             set { _usuario = value; }
         }
 
-        private bool _iniciado = false;
+        private string _rol;
 
-        public bool Iniciado
+        public string Rol
         {
-            get { return _iniciado; }
+            get { return _rol; }
             set {
-                if (_iniciado != value)
+                if (_rol != value)
                 {
-                    _iniciado = value;
+                    _rol = value;
                     OnPropiedadCambiada();
                 }
             }
         }
 
 
-        public event Action<bool> PropiedadCambiada;
+
+        public event Action<string> PropiedadCambiada;
 
         public void OnPropiedadCambiada()
         {
-            PropiedadCambiada?.Invoke(true);
+            PropiedadCambiada?.Invoke(Rol);
         }
     }
 }

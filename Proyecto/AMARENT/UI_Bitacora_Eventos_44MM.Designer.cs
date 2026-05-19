@@ -46,12 +46,15 @@
             this.button_imprimir = new System.Windows.Forms.Button();
             this.button_aplicar = new System.Windows.Forms.Button();
             this.button_limpiar = new System.Windows.Forms.Button();
-            this.groupBox_controles = new System.Windows.Forms.GroupBox();
             this.saveFileDialog_tabla_bitacora = new System.Windows.Forms.SaveFileDialog();
+            this.textBox_apellido = new System.Windows.Forms.TextBox();
+            this.textBox_nombre = new System.Windows.Forms.TextBox();
+            this.label_apellido = new System.Windows.Forms.Label();
+            this.label_nombre = new System.Windows.Forms.Label();
+            this.button_actualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_criticidad)).BeginInit();
             this.groupBox_filtro.SuspendLayout();
-            this.groupBox_controles.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView_lista
@@ -66,6 +69,7 @@
             this.dataGridView_lista.RowTemplate.Height = 24;
             this.dataGridView_lista.Size = new System.Drawing.Size(570, 450);
             this.dataGridView_lista.TabIndex = 0;
+            this.dataGridView_lista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_lista_CellClick);
             // 
             // textBox_modulo
             // 
@@ -198,7 +202,7 @@
             // 
             // button_imprimir
             // 
-            this.button_imprimir.Location = new System.Drawing.Point(6, 79);
+            this.button_imprimir.Location = new System.Drawing.Point(12, 391);
             this.button_imprimir.Name = "button_imprimir";
             this.button_imprimir.Size = new System.Drawing.Size(75, 23);
             this.button_imprimir.TabIndex = 10;
@@ -208,7 +212,7 @@
             // 
             // button_aplicar
             // 
-            this.button_aplicar.Location = new System.Drawing.Point(6, 50);
+            this.button_aplicar.Location = new System.Drawing.Point(12, 362);
             this.button_aplicar.Name = "button_aplicar";
             this.button_aplicar.Size = new System.Drawing.Size(75, 23);
             this.button_aplicar.TabIndex = 11;
@@ -218,30 +222,62 @@
             // 
             // button_limpiar
             // 
-            this.button_limpiar.Location = new System.Drawing.Point(6, 21);
+            this.button_limpiar.Location = new System.Drawing.Point(12, 333);
             this.button_limpiar.Name = "button_limpiar";
             this.button_limpiar.Size = new System.Drawing.Size(75, 23);
             this.button_limpiar.TabIndex = 12;
             this.button_limpiar.Text = "Limpiar";
             this.button_limpiar.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_controles
-            // 
-            this.groupBox_controles.AutoSize = true;
-            this.groupBox_controles.Controls.Add(this.button_limpiar);
-            this.groupBox_controles.Controls.Add(this.button_imprimir);
-            this.groupBox_controles.Controls.Add(this.button_aplicar);
-            this.groupBox_controles.Location = new System.Drawing.Point(12, 327);
-            this.groupBox_controles.Name = "groupBox_controles";
-            this.groupBox_controles.Size = new System.Drawing.Size(87, 123);
-            this.groupBox_controles.TabIndex = 13;
-            this.groupBox_controles.TabStop = false;
-            this.groupBox_controles.Text = "Controles";
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
             // 
             // saveFileDialog_tabla_bitacora
             // 
             this.saveFileDialog_tabla_bitacora.DefaultExt = "pdf";
             this.saveFileDialog_tabla_bitacora.RestoreDirectory = true;
+            // 
+            // textBox_apellido
+            // 
+            this.textBox_apellido.Location = new System.Drawing.Point(105, 416);
+            this.textBox_apellido.Name = "textBox_apellido";
+            this.textBox_apellido.ReadOnly = true;
+            this.textBox_apellido.Size = new System.Drawing.Size(100, 22);
+            this.textBox_apellido.TabIndex = 15;
+            // 
+            // textBox_nombre
+            // 
+            this.textBox_nombre.Location = new System.Drawing.Point(105, 372);
+            this.textBox_nombre.Name = "textBox_nombre";
+            this.textBox_nombre.ReadOnly = true;
+            this.textBox_nombre.Size = new System.Drawing.Size(100, 22);
+            this.textBox_nombre.TabIndex = 16;
+            // 
+            // label_apellido
+            // 
+            this.label_apellido.AutoSize = true;
+            this.label_apellido.Location = new System.Drawing.Point(105, 397);
+            this.label_apellido.Name = "label_apellido";
+            this.label_apellido.Size = new System.Drawing.Size(57, 16);
+            this.label_apellido.TabIndex = 17;
+            this.label_apellido.Text = "Apellido";
+            // 
+            // label_nombre
+            // 
+            this.label_nombre.AutoSize = true;
+            this.label_nombre.Location = new System.Drawing.Point(105, 353);
+            this.label_nombre.Name = "label_nombre";
+            this.label_nombre.Size = new System.Drawing.Size(56, 16);
+            this.label_nombre.TabIndex = 18;
+            this.label_nombre.Text = "Nombre";
+            // 
+            // button_actualizar
+            // 
+            this.button_actualizar.Location = new System.Drawing.Point(12, 420);
+            this.button_actualizar.Name = "button_actualizar";
+            this.button_actualizar.Size = new System.Drawing.Size(75, 23);
+            this.button_actualizar.TabIndex = 19;
+            this.button_actualizar.Text = "Actualizar";
+            this.button_actualizar.UseVisualStyleBackColor = true;
+            this.button_actualizar.Click += new System.EventHandler(this.button_actualizar_Click);
             // 
             // UI_Bitacora_Eventos_44MM
             // 
@@ -249,7 +285,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.groupBox_controles);
+            this.Controls.Add(this.button_limpiar);
+            this.Controls.Add(this.button_actualizar);
+            this.Controls.Add(this.button_imprimir);
+            this.Controls.Add(this.button_aplicar);
+            this.Controls.Add(this.label_nombre);
+            this.Controls.Add(this.label_apellido);
+            this.Controls.Add(this.textBox_nombre);
+            this.Controls.Add(this.textBox_apellido);
             this.Controls.Add(this.groupBox_filtro);
             this.Controls.Add(this.dataGridView_lista);
             this.Name = "UI_Bitacora_Eventos_44MM";
@@ -258,7 +301,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_criticidad)).EndInit();
             this.groupBox_filtro.ResumeLayout(false);
             this.groupBox_filtro.PerformLayout();
-            this.groupBox_controles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,8 +325,12 @@
         private System.Windows.Forms.Button button_limpiar;
         private System.Windows.Forms.Button button_aplicar;
         private System.Windows.Forms.Button button_imprimir;
-        private System.Windows.Forms.GroupBox groupBox_controles;
         private System.Windows.Forms.CheckBox checkBox_usar_fechas;
         private System.Windows.Forms.SaveFileDialog saveFileDialog_tabla_bitacora;
+        private System.Windows.Forms.TextBox textBox_apellido;
+        private System.Windows.Forms.TextBox textBox_nombre;
+        private System.Windows.Forms.Label label_apellido;
+        private System.Windows.Forms.Label label_nombre;
+        private System.Windows.Forms.Button button_actualizar;
     }
 }

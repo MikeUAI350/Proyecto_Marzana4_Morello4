@@ -98,7 +98,7 @@
             // 
             // button_salir
             // 
-            this.button_salir.Location = new System.Drawing.Point(12, 415);
+            this.button_salir.Location = new System.Drawing.Point(12, 173);
             this.button_salir.Name = "button_salir";
             this.button_salir.Size = new System.Drawing.Size(75, 23);
             this.button_salir.TabIndex = 7;
@@ -110,7 +110,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(180, 208);
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_confirmar);
@@ -122,6 +123,7 @@
             this.Controls.Add(this.textBox_contra);
             this.Name = "UI_Cambiar_Clave_44MM";
             this.Text = "UI_Cambiar_Clave_44MM";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UI_Cambiar_Clave_44MM_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

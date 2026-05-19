@@ -32,8 +32,6 @@
             this.label_lista = new System.Windows.Forms.Label();
             this.groupBox_controles = new System.Windows.Forms.GroupBox();
             this.button_actualizar = new System.Windows.Forms.Button();
-            this.button_salir = new System.Windows.Forms.Button();
-            this.button_cancelar = new System.Windows.Forms.Button();
             this.button_activar_desactivar = new System.Windows.Forms.Button();
             this.button_modificar = new System.Windows.Forms.Button();
             this.button_desbloquear = new System.Windows.Forms.Button();
@@ -72,8 +70,6 @@
             // 
             this.groupBox_controles.AutoSize = true;
             this.groupBox_controles.Controls.Add(this.button_actualizar);
-            this.groupBox_controles.Controls.Add(this.button_salir);
-            this.groupBox_controles.Controls.Add(this.button_cancelar);
             this.groupBox_controles.Controls.Add(this.button_activar_desactivar);
             this.groupBox_controles.Controls.Add(this.button_modificar);
             this.groupBox_controles.Controls.Add(this.button_desbloquear);
@@ -96,30 +92,10 @@
             this.button_actualizar.UseVisualStyleBackColor = true;
             this.button_actualizar.Click += new System.EventHandler(this.button_actualizar_Click);
             // 
-            // button_salir
-            // 
-            this.button_salir.AutoSize = true;
-            this.button_salir.Location = new System.Drawing.Point(6, 172);
-            this.button_salir.Name = "button_salir";
-            this.button_salir.Size = new System.Drawing.Size(96, 26);
-            this.button_salir.TabIndex = 6;
-            this.button_salir.Text = "Salir";
-            this.button_salir.UseVisualStyleBackColor = true;
-            // 
-            // button_cancelar
-            // 
-            this.button_cancelar.AutoSize = true;
-            this.button_cancelar.Location = new System.Drawing.Point(6, 140);
-            this.button_cancelar.Name = "button_cancelar";
-            this.button_cancelar.Size = new System.Drawing.Size(96, 26);
-            this.button_cancelar.TabIndex = 5;
-            this.button_cancelar.Text = "Cancelar";
-            this.button_cancelar.UseVisualStyleBackColor = true;
-            // 
             // button_activar_desactivar
             // 
             this.button_activar_desactivar.AutoSize = true;
-            this.button_activar_desactivar.Location = new System.Drawing.Point(6, 108);
+            this.button_activar_desactivar.Location = new System.Drawing.Point(6, 85);
             this.button_activar_desactivar.Name = "button_activar_desactivar";
             this.button_activar_desactivar.Size = new System.Drawing.Size(96, 26);
             this.button_activar_desactivar.TabIndex = 3;
@@ -130,7 +106,7 @@
             // button_modificar
             // 
             this.button_modificar.AutoSize = true;
-            this.button_modificar.Location = new System.Drawing.Point(6, 79);
+            this.button_modificar.Location = new System.Drawing.Point(6, 53);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(96, 26);
             this.button_modificar.TabIndex = 2;
@@ -141,12 +117,14 @@
             // button_desbloquear
             // 
             this.button_desbloquear.AutoSize = true;
-            this.button_desbloquear.Location = new System.Drawing.Point(6, 50);
+            this.button_desbloquear.Enabled = false;
+            this.button_desbloquear.Location = new System.Drawing.Point(6, 117);
             this.button_desbloquear.Name = "button_desbloquear";
             this.button_desbloquear.Size = new System.Drawing.Size(96, 26);
             this.button_desbloquear.TabIndex = 1;
             this.button_desbloquear.Text = "Desbloquear";
             this.button_desbloquear.UseVisualStyleBackColor = true;
+            this.button_desbloquear.Visible = false;
             this.button_desbloquear.Click += new System.EventHandler(this.button_desbloquear_Click);
             // 
             // button_crear
@@ -223,8 +201,6 @@
         private System.Windows.Forms.Label label_lista;
         private System.Windows.Forms.GroupBox groupBox_controles;
         private System.Windows.Forms.Button button_crear;
-        private System.Windows.Forms.Button button_salir;
-        private System.Windows.Forms.Button button_cancelar;
         private System.Windows.Forms.Button button_activar_desactivar;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.Button button_desbloquear;

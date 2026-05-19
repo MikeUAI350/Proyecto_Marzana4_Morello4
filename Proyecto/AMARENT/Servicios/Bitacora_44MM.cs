@@ -59,6 +59,19 @@ namespace Servicios
             return tabla_usuarios;
         }
 
+        public DataRow Obtener_Login(string login)
+        {
+            DataTable dt = dal_bitacora.Obtener_Login(login);
+            if (dt.Rows.Count != 1)
+            {
+                return null;
+            }
+            else
+            {
+                return dt.Rows[0];
+            }
+        }
+
         public (bool, string) Imprimir_Bitacora(DataTable tabla, string ruta)
         {
             // Crear documento

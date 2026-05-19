@@ -204,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(148, 450);
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_anular);
@@ -223,6 +223,7 @@
             this.Controls.Add(this.textBox_dni);
             this.Name = "UI_Gestion_44MM";
             this.Text = "UI_Gestion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UI_Gestion_44MM_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

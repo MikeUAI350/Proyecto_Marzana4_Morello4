@@ -54,5 +54,10 @@ namespace AMARENT
         {
             this.Close();
         }
+
+        private void UI_Cambiar_Clave_44MM_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.MdiParent.Controls["menuStrip"].Enabled = true;
+        }
     }
 }

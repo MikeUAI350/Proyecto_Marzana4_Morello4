@@ -80,6 +80,7 @@ namespace Servicios
                         if (intentos <= 0)
                         {
                             dal_usuarios.Bloquear_Usuario(login);
+                            Bitacora_44MM.Registrar_Evento(login, DateTime.Now, "Usuarios", "Bloqueo", 1);
                         }
                         //Contraseña incorrecta
                         return (false, cod_op);
