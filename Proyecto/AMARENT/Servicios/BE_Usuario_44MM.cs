@@ -17,6 +17,7 @@ namespace BE
             Login = (string)info["Login"];
             Rol = (string)info["Rol"];
             Email = (string)info["Email"];
+            Activo = (bool)info["Activo"];
         }
 
         private string _dni;
@@ -59,6 +60,14 @@ namespace BE
         {
             get { return _email; }
             set { _email = value; }
+        }
+
+        private bool _activo;
+
+        public bool Activo
+        {
+            get { return _activo; }
+            set { _activo = value; }
         }
     }
 }

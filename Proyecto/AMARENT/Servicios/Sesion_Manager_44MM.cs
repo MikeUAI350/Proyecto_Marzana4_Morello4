@@ -49,13 +49,11 @@ namespace Servicios
         public static void Quitar_Cuenta()
         {
             Usuario = null;
-            Instancia.Rol = null;
         }
 
         public static void Set(BE_Usuario_44MM cuenta)
         {
             Usuario = cuenta;
-            Instancia.Rol = cuenta.Rol;
         }
 
         public static BE_Usuario_44MM Get()
@@ -69,29 +67,6 @@ namespace Servicios
         {
             get { return _usuario; }
             set { _usuario = value; }
-        }
-
-        private string _rol;
-
-        public string Rol
-        {
-            get { return _rol; }
-            set {
-                if (_rol != value)
-                {
-                    _rol = value;
-                    OnPropiedadCambiada();
-                }
-            }
-        }
-
-
-
-        public event Action<string> PropiedadCambiada;
-
-        public void OnPropiedadCambiada()
-        {
-            PropiedadCambiada?.Invoke(Rol);
         }
     }
 }

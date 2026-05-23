@@ -1,4 +1,5 @@
-﻿using Servicios;
+﻿using BLL;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,10 @@ namespace AMARENT
     public partial class UI_Bitacora_Eventos_44MM : Form
     {
         private DataTable tabla_datos;
+        private List<BE_Bitacora_44MM> lista_datos;
         private DataGridViewCell celda_actual;
+        private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+
         public UI_Bitacora_Eventos_44MM()
         {
             InitializeComponent();
@@ -23,11 +27,10 @@ namespace AMARENT
 
         private void Actualizar_Grillas()
         {
-            DataTable tabla_usuarios = Bitacora_44MM.Instancia.Gestionar_Bitacora();
-            tabla_datos = tabla_usuarios;
+            (tabla_datos, lista_datos) = bll_bitacora.Gestionar_Bitacora();
 
             DateTime filtro = DateTime.Now.Subtract(TimeSpan.FromDays(3));
-            DataTable tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla_usuarios, "Fecha", filtro, DateTime.Now);
+            DataTable tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla_datos, "Fecha", filtro, DateTime.Now);
 
             dataGridView_lista.DataSource = tabla;
 
@@ -53,7 +56,7 @@ namespace AMARENT
         private void Filtrar_Contenido()
         {
             string login = textBox_login.Text;
-            string modulo = textBox_modulo.Text;
+            string modulo = comboBox_modulo.Text;
             string evento = textBox_evento.Text;
             DateTime fecha_inicial = dateTimePicker_fecha_inicial.Value;
             DateTime fecha_final = dateTimePicker_fecha_final.Value;
@@ -62,32 +65,52 @@ namespace AMARENT
 
             DataTable tabla = tabla_datos;
 
-            if (login != "" && login != null && login != string.Empty)
+            //Verificacion de fechas
+            if (fecha_inicial > fecha_final && usar_fechas == true || fecha_final > DateTime.Now && usar_fechas == true)
             {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla_datos, "Login", login);
-            }
-            if (modulo != "" && modulo != null && modulo != string.Empty)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Modulo", modulo);
-            }
-            if (evento != "" && evento != null && evento != string.Empty)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Evento", evento);
-            }
-            if (criticidad > 0)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Criticidad", criticidad.ToString());
-            }
-            if (usar_fechas == true)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", fecha_inicial, fecha_final);
+                MessageBox.Show("Fechas Invalidas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
             {
-                tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", DateTime.Now.Subtract(TimeSpan.FromDays(3)), DateTime.Now);
-            }
+                //Filtros
+                if (login != "" && login != null && login != string.Empty)
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla_datos, "Login", login);
+                }
+                if (modulo != "" && modulo != null && modulo != string.Empty)
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Modulo", modulo);
+                }
+                if (evento != "" && evento != null && evento != string.Empty)
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Evento", evento);
+                }
+                if (criticidad > 0)
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Criticidad", criticidad.ToString());
+                }
 
-            dataGridView_lista.DataSource = tabla;
+                //Filtro para fechas
+                if (usar_fechas == true)
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", fecha_inicial, fecha_final);
+                }
+                else
+                {
+                    tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", DateTime.Now.Subtract(TimeSpan.FromDays(3)), DateTime.Now);
+                }
+
+                //Error si esta vacio
+                if (tabla.Rows.Count <= 0)
+                {
+                    MessageBox.Show("No se encontraron resultados con los filtros aplicados", "Sin Resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    dataGridView_lista.DataSource = tabla;
+                }
+            }
         }
 
         private void Imprimir_Contenido()
@@ -99,7 +122,7 @@ namespace AMARENT
                 string ruta = saveFileDialog_tabla_bitacora.FileName;
                 if (ruta != "" && ruta != null && ruta != string.Empty)
                 {
-                    (bool exito, string mensaje) = Bitacora_44MM.Instancia.Imprimir_Bitacora(tabla, ruta);
+                    (bool exito, string mensaje) = bll_bitacora.Imprimir_Bitacora(tabla, ruta);
                     if (exito == true)
                     {
                         MessageBox.Show(mensaje);
@@ -114,7 +137,7 @@ namespace AMARENT
 
         private void Obtener_Login(DataRow fila)
         {
-            DataRow fila_rec = Bitacora_44MM.Instancia.Obtener_Login((string)fila["Login"]);
+            DataRow fila_rec = bll_bitacora.Obtener_Login((string)fila["Login"]);
 
             textBox_nombre.Text = (string)fila_rec["Nombre"];
             textBox_apellido.Text = (string)fila_rec["Apellido"];
@@ -123,15 +146,16 @@ namespace AMARENT
         private void Limpiar_Filtros()
         {
             textBox_login.Text = "";
-            textBox_modulo.Text = "";
+            comboBox_modulo.Text = "";
             textBox_evento.Text = "";
             dateTimePicker_fecha_inicial.Value = DateTime.Now;
             dateTimePicker_fecha_final.Value = DateTime.Now;
             checkBox_usar_fechas.Checked = false;
-            numericUpDown_criticidad.Value = 0;
+            numericUpDown_criticidad.Value = 1;
             textBox_nombre.Text = "";
             textBox_apellido.Text = "";
 
+            Actualizar_Grillas();
             Filtrar_Contenido();
         }
 
@@ -157,11 +181,24 @@ namespace AMARENT
 
         private void dataGridView_lista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (Obtener_Seleccionado() != null)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                Obtener_Login(Obtener_Seleccionado());
+                celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (Obtener_Seleccionado() != null)
+                {
+                    Obtener_Login(Obtener_Seleccionado());
+                }
             }
+        }
+
+        private void UI_Bitacora_Eventos_44MM_Load(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+
+        private void UI_Bitacora_Eventos_44MM_Shown(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
         }
     }
 }

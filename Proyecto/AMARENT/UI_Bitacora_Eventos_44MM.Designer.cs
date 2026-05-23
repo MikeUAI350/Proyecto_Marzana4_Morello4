@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridView_lista = new System.Windows.Forms.DataGridView();
-            this.textBox_modulo = new System.Windows.Forms.TextBox();
             this.dateTimePicker_fecha_final = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_fecha_inicial = new System.Windows.Forms.DateTimePicker();
             this.textBox_login = new System.Windows.Forms.TextBox();
             this.textBox_evento = new System.Windows.Forms.TextBox();
             this.numericUpDown_criticidad = new System.Windows.Forms.NumericUpDown();
             this.groupBox_filtro = new System.Windows.Forms.GroupBox();
+            this.comboBox_modulo = new System.Windows.Forms.ComboBox();
             this.checkBox_usar_fechas = new System.Windows.Forms.CheckBox();
             this.label_criticidad = new System.Windows.Forms.Label();
             this.label_fecha_final = new System.Windows.Forms.Label();
@@ -71,13 +71,6 @@
             this.dataGridView_lista.TabIndex = 0;
             this.dataGridView_lista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_lista_CellClick);
             // 
-            // textBox_modulo
-            // 
-            this.textBox_modulo.Location = new System.Drawing.Point(6, 81);
-            this.textBox_modulo.Name = "textBox_modulo";
-            this.textBox_modulo.Size = new System.Drawing.Size(200, 22);
-            this.textBox_modulo.TabIndex = 1;
-            // 
             // dateTimePicker_fecha_final
             // 
             this.dateTimePicker_fecha_final.Location = new System.Drawing.Point(6, 213);
@@ -109,13 +102,29 @@
             // numericUpDown_criticidad
             // 
             this.numericUpDown_criticidad.Location = new System.Drawing.Point(6, 283);
+            this.numericUpDown_criticidad.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown_criticidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_criticidad.Name = "numericUpDown_criticidad";
             this.numericUpDown_criticidad.Size = new System.Drawing.Size(200, 22);
             this.numericUpDown_criticidad.TabIndex = 6;
+            this.numericUpDown_criticidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // groupBox_filtro
             // 
             this.groupBox_filtro.AutoSize = true;
+            this.groupBox_filtro.Controls.Add(this.comboBox_modulo);
             this.groupBox_filtro.Controls.Add(this.checkBox_usar_fechas);
             this.groupBox_filtro.Controls.Add(this.label_criticidad);
             this.groupBox_filtro.Controls.Add(this.numericUpDown_criticidad);
@@ -128,13 +137,22 @@
             this.groupBox_filtro.Controls.Add(this.textBox_evento);
             this.groupBox_filtro.Controls.Add(this.label_login);
             this.groupBox_filtro.Controls.Add(this.textBox_login);
-            this.groupBox_filtro.Controls.Add(this.textBox_modulo);
             this.groupBox_filtro.Location = new System.Drawing.Point(12, 1);
             this.groupBox_filtro.Name = "groupBox_filtro";
             this.groupBox_filtro.Size = new System.Drawing.Size(212, 326);
             this.groupBox_filtro.TabIndex = 7;
             this.groupBox_filtro.TabStop = false;
             this.groupBox_filtro.Text = "Filtros";
+            // 
+            // comboBox_modulo
+            // 
+            this.comboBox_modulo.FormattingEnabled = true;
+            this.comboBox_modulo.Items.AddRange(new object[] {
+            "Usuarios"});
+            this.comboBox_modulo.Location = new System.Drawing.Point(9, 81);
+            this.comboBox_modulo.Name = "comboBox_modulo";
+            this.comboBox_modulo.Size = new System.Drawing.Size(197, 24);
+            this.comboBox_modulo.TabIndex = 11;
             // 
             // checkBox_usar_fechas
             // 
@@ -297,6 +315,8 @@
             this.Controls.Add(this.dataGridView_lista);
             this.Name = "UI_Bitacora_Eventos_44MM";
             this.Text = "UI_Gestion_Bitacora_44MM";
+            this.Load += new System.EventHandler(this.UI_Bitacora_Eventos_44MM_Load);
+            this.Shown += new System.EventHandler(this.UI_Bitacora_Eventos_44MM_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_criticidad)).EndInit();
             this.groupBox_filtro.ResumeLayout(false);
@@ -309,7 +329,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView_lista;
-        private System.Windows.Forms.TextBox textBox_modulo;
         private System.Windows.Forms.DateTimePicker dateTimePicker_fecha_final;
         private System.Windows.Forms.DateTimePicker dateTimePicker_fecha_inicial;
         private System.Windows.Forms.TextBox textBox_login;
@@ -332,5 +351,6 @@
         private System.Windows.Forms.Label label_apellido;
         private System.Windows.Forms.Label label_nombre;
         private System.Windows.Forms.Button button_actualizar;
+        private System.Windows.Forms.ComboBox comboBox_modulo;
     }
 }

@@ -44,6 +44,9 @@
             this.textBox_contra.Name = "textBox_contra";
             this.textBox_contra.Size = new System.Drawing.Size(100, 22);
             this.textBox_contra.TabIndex = 0;
+            this.textBox_contra.UseSystemPasswordChar = true;
+            this.textBox_contra.MouseEnter += new System.EventHandler(this.textBox_contra_MouseEnter);
+            this.textBox_contra.MouseLeave += new System.EventHandler(this.textBox_contra_MouseLeave);
             // 
             // textBox_nueva_contra1
             // 
@@ -51,6 +54,9 @@
             this.textBox_nueva_contra1.Name = "textBox_nueva_contra1";
             this.textBox_nueva_contra1.Size = new System.Drawing.Size(100, 22);
             this.textBox_nueva_contra1.TabIndex = 1;
+            this.textBox_nueva_contra1.UseSystemPasswordChar = true;
+            this.textBox_nueva_contra1.MouseEnter += new System.EventHandler(this.textBox_nueva_contra1_MouseEnter);
+            this.textBox_nueva_contra1.MouseLeave += new System.EventHandler(this.textBox_nueva_contra1_MouseLeave);
             // 
             // textBox_nueva_contra2
             // 
@@ -58,6 +64,9 @@
             this.textBox_nueva_contra2.Name = "textBox_nueva_contra2";
             this.textBox_nueva_contra2.Size = new System.Drawing.Size(100, 22);
             this.textBox_nueva_contra2.TabIndex = 2;
+            this.textBox_nueva_contra2.UseSystemPasswordChar = true;
+            this.textBox_nueva_contra2.MouseEnter += new System.EventHandler(this.textBox_nueva_contra2_MouseEnter);
+            this.textBox_nueva_contra2.MouseLeave += new System.EventHandler(this.textBox_nueva_contra2_MouseLeave);
             // 
             // label_contra
             // 

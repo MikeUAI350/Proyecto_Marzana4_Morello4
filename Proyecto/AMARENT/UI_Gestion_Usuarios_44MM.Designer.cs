@@ -187,6 +187,8 @@
             this.Controls.Add(this.dataGridView_lista);
             this.Name = "UI_Gestion_Usuarios_44MM";
             this.Text = "UI_Gestion_Usuarios";
+            this.Load += new System.EventHandler(this.UI_Gestion_Usuarios_44MM_Load);
+            this.Shown += new System.EventHandler(this.UI_Gestion_Usuarios_44MM_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).EndInit();
             this.groupBox_controles.ResumeLayout(false);
             this.groupBox_controles.PerformLayout();

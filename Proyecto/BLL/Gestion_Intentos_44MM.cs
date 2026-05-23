@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicios
+namespace BLL
 {
     public sealed class Gestion_Intentos_44MM
     {
@@ -44,6 +44,63 @@ namespace Servicios
             set { _tabla_intentos = value; }
         }
 
+        /*private void Recuperar_Intentos()
+        {
+
+        }*/
+
+        public int Agregar_Intento(string login)
+        {
+            Intento_44MM intento;
+            if (Lista_Intentos.Count == 0)
+            {
+                intento = new Intento_44MM(login);
+                Lista_Intentos.Add(intento);
+                intento.Intentos_Restantes -= 1;
+            }
+            else
+            {
+                intento = Lista_Intentos.FindLast(x => x.Login == login);
+                if (intento == null)
+                {
+                    intento = new Intento_44MM(login);
+                    Lista_Intentos.Add(intento);
+                    intento.Intentos_Restantes -= 1;
+                }
+                else
+                {
+                    TimeSpan diferencia = DateTime.Now - intento.Fecha;
+                    if (diferencia.TotalDays >= 1)
+                    {
+                        intento.Fecha = DateTime.Now;
+                        intento.Intentos_Restantes = 3;
+                    }
+                    intento.Intentos_Restantes -= 1;
+                }
+            }
+            return intento.Intentos_Restantes;
+        }
+
+        public void Resetear_Intentos(string login)
+        {
+            Intento_44MM intento;
+            if (Lista_Intentos.Count == 0)
+            {
+                intento = new Intento_44MM(login);
+                Lista_Intentos.Add(intento);
+                intento.Intentos_Restantes -= 1;
+            }
+            else
+            {
+                intento = Lista_Intentos.FindLast(x => x.Login == login);
+                if (intento != null)
+                {
+                    intento.Intentos_Restantes = 3;
+                    intento.Fecha = DateTime.Now;
+                }
+            }
+        }
+
         private void Recuperar_Intentos()
         {
             FileStream fs = new FileStream("Intentos_44MM.txt", FileMode.OpenOrCreate, FileAccess.Read);
@@ -76,38 +133,6 @@ namespace Servicios
 
             fs.Dispose();
             fs.Close();
-        }
-
-        public int Agregar_Intento(string login)
-        {
-            Intento_44MM intento;
-            if (Lista_Intentos.Count == 0)
-            {
-                intento = new Intento_44MM(login);
-                Lista_Intentos.Add(intento);
-                intento.Intentos_Restantes -= 1;
-            }
-            else
-            {
-                intento = Lista_Intentos.FindLast(x => x.Login == login);
-                if (intento == null)
-                {
-                    intento = new Intento_44MM(login);
-                    Lista_Intentos.Add(intento);
-                    intento.Intentos_Restantes -= 1;
-                }
-                else
-                {
-                    TimeSpan diferencia = DateTime.Now - intento.Fecha;
-                    if (diferencia.TotalDays >= 1)
-                    {
-                        intento.Fecha = DateTime.Now;
-                        intento.Intentos_Restantes = 3;
-                    }
-                    intento.Intentos_Restantes -= 1;
-                }
-            }
-            return intento.Intentos_Restantes;
         }
 
         public void Guardar_Intentos()

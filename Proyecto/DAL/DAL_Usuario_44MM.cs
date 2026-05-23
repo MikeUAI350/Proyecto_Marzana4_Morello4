@@ -24,7 +24,7 @@ namespace DAL
         }
 
         #region Usuario
-        public DataTable Verificar_Cuenta(string login)
+        public DataTable Verificar_Login(string login)
         {
             string propiedad = "Login";
             string valor = login;
@@ -51,6 +51,16 @@ namespace DAL
             string propiedad2 = "Password";
 
             (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, contra, propiedad2, nombre_tabla);
+            if (exito == false)
+            {
+                return (false, mensaje);
+            }
+            else
+            {
+                propiedad2 = "RCC";
+                string valor2 = false.ToString();
+                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);
+            }
             return (exito, mensaje);
         }
         #endregion
@@ -64,10 +74,10 @@ namespace DAL
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
 
-        public (bool, string) Verificar_Login(string login)
+        public (bool, string) Verificar_DNI(string dni)
         {
-            string propiedad = "Login";
-            string valor = login;
+            string propiedad = "DNI";
+            string valor = dni;
 
             string mensaje = "Usuario ya Existente";
 
@@ -82,7 +92,7 @@ namespace DAL
             }
         }
 
-        public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string login, string email, string password, string rol, bool bloqueado, bool activo)
+        public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string login, string email, string password, string rol)
         {
             bool exito = false;
             string mensaje = "Usuario Creado Exitosamente";
@@ -91,7 +101,7 @@ namespace DAL
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (DNI, Nombre, Apellido, Login, Email, Password, Rol, Bloqueado, Activo) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol, @Bloqueado, @Activo)";
+                string sql = $"INSERT INTO [{nombre_tabla}] (DNI, Nombre, Apellido, Login, Email, Password, Rol) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol)";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.Transaction = transaction;
 
@@ -102,8 +112,6 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Email", email);
                 cmd.Parameters.AddWithValue("@Password", password);
                 cmd.Parameters.AddWithValue("@Rol", rol);
-                cmd.Parameters.AddWithValue("@Bloqueado", bloqueado);
-                cmd.Parameters.AddWithValue("@Activo", activo);
 
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
@@ -199,7 +207,16 @@ namespace DAL
                 }
                 else
                 {
-                    return (true, mensaje);
+                    propiedad2 = "RCC";
+                    (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, true.ToString(), propiedad2, nombre_tabla);
+                    if (exito == false)
+                    {
+                        return (false, mensaje);
+                    }
+                    else
+                    {
+                        return (true, mensaje);
+                    }
                 }
             }
         }

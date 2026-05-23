@@ -35,6 +35,7 @@ namespace Servicios
         }
 
         private SqlConnection _conexion = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Proyecto IS2026;Integrated Security=True");
+        //private SqlConnection _conexion = new SqlConnection("Data Source=.;Initial Catalog=Proyecto IS2026;Integrated Security=True");
         public SqlConnection Conexion
         {
             get { return _conexion; }
@@ -43,15 +44,15 @@ namespace Servicios
 
         public string Conectar(string nombre_tabla)
         {
-            return ($"SELECT * FROM [{nombre_tabla}]");
+            return ($"SELECT * FROM {nombre_tabla}");
         }
 
         public DataTable Seleccionar(string nombre_tabla, string propiedad, string valor)
         {
             Conexion.Open();
 
-            string query = "SELECT * FROM " + nombre_tabla + " WHERE " + propiedad + " = '" + valor + "'";
-            //string query = $"SELECT * FROM [{nombre_tabla}] WHERE [{propiedad}] = '[{valor}]'";
+            //string query = "SELECT * FROM " + nombre_tabla + " WHERE " + propiedad + " = '" + valor + "'";
+            string query = $"SELECT * FROM {nombre_tabla} WHERE {propiedad} = '{valor}'";
             SqlDataAdapter adapter = new SqlDataAdapter(query, Conexion);
             DataTable tabla = new DataTable();
             adapter.Fill(tabla);
