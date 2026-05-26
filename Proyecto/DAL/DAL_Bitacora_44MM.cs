@@ -13,7 +13,7 @@ namespace DAL
     public class DAL_Bitacora_44MM
     {
         private string nombre_tabla = "Bitacora";
-        private SqlConnection conexion = Conexion_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
 
         public DataTable tabla_datos;
         private string query;
@@ -25,8 +25,8 @@ namespace DAL
 
         public void Recuperar_Bitacora()
         {
-            query = Conexion_44MM.Instancia.Conectar(nombre_tabla);
-            tabla_datos = Conexion_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
+            query = DAL_44MM.Instancia.Conectar(nombre_tabla);
+            tabla_datos = DAL_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
             DataColumn p = tabla_datos.Columns["Cod_Operacion"];
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
@@ -59,7 +59,7 @@ namespace DAL
 
         public DataTable Obtener_Login(string login)
         {
-            DataTable dt = Conexion_44MM.Instancia.Seleccionar("Usuario", "Login", login);
+            DataTable dt = DAL_44MM.Instancia.Seleccionar("Usuario", "Login", login);
             return dt;
         }
     }

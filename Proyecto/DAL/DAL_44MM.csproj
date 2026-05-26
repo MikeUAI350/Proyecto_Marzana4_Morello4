@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conexion_44MM.cs" />
+    <Compile Include="DAL_44MM.cs" />
     <Compile Include="DAL_Bitacora_44MM.cs" />
-    <Compile Include="DAL_Intentos_44MM.cs" />
+    <Compile Include="DAL_Intento_44MM.cs" />
     <Compile Include="DAL_Usuario_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

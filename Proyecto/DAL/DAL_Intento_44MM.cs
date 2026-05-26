@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DAL_Intentos_44MM
+    public class DAL_Intento_44MM
     {
         private string nombre_tabla = "Intentos";
-        private SqlConnection conexion = Conexion_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
 
         public DataTable tabla_datos;
         private string query;
 
-        public DAL_Intentos_44MM()
+        public DAL_Intento_44MM()
         {
             Recuperar_Intentos();
         }
 
         public void Recuperar_Intentos()
         {
-            query = Conexion_44MM.Instancia.Conectar(nombre_tabla);
-            tabla_datos = Conexion_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
+            query = DAL_44MM.Instancia.Conectar(nombre_tabla);
+            tabla_datos = DAL_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
             DataColumn p = tabla_datos.Columns["Login"];
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }

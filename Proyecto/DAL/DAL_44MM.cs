@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public sealed class Conexion_44MM
+    public sealed class DAL_44MM
     {
         private static readonly object _candado = new object();
 
-        private Conexion_44MM() { }
+        private DAL_44MM() { }
 
-        private static Conexion_44MM _Instancia;
+        private static DAL_44MM _Instancia;
 
-        public static Conexion_44MM Instancia
+        public static DAL_44MM Instancia
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Servicios
                     {
                         if (_Instancia == null)
                         {
-                            _Instancia = new Conexion_44MM();
+                            _Instancia = new DAL_44MM();
                         }
                     }
                 }
