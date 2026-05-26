@@ -100,7 +100,7 @@ namespace BLL
         #endregion
 
         #region Base de Datos
-        DAL_Intentos_44MM dal_intentos = new DAL_Intentos_44MM();
+        DAL_Intento_44MM dal_intentos = new DAL_Intento_44MM();
         public void Recuperar_Intentos()
         {
             Tabla_Intentos = dal_intentos.tabla_datos;

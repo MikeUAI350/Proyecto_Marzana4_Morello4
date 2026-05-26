@@ -14,7 +14,7 @@ namespace DAL
     public class DAL_Usuario_44MM
     {
         private string nombre_tabla = "Usuario";
-        private SqlConnection conexion = Conexion_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
 
         public DataTable tabla_datos;
         private string query;
@@ -30,7 +30,7 @@ namespace DAL
             string propiedad = "Login";
             string valor = login;
 
-            tabla_datos = Conexion_44MM.Instancia.Seleccionar(nombre_tabla, propiedad, valor);
+            tabla_datos = DAL_44MM.Instancia.Seleccionar(nombre_tabla, propiedad, valor);
             return tabla_datos;
         }
 
@@ -106,8 +106,8 @@ namespace DAL
 
         public void Recuperar_Usuarios()
         {
-            query = Conexion_44MM.Instancia.Conectar(nombre_tabla);
-            tabla_datos = Conexion_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
+            query = DAL_44MM.Instancia.Conectar(nombre_tabla);
+            tabla_datos = DAL_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
             DataColumn p = tabla_datos.Columns["Login"];
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
@@ -119,7 +119,7 @@ namespace DAL
 
             string mensaje = "Usuario ya Existente";
 
-            tabla_datos = Conexion_44MM.Instancia.Seleccionar(nombre_tabla, propiedad, valor);
+            tabla_datos = DAL_44MM.Instancia.Seleccionar(nombre_tabla, propiedad, valor);
             if (tabla_datos.Rows.Count == 0)
             {
                 return (true, "");

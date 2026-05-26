@@ -1,32 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|c:\\users\\mikem\\source\\repos\\proyecto_marzana4_morello4\\proyecto\\dal\\dal_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|solutionrelative:dal\\dal_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{208CCA24-D2FD-4124-835E-B22549D48B57}|BLL\\BLL_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\bll\\bll_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{208CCA24-D2FD-4124-835E-B22549D48B57}|BLL\\BLL_44MM.csproj|solutionrelative:bll\\bll_bitacora_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\dal\\dal_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|solutionrelative:dal\\dal_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\dal\\dal_usuario_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD6C4B08-FB69-4952-B6BE-8F6EDF803409}|DAL\\DAL_44MM.csproj|solutionrelative:dal\\dal_usuario_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{208CCA24-D2FD-4124-835E-B22549D48B57}|BLL\\BLL_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\bll\\bll_intento_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{208CCA24-D2FD-4124-835E-B22549D48B57}|BLL\\BLL_44MM.csproj|solutionrelative:bll\\bll_intento_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85BA8C02-8C39-4250-BB98-4609FDDB1420}|AMARENT\\UI_44MM.csproj|solutionrelative:amarent\\ui_menu_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -34,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,79 +26,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DAL_Bitacora_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Bitacora_44MM.cs",
-              "RelativeDocumentMoniker": "DAL\\DAL_Bitacora_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Bitacora_44MM.cs",
-              "RelativeToolTip": "DAL\\DAL_Bitacora_44MM.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T21:19:32.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BLL_Bitacora_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\BLL\\BLL_Bitacora_44MM.cs",
-              "RelativeDocumentMoniker": "BLL\\BLL_Bitacora_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\BLL\\BLL_Bitacora_44MM.cs",
-              "RelativeToolTip": "BLL\\BLL_Bitacora_44MM.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T20:59:47.709Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DAL_Usuario_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Usuario_44MM.cs",
-              "RelativeDocumentMoniker": "DAL\\DAL_Usuario_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Usuario_44MM.cs",
-              "RelativeToolTip": "DAL\\DAL_Usuario_44MM.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAgwI0AAAC1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T21:14:19.255Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DAL_Intentos_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Intentos_44MM.cs",
-              "RelativeDocumentMoniker": "DAL\\DAL_Intentos_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\DAL\\DAL_Intentos_44MM.cs",
-              "RelativeToolTip": "DAL\\DAL_Intentos_44MM.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T21:01:33.811Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UI_Menu_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\UI_Menu_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\UI_Menu_44MM.cs",
-              "RelativeToolTip": "AMARENT\\UI_Menu_44MM.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAowFMAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T20:55:38.325Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BLL_Intento_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\BLL\\BLL_Intento_44MM.cs",
-              "RelativeDocumentMoniker": "BLL\\BLL_Intento_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\BLL\\BLL_Intento_44MM.cs",
-              "RelativeToolTip": "BLL\\BLL_Intento_44MM.cs",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAIwGkAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T20:49:07.117Z"
             }
           ]
         }
