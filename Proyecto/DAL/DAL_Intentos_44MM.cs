@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,26 +31,52 @@ namespace DAL
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
 
-        public void Registrar_Intento(string login, DateTime fecha)
+        public void Actualizar_Intentos(DataTable tabla)
         {
             conexion.Open();
-            SqlTransaction transaction = conexion.BeginTransaction();
-            try
+            foreach (DataRow row in tabla.Rows)
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (Login, Fecha) VALUES (@Login, @Fecha)";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.Transaction = transaction;
+                DataRow fila = tabla_datos.Rows.Find((string)row["Login"]);
+                if (fila != null)
+                {
+                    SqlTransaction transaction = conexion.BeginTransaction();
+                    try
+                    {
+                        string sql = $"UPDATE {nombre_tabla} SET Fecha = @Fecha, Intentos = @Intentos WHERE Login = @Login";
+                        SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                        cmd.Parameters.AddWithValue("@Fecha", (DateTime)row["Fecha"]);
+                        cmd.Parameters.AddWithValue("@Intentos", (int)row["Intentos"]);
+                        cmd.Parameters.AddWithValue("@Login", (string)row["Login"]);
 
-                cmd.Parameters.AddWithValue("@Login", login);
-                cmd.Parameters.AddWithValue("@Fecha", fecha);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                else
+                {
+                    SqlTransaction transaction = conexion.BeginTransaction();
+                    try
+                    {
+                        string sql = $"INSERT INTO [{nombre_tabla}] (Login, Fecha, Intentos) VALUES (@Fecha, @Intentos, @Login)";
+                        SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                        cmd.Parameters.AddWithValue("@Fecha", (DateTime)row["Fecha"]);
+                        cmd.Parameters.AddWithValue("@Intentos", (int)row["Intentos"]);
+                        cmd.Parameters.AddWithValue("@Login", (string)row["Login"]);
 
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
             }
-            catch
-            {
-                transaction.Rollback();
-            }
+
             conexion.Close();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -8,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public sealed class Gestion_Intentos_44MM
+    public sealed class BLL_Intento_44MM
     {
-        public Gestion_Intentos_44MM() { }
+        public BLL_Intento_44MM() { }
 
-        private static Gestion_Intentos_44MM _instancia;
+        private static BLL_Intento_44MM _instancia;
 
-        public static Gestion_Intentos_44MM Instancia
+        public static BLL_Intento_44MM Instancia
         {
             get
             {
                 if (_instancia == null)
                 {
-                    _instancia = new Gestion_Intentos_44MM();
+                    _instancia = new BLL_Intento_44MM();
                     Instancia.Recuperar_Intentos();
 
                 }
@@ -28,9 +29,9 @@ namespace BLL
             }
         }
 
-        private static List<Intento_44MM> _lista_intentos = new List<Intento_44MM>();
+        private static List<BE_Intento_44MM> _lista_intentos = new List<BE_Intento_44MM>();
 
-        public static List<Intento_44MM> Lista_Intentos
+        public static List<BE_Intento_44MM> Lista_Intentos
         {
             get { return _lista_intentos; }
             set { _lista_intentos = value; }
@@ -44,17 +45,13 @@ namespace BLL
             set { _tabla_intentos = value; }
         }
 
-        /*private void Recuperar_Intentos()
-        {
-
-        }*/
-
+        #region Funciones Principales
         public int Agregar_Intento(string login)
         {
-            Intento_44MM intento;
+            BE_Intento_44MM intento;
             if (Lista_Intentos.Count == 0)
             {
-                intento = new Intento_44MM(login);
+                intento = new BE_Intento_44MM(login);
                 Lista_Intentos.Add(intento);
                 intento.Intentos_Restantes -= 1;
             }
@@ -63,7 +60,7 @@ namespace BLL
                 intento = Lista_Intentos.FindLast(x => x.Login == login);
                 if (intento == null)
                 {
-                    intento = new Intento_44MM(login);
+                    intento = new BE_Intento_44MM(login);
                     Lista_Intentos.Add(intento);
                     intento.Intentos_Restantes -= 1;
                 }
@@ -83,10 +80,10 @@ namespace BLL
 
         public void Resetear_Intentos(string login)
         {
-            Intento_44MM intento;
+            BE_Intento_44MM intento;
             if (Lista_Intentos.Count == 0)
             {
-                intento = new Intento_44MM(login);
+                intento = new BE_Intento_44MM(login);
                 Lista_Intentos.Add(intento);
                 intento.Intentos_Restantes -= 1;
             }
@@ -100,8 +97,39 @@ namespace BLL
                 }
             }
         }
+        #endregion
 
-        private void Recuperar_Intentos()
+        #region Base de Datos
+        DAL_Intentos_44MM dal_intentos = new DAL_Intentos_44MM();
+        public void Recuperar_Intentos()
+        {
+            Tabla_Intentos = dal_intentos.tabla_datos;
+            foreach (DataRow row in Tabla_Intentos.Rows)
+            {
+                BE_Intento_44MM intento = new BE_Intento_44MM((string)row["Login"]);
+                intento.Fecha = (DateTime)row["Fecha"];
+                intento.Intentos_Restantes = (int)row["Intentos"];
+                Lista_Intentos.Add(intento);
+            }
+        }
+
+        public void Guardar_Intentos()
+        {
+            Tabla_Intentos.Rows.Clear();
+            foreach (BE_Intento_44MM intento in Lista_Intentos)
+            {
+                DataRow row = Tabla_Intentos.NewRow();
+                row["Login"] = intento.Login;
+                row["Fecha"] = intento.Fecha;
+                row["Intentos"] = intento.Intentos_Restantes;
+                Tabla_Intentos.Rows.Add(row);
+            }
+           dal_intentos.Actualizar_Intentos(Tabla_Intentos);
+        }
+        #endregion
+
+        #region Archivo
+        /*private void Recuperar_Intentos()
         {
             FileStream fs = new FileStream("Intentos_44MM.txt", FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
@@ -146,6 +174,7 @@ namespace BLL
             }
             sw.Dispose();
             sw.Close();
-        }
+        }*/
+        #endregion
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class Intento_44MM
+    public class BE_Intento_44MM
     {
-        public Intento_44MM(string l)
+        public BE_Intento_44MM(string l)
         {
             Login = l;
             Fecha = DateTime.Now;

@@ -33,7 +33,7 @@
             this.textBox_nueva_contra2 = new System.Windows.Forms.TextBox();
             this.label_contra = new System.Windows.Forms.Label();
             this.label_nueva_contra1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_nueva_contra2 = new System.Windows.Forms.Label();
             this.button_confirmar = new System.Windows.Forms.Button();
             this.button_salir = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -86,20 +86,21 @@
             this.label_nueva_contra1.TabIndex = 4;
             this.label_nueva_contra1.Text = "Nueva contraseña";
             // 
-            // label3
+            // label_nueva_contra2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Repetir nueva contraseña";
+            this.label_nueva_contra2.AutoSize = true;
+            this.label_nueva_contra2.Location = new System.Drawing.Point(12, 97);
+            this.label_nueva_contra2.Name = "label_nueva_contra2";
+            this.label_nueva_contra2.Size = new System.Drawing.Size(161, 16);
+            this.label_nueva_contra2.TabIndex = 5;
+            this.label_nueva_contra2.Text = "Repetir nueva contraseña";
             // 
             // button_confirmar
             // 
+            this.button_confirmar.AutoSize = true;
             this.button_confirmar.Location = new System.Drawing.Point(12, 144);
             this.button_confirmar.Name = "button_confirmar";
-            this.button_confirmar.Size = new System.Drawing.Size(75, 23);
+            this.button_confirmar.Size = new System.Drawing.Size(75, 26);
             this.button_confirmar.TabIndex = 6;
             this.button_confirmar.Text = "Confirmar";
             this.button_confirmar.UseVisualStyleBackColor = true;
@@ -107,9 +108,10 @@
             // 
             // button_salir
             // 
+            this.button_salir.AutoSize = true;
             this.button_salir.Location = new System.Drawing.Point(12, 173);
             this.button_salir.Name = "button_salir";
-            this.button_salir.Size = new System.Drawing.Size(75, 23);
+            this.button_salir.Size = new System.Drawing.Size(75, 26);
             this.button_salir.TabIndex = 7;
             this.button_salir.Text = "Salir";
             this.button_salir.UseVisualStyleBackColor = true;
@@ -124,7 +126,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_confirmar);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label_nueva_contra2);
             this.Controls.Add(this.label_nueva_contra1);
             this.Controls.Add(this.label_contra);
             this.Controls.Add(this.textBox_nueva_contra2);
@@ -145,7 +147,7 @@
         private System.Windows.Forms.TextBox textBox_nueva_contra2;
         private System.Windows.Forms.Label label_contra;
         private System.Windows.Forms.Label label_nueva_contra1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_nueva_contra2;
         private System.Windows.Forms.Button button_confirmar;
         private System.Windows.Forms.Button button_salir;
     }

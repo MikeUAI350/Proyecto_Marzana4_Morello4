@@ -8,6 +8,6 @@ namespace Servicios
 {
     public interface I_Idioma
     {
-
+        void Agregar_Form_Idioma();
     }
 }

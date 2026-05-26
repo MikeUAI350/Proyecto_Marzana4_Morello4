@@ -70,7 +70,7 @@ namespace BLL
                     else if (contra_enc != contra_rec)
                     {
                         //Agrega un intento fallido
-                        int intentos = Gestion_Intentos_44MM.Instancia.Agregar_Intento(login);
+                        int intentos = BLL_Intento_44MM.Instancia.Agregar_Intento(login);
 
                         //Si se alcanzan los 3 intentos, bloquea el usuario
                         if (intentos <= 0)
@@ -92,7 +92,7 @@ namespace BLL
                         Sesion_Manager_44MM.Set(usuario);
                         bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Nuevo Ingreso", 1);
                         //Reinicia intentos
-                        Gestion_Intentos_44MM.Instancia.Resetear_Intentos(login);
+                        BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                         return (-1, "Requiere Cambio de Clave");
                     }
                     else
@@ -102,7 +102,7 @@ namespace BLL
                         Sesion_Manager_44MM.Set(usuario);
                         bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Login", 1);
                         //Reinicia intentos
-                        Gestion_Intentos_44MM.Instancia.Resetear_Intentos(login);
+                        BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                         //Sesion iniciada
                         return (1, "Inicio de Sesion Exitoso");
                     }
@@ -146,7 +146,7 @@ namespace BLL
                     mensaje = "Contraseña Actualizada";
                     bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Cambiar Clave", 1);
                     //Reinicia Intentos
-                    Gestion_Intentos_44MM.Instancia.Resetear_Intentos(login);
+                    BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                     return (true, mensaje);
                 }
             }
@@ -158,26 +158,27 @@ namespace BLL
             //Obtiene el login del usuario actual, lo quita del Sesion Manager y registra el evento en la bitacora
             string login = Sesion_Manager_44MM.Get().Login;
             Sesion_Manager_44MM.Quitar_Cuenta();
+            BLL_Intento_44MM.Instancia.Guardar_Intentos();
             bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Logout", 1);
         }
         #endregion
         #region Gestion
         //Devuelve : tabla completa / tabla deactivos / tabla bloqueados
-        public (List<BE_Usuario_44MM>, List<BE_Usuario_44MM>, List<BE_Usuario_44MM>) Gestionar_Usuarios()
+        public List<BE_Usuario_44MM> Gestionar_Usuarios()
         {
             //Recupera la tabla de usuarios
             dal_usuarios.Recuperar_Usuarios();
             DataTable tabla_usuarios = dal_usuarios.tabla_datos;
             List<BE_Usuario_44MM> lista_usuarios = datatable_converter.DataTable_Class(tabla_usuarios, typeof(BE_Usuario_44MM));
-
+            
             //Filtra los activos y bloqueados
-            DataTable tabla_activos = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Activo", true.ToString());
-            DataTable tabla_bloqueados = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Bloqueado", true.ToString());
+            //DataTable tabla_activos = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Activo", true.ToString());
+            //DataTable tabla_bloqueados = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Bloqueado", true.ToString());
 
-            List<BE_Usuario_44MM> lista_activos = datatable_converter.DataTable_Class(tabla_activos, typeof(BE_Usuario_44MM));
-            List<BE_Usuario_44MM> lista_bloqueados = datatable_converter.DataTable_Class(tabla_bloqueados, typeof(BE_Usuario_44MM));
+            //List<BE_Usuario_44MM> lista_activos = datatable_converter.DataTable_Class(tabla_activos, typeof(BE_Usuario_44MM));
+            //List<BE_Usuario_44MM> lista_bloqueados = datatable_converter.DataTable_Class(tabla_bloqueados, typeof(BE_Usuario_44MM));
 
-            return (lista_usuarios, lista_activos, lista_bloqueados);
+            return lista_usuarios;
         }
 
         public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string email, string rol)
@@ -279,7 +280,7 @@ namespace BLL
                 //Registra el evento en la bitacora
                 bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Desbloquear Usuario " + login, 1);
                 //Reinicia Intentos para el Login Desbloqueado
-                Gestion_Intentos_44MM.Instancia.Resetear_Intentos(login);
+                BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                 return (true, mensaje);
             }
             else

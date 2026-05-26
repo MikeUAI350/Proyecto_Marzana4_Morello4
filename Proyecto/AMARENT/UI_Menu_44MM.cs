@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace AMARENT
 {
-    public partial class UI_Menu_44MM : Form
+    public partial class UI_Menu_44MM : Form , I_Idioma
     {
         private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
         public UI_Menu_44MM()
@@ -22,6 +22,7 @@ namespace AMARENT
             InitializeComponent();
             Abrir_Login();
             Total_Pantallas();
+            Agregar_Form_Idioma();
         }
 
         #region Usuarios
@@ -30,11 +31,16 @@ namespace AMARENT
             UI_Login_44MM ui = new UI_Login_44MM(this);
             ui.MdiParent = this;
             ui.Show();
+
+            if (Pantalla_Actual != null)
+            {
+                Pantalla_Actual.Enabled = false;
+            }
         }
 
         private void Abrir_Cambiar_Idioma(string idioma)
         {
-
+            Gestion_Idioma_44MM.Instancia.Notificar_Cambio_Idioma(idioma);
         }
 
         private void Abrir_Cambiar_Clave()
@@ -49,6 +55,11 @@ namespace AMARENT
                 UI_Cambiar_Clave_44MM ui = new UI_Cambiar_Clave_44MM(this);
                 ui.MdiParent = this;
                 ui.Show();
+
+                if (Pantalla_Actual != null)
+                {
+                    Pantalla_Actual.Enabled = false;
+                }
             }
         }
 
@@ -105,6 +116,7 @@ namespace AMARENT
             }
         }
 
+        public Form Pantalla_Actual;
         private void Gestion_Pantalla(Form f)
         {
             foreach (Form pantalla in pantallas)
@@ -113,6 +125,7 @@ namespace AMARENT
             }
 
             f.Visible = true;
+            Pantalla_Actual = f;
         }
 
         public void Activar_Menus(string rol)
@@ -198,11 +211,18 @@ namespace AMARENT
         {
             Abrir_Cambiar_Idioma("en");
         }
-        #endregion
 
         private void UI_Menu_44MM_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Gestion_Intentos_44MM.Instancia.Guardar_Intentos();
+            BE_Usuario_44MM be = Sesion_Manager_44MM.Get();
+            if (be != null)
+            {
+                bll.Cerrar_Sesion();
+            }
+            foreach (Form pantalla in pantallas)
+            {
+                pantalla.Visible = false;
+            }
             GC.Collect();
         }
 
@@ -247,5 +267,13 @@ namespace AMARENT
             key8 = key9;
             key9 = e.KeyCode;
         }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }

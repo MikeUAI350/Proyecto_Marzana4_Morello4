@@ -1,17 +1,17 @@
 {
   "UI_Login_44MM": {
-    "Text": "Iniciar Sesion"
+    "Text": "Login"
   },
   "label_login": {
-    "Text": "Usuario"
+    "Text": "User"
   },
   "label_contra": {
-    "Text": "Contraseña"
+    "Text": "Password"
   },
   "button_login": {
-    "Text": "Iniciar Sesion"
+    "Text": "Login"
   },
   "button_salir": {
-    "Text": "Salir"
+    "Text": "Exit"
   }
 }

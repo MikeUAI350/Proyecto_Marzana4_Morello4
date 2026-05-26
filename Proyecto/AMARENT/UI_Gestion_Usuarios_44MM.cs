@@ -13,36 +13,28 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_Usuarios_44MM : Form
+    public partial class UI_Gestion_Usuarios_44MM : Form , I_Idioma
     {
         private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
         /*private DataTable tabla_usuarios;
         private DataTable tabla_activos;
         private DataTable tabla_bloqueados;*/
         private List<BE_Usuario_44MM> lista_usuarios;
-        private List<BE_Usuario_44MM> lista_activos;
-        private List<BE_Usuario_44MM> lista_bloqueados;
         private DataGridViewCell celda_actual;
 
         public UI_Gestion_Usuarios_44MM()
         {
             InitializeComponent();
             Actualizar_Grillas();
+            Agregar_Form_Idioma();
         }
 
+        #region Funciones Secundarias
         public void Actualizar_Grillas()
         {
             radioButton_todos.Checked = true;
-            (lista_usuarios, lista_activos, lista_bloqueados) = bll.Gestionar_Usuarios();
-
-            dataGridView_lista.DataSource = lista_usuarios;
-
-            dataGridView_lista.Columns["Email"].Visible = false;
-            dataGridView_lista.Columns["Activo"].Visible = false;
-            /*dataGridView_lista.Columns["Password"].Visible = false;
-            dataGridView_lista.Columns["Bloqueado"].Visible = false;*/
-
-            celda_actual = dataGridView_lista.Rows[0].Cells[0];
+            lista_usuarios = bll.Gestionar_Usuarios();
+            Filtrar("Todos");
         }
 
         private BE_Usuario_44MM Obtener_Seleccionado()
@@ -74,12 +66,20 @@ namespace AMARENT
                     }
                 case "Activos":
                     {
-                        dataGridView_lista.DataSource = lista_activos;
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Activo == true).ToList();
+                        dataGridView_lista.DataSource = lista;
+                        break;
+                    }
+                case "Inactivos":
+                    {
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Activo == false).ToList();
+                        dataGridView_lista.DataSource = lista;
                         break;
                     }
                 case "Bloqueados":
                     {
-                        dataGridView_lista.DataSource = lista_bloqueados;
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Bloqueado == true).ToList();
+                        dataGridView_lista.DataSource = lista;
                         button_desbloquear.Enabled = true;
                         button_desbloquear.Visible = true;
                         break;
@@ -91,11 +91,15 @@ namespace AMARENT
             }
 
             dataGridView_lista.Columns["Email"].Visible = false;
+            dataGridView_lista.Columns["Bloqueado"].Visible = false;
             dataGridView_lista.Columns["Activo"].Visible = false;
-            /*dataGridView_lista.Columns["Password"].Visible = false;
-            dataGridView_lista.Columns["Bloqueado"].Visible = false;*/
+            dataGridView_lista.Columns["Idioma"].Visible = false;
+            dataGridView_lista.Columns["RCC"].Visible = false;
+            //dataGridView_lista.Columns["Password"].Visible = false;
         }
+        #endregion
 
+        #region Funciones Principales
         private void Crear()
         {
             UI_Gestion_44MM ui = new UI_Gestion_44MM("Crear", null, this);
@@ -173,7 +177,9 @@ namespace AMARENT
                 }
             }
         }
+        #endregion
 
+        #region Botones
         private void button_crear_Click(object sender, EventArgs e)
         {
             Crear();
@@ -232,6 +238,14 @@ namespace AMARENT
             }
         }
 
+        private void radioButton_inactivos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton_inactivos.Checked == true)
+            {
+                Filtrar("Inactivos");
+            }
+        }
+
         private void radioButton_bloqueados_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_bloqueados.Checked == true)
@@ -249,5 +263,13 @@ namespace AMARENT
         {
             Actualizar_Grillas();
         }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }

@@ -12,13 +12,14 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Cambiar_Clave_44MM : Form
+    public partial class UI_Cambiar_Clave_44MM : Form , I_Idioma
     {
         private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
         public UI_Cambiar_Clave_44MM(UI_Menu_44MM menu)
         {
             InitializeComponent();
             menu.Controls["menuStrip"].Enabled = false;
+            Agregar_Form_Idioma();
         }
 
         private void Verificar_Coincidencia(string contra_a, string contra1, string contra2)
@@ -70,6 +71,10 @@ namespace AMARENT
         private void UI_Cambiar_Clave_44MM_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.MdiParent.Controls["menuStrip"].Enabled = true;
+            if ((this.MdiParent as UI_Menu_44MM).Pantalla_Actual != null)
+            {
+                (this.MdiParent as UI_Menu_44MM).Pantalla_Actual.Enabled = true;
+            }
         }
 
 
@@ -111,6 +116,13 @@ namespace AMARENT
         private void textBox_nueva_contra2_MouseLeave(object sender, EventArgs e)
         {
             Ocultar_TextBox(textBox_nueva_contra2);
+        }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
         }
         #endregion
     }

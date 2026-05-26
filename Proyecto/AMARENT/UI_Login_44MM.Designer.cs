@@ -73,9 +73,10 @@
             // 
             // button_login
             // 
+            this.button_login.AutoSize = true;
             this.button_login.Location = new System.Drawing.Point(12, 100);
             this.button_login.Name = "button_login";
-            this.button_login.Size = new System.Drawing.Size(75, 23);
+            this.button_login.Size = new System.Drawing.Size(75, 26);
             this.button_login.TabIndex = 5;
             this.button_login.Text = "Iniciar";
             this.button_login.UseVisualStyleBackColor = true;
@@ -83,9 +84,10 @@
             // 
             // button_salir
             // 
+            this.button_salir.AutoSize = true;
             this.button_salir.Location = new System.Drawing.Point(13, 129);
             this.button_salir.Name = "button_salir";
-            this.button_salir.Size = new System.Drawing.Size(75, 23);
+            this.button_salir.Size = new System.Drawing.Size(75, 26);
             this.button_salir.TabIndex = 7;
             this.button_salir.Text = "Salir";
             this.button_salir.UseVisualStyleBackColor = true;

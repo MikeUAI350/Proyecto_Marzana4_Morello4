@@ -24,14 +24,14 @@ namespace BLL
             dal_bitacora.Registrar_Evento(login, fecha, modulo, evento, criticidad);
         }
 
-        public (DataTable, List<BE_Bitacora_44MM>) Gestionar_Bitacora()
+        public List<BE_Bitacora_44MM> Gestionar_Bitacora()
         {
             dal_bitacora.Recuperar_Bitacora();
             DataTable tabla_usuarios = dal_bitacora.tabla_datos;
 
             List<BE_Bitacora_44MM> lista_usuarios = datatable_converter.DataTable_Class(tabla_usuarios, typeof(BE_Bitacora_44MM));
 
-            return (tabla_usuarios, lista_usuarios);
+            return lista_usuarios;
         }
 
         public DataRow Obtener_Login(string login)
@@ -47,8 +47,9 @@ namespace BLL
             }
         }
 
-        public (bool, string) Imprimir_Bitacora(DataTable tabla, string ruta)
+        public (bool, string) Imprimir_Bitacora(List<BE_Bitacora_44MM> lista, string ruta)
         {
+            DataTable tabla = datatable_converter.Class_DataTable(lista, typeof(BE_Bitacora_44MM));
             // Crear documento
             Document documento = new Document(PageSize.A4.Rotate(), 10f, 10f, 10f, 10f);
 

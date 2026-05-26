@@ -90,7 +90,7 @@ namespace Servicios
             SqlTransaction transaction = Conexion.BeginTransaction();
             try
             {
-                string command = "UPDATE " + nombre_tabla + " SET " + propiedad2 + " = '" + valor2 + "' WHERE " + propiedad1 +" = '" + valor1 + "'";
+                string command = $"UPDATE {nombre_tabla} SET {propiedad2} = '{valor2}' WHERE {propiedad1} = '{valor1}'";
                 SqlCommand cmd = new SqlCommand(command, Conexion);
                 cmd.Transaction = transaction;
 

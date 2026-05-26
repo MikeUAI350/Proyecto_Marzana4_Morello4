@@ -220,9 +220,10 @@
             // 
             // button_imprimir
             // 
-            this.button_imprimir.Location = new System.Drawing.Point(12, 391);
+            this.button_imprimir.AutoSize = true;
+            this.button_imprimir.Location = new System.Drawing.Point(12, 362);
             this.button_imprimir.Name = "button_imprimir";
-            this.button_imprimir.Size = new System.Drawing.Size(75, 23);
+            this.button_imprimir.Size = new System.Drawing.Size(75, 26);
             this.button_imprimir.TabIndex = 10;
             this.button_imprimir.Text = "Imprimir";
             this.button_imprimir.UseVisualStyleBackColor = true;
@@ -230,9 +231,10 @@
             // 
             // button_aplicar
             // 
-            this.button_aplicar.Location = new System.Drawing.Point(12, 362);
+            this.button_aplicar.AutoSize = true;
+            this.button_aplicar.Location = new System.Drawing.Point(12, 333);
             this.button_aplicar.Name = "button_aplicar";
-            this.button_aplicar.Size = new System.Drawing.Size(75, 23);
+            this.button_aplicar.Size = new System.Drawing.Size(75, 26);
             this.button_aplicar.TabIndex = 11;
             this.button_aplicar.Text = "Aplicar";
             this.button_aplicar.UseVisualStyleBackColor = true;
@@ -240,9 +242,10 @@
             // 
             // button_limpiar
             // 
-            this.button_limpiar.Location = new System.Drawing.Point(12, 333);
+            this.button_limpiar.AutoSize = true;
+            this.button_limpiar.Location = new System.Drawing.Point(12, 391);
             this.button_limpiar.Name = "button_limpiar";
-            this.button_limpiar.Size = new System.Drawing.Size(75, 23);
+            this.button_limpiar.Size = new System.Drawing.Size(75, 26);
             this.button_limpiar.TabIndex = 12;
             this.button_limpiar.Text = "Limpiar";
             this.button_limpiar.UseVisualStyleBackColor = true;
@@ -289,9 +292,10 @@
             // 
             // button_actualizar
             // 
+            this.button_actualizar.AutoSize = true;
             this.button_actualizar.Location = new System.Drawing.Point(12, 420);
             this.button_actualizar.Name = "button_actualizar";
-            this.button_actualizar.Size = new System.Drawing.Size(75, 23);
+            this.button_actualizar.Size = new System.Drawing.Size(75, 26);
             this.button_actualizar.TabIndex = 19;
             this.button_actualizar.Text = "Actualizar";
             this.button_actualizar.UseVisualStyleBackColor = true;

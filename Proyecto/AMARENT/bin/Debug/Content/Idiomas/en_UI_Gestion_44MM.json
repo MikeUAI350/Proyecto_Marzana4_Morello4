@@ -1,32 +1,32 @@
 {
   "UI_Gestion_44MM": {
-    "Text": "Gestion"
+    "Text": "Management"
   },
   "label_dni": {
     "Text": "DNI"
   },
   "label_nombre": {
-    "Text": "Nombre"
+    "Text": "First Name"
   },
   "label_apellido": {
-    "Text": "Apellido"
+    "Text": "Last Name"
   },
   "label_email": {
     "Text": "Email"
   },
   "label_rol": {
-    "Text": "Rol"
+    "Text": "Role"
   },
   "label_login": {
-    "Text": "Usuario"
+    "Text": "User"
   },
   "button_confirmar": {
-    "Text": "Confirmar"
+    "Text": "Confirm"
   },
   "button_anular": {
-    "Text": "Anular"
+    "Text": "Cancel"
   },
   "button_salir": {
-    "Text": "Salir"
+    "Text": "Exit"
   }
 }

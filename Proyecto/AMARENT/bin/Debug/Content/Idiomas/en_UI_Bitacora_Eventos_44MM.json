@@ -1,47 +1,47 @@
 {
   "UI_Bitacora_Eventos_44MM": {
-    "Text": "Bitacora"
+    "Text": "Log"
   },
   "groupBox_filtro": {
-    "Text": "Filtros"
+    "Text": "Filters"
   },
   "label_login": {
-    "Text": "Usuario"
+    "Text": "User"
   },
   "label_modulo": {
-    "Text": "Modulo"
+    "Text": "Module"
   },
   "label_evento": {
-    "Text": "Evento"
+    "Text": "Event"
   },
   "label_fecha_inicial": {
-    "Text": "Fecha Inicial"
+    "Text": "Start Date"
   },
   "label_fecha_final": {
-    "Text": "Fecha Final"
+    "Text": "End Date"
   },
   "checkBox_usar_fechas": {
-    "Text": "Usar Fechas"
+    "Text": "Use Dates"
   },
   "label_criticidad": {
-    "Text": "Criticidad"
+    "Text": "Criticality"
   },
   "button_limpiar": {
-    "Text": "Limpiar"
+    "Text": "Clear"
   },
   "button_aplicar": {
-    "Text": "Aplicar"
+    "Text": "Apply"
   },
   "button_imprimir": {
-    "Text": "Imprimir"
+    "Text": "Print"
   },
   "button_actualizar": {
-    "Text": "Actualizar"
+    "Text": "Update"
   },
   "label_nombre": {
-    "Text": "Nombre"
+    "Text": "First Name"
   },
   "label_apellido": {
-    "Text": "Apellido"
+    "Text": "Last Name"
   }
 }

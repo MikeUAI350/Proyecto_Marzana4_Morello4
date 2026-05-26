@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BE_Bitacora_44MM.cs" />
+    <Compile Include="BE_Intento_44MM.cs" />
     <Compile Include="BE_Usuario_44MM.cs" />
     <Compile Include="DataTable_Converter_44MM.cs" />
     <Compile Include="DataTable_Filter_44MM.cs" />

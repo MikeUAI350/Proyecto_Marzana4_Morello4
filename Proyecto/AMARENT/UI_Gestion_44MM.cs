@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_44MM : Form
+    public partial class UI_Gestion_44MM : Form , I_Idioma
     {
         private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
         private string finalidad;
@@ -27,6 +27,7 @@ namespace AMARENT
             ui = form;
             ui.Visible = false;
             Definir_Objetivo(be);
+            Agregar_Form_Idioma();
         }
 
         private void Definir_Objetivo(BE_Usuario_44MM be)
@@ -144,6 +145,7 @@ namespace AMARENT
             textBox_login.Text = informacion.Login;
         }
 
+        #region Botones
         private void button_confirmar_Click(object sender, EventArgs e)
         {
             Confirmacion();
@@ -165,5 +167,13 @@ namespace AMARENT
             ui.Visible = true;
             ui.Actualizar_Grillas();
         }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }

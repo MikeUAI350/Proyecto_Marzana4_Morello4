@@ -39,6 +39,7 @@
             this.radioButton_todos = new System.Windows.Forms.RadioButton();
             this.radioButton_activos = new System.Windows.Forms.RadioButton();
             this.radioButton_bloqueados = new System.Windows.Forms.RadioButton();
+            this.radioButton_inactivos = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_lista)).BeginInit();
             this.groupBox_controles.SuspendLayout();
             this.SuspendLayout();
@@ -165,7 +166,7 @@
             // radioButton_bloqueados
             // 
             this.radioButton_bloqueados.AutoSize = true;
-            this.radioButton_bloqueados.Location = new System.Drawing.Point(432, 5);
+            this.radioButton_bloqueados.Location = new System.Drawing.Point(345, 5);
             this.radioButton_bloqueados.Name = "radioButton_bloqueados";
             this.radioButton_bloqueados.Size = new System.Drawing.Size(102, 20);
             this.radioButton_bloqueados.TabIndex = 5;
@@ -173,12 +174,24 @@
             this.radioButton_bloqueados.UseVisualStyleBackColor = true;
             this.radioButton_bloqueados.CheckedChanged += new System.EventHandler(this.radioButton_bloqueados_CheckedChanged);
             // 
+            // radioButton_inactivos
+            // 
+            this.radioButton_inactivos.AutoSize = true;
+            this.radioButton_inactivos.Location = new System.Drawing.Point(453, 5);
+            this.radioButton_inactivos.Name = "radioButton_inactivos";
+            this.radioButton_inactivos.Size = new System.Drawing.Size(81, 20);
+            this.radioButton_inactivos.TabIndex = 6;
+            this.radioButton_inactivos.Text = "Inactivos";
+            this.radioButton_inactivos.UseVisualStyleBackColor = true;
+            this.radioButton_inactivos.CheckedChanged += new System.EventHandler(this.radioButton_inactivos_CheckedChanged);
+            // 
             // UI_Gestion_Usuarios_44MM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.radioButton_inactivos);
             this.Controls.Add(this.radioButton_bloqueados);
             this.Controls.Add(this.radioButton_activos);
             this.Controls.Add(this.radioButton_todos);
@@ -210,5 +223,6 @@
         private System.Windows.Forms.RadioButton radioButton_activos;
         private System.Windows.Forms.RadioButton radioButton_bloqueados;
         private System.Windows.Forms.Button button_actualizar;
+        private System.Windows.Forms.RadioButton radioButton_inactivos;
     }
 }

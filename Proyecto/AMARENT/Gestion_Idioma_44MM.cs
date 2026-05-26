@@ -33,20 +33,36 @@ namespace Servicios
 			set { _lista_form_idioma = value; }
 		}
 
+        private static string _idioma = "es";
+
         private static Dictionary<string, Dictionary<string, string>> _traducciones;
 
         public void Agregar_Form_Idioma(I_Idioma form_idioma)
 		{
 			_lista_form_idioma.Add(form_idioma);
+            Cargar_Idioma(form_idioma);
         }
 
-		public void Notificar_Cambio_Idioma(string idioma, string nombre_form)
+        public void Eliminar_Form_Idioma(I_Idioma form_idioma)
+        {
+            _lista_form_idioma.Remove(form_idioma);
+        }
+
+        private void Cargar_Idioma(I_Idioma form_idioma)
+        {
+            string ruta = $"Content\\Idiomas\\{_idioma}_{(form_idioma as Control).Name}.json";
+            Cargar_Idioma(ruta);
+            Aplicar_Idioma(form_idioma as Control);
+        }
+
+        public void Notificar_Cambio_Idioma(string idioma)
 		{
-            string ruta = $"Content\\Idiomas\\{idioma}_{nombre_form}.json";
+            _idioma = idioma;
             foreach (I_Idioma form in Lista_Form_Idioma)
             {
+                string ruta = $"Content\\Idiomas\\{idioma}_{(form as Control).Name}.json";
                 Cargar_Idioma(ruta);
-                Aplicar_Control(form as Control);
+                Aplicar_Idioma(form as Control);
             }
         }
 
@@ -67,6 +83,16 @@ namespace Servicios
             {
                 Aplicar_Idioma(control);
             }
+            if (parent is Form form)
+            {
+                foreach (Control c in form.Controls)
+                {
+                    if (c is MenuStrip menu)
+                    {
+                        Aplicar_Menu(menu.Items);
+                    }
+                }
+            }
         }
 
         private static void Aplicar_Control(Control control)
@@ -80,6 +106,41 @@ namespace Servicios
                 if (propiedades.ContainsKey("Text"))
                     control.Text = propiedades["Text"];
             }
+        }
+
+        private static void Aplicar_Menu(ToolStripItemCollection items)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (_traducciones.ContainsKey(item.Name))
+                {
+                    var propiedades = _traducciones[item.Name];
+
+                    if (propiedades.ContainsKey("Text"))
+                    {
+                        item.Text = propiedades["Text"];
+                    }
+                }
+
+                // Submenús
+                if (item is ToolStripMenuItem menuItem)
+                {
+                    Aplicar_Menu(menuItem.DropDownItems);
+                }
+            }
+        }
+
+        public static string Obtener_Mensajes(string key)
+        {
+            if (_traducciones.ContainsKey("Messages"))
+            {
+                var messages = _traducciones["Messages"];
+                if (messages.ContainsKey(key))
+                {
+                    return messages[key];
+                }
+            }
+            return key;
         }
     }
 }
