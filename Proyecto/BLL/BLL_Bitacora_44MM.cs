@@ -1,4 +1,8 @@
-﻿using DAL;
+﻿using BE;
+using DAL;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,56 +11,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
-namespace Servicios
+namespace BLL
 {
-    public sealed class Bitacora_44MM
+    public class BLL_Bitacora_44MM
     {
-        private static readonly object _candado = new object();
-
-        private Bitacora_44MM() { }
-        private static Bitacora_44MM _Instancia;
-
-        public static Bitacora_44MM Instancia
-        {
-            get
-            {
-                if (_Instancia == null)
-                {
-                    lock (_candado)
-                    {
-                        if (_Instancia == null)
-                        {
-                            _Instancia = new Bitacora_44MM();
-                        }
-                    }
-                }
-                return _Instancia;
-            }
-        }
-
-        private static DAL_Bitacora_44MM _dal = new DAL_Bitacora_44MM();
-        public static DAL_Bitacora_44MM Dal
-        {
-            get { return _dal; }
-            set { _dal = value; }
-        }
-
-        public static void Registrar_Evento(string login, DateTime fecha, string modulo, string evento, int criticidad)
-        {
-            Dal.Registrar_Evento(login, fecha, modulo, evento, criticidad);
-        }
-
         private DAL_Bitacora_44MM dal_bitacora = new DAL_Bitacora_44MM();
+        private DataTable_Converter_44MM<BE_Bitacora_44MM> datatable_converter = new DataTable_Converter_44MM<BE_Bitacora_44MM>();
 
-        public DataTable Gestionar_Bitacora()
+        public void Registrar_Evento(string login, DateTime fecha, string modulo, string evento, int criticidad)
+        {
+            dal_bitacora.Registrar_Evento(login, fecha, modulo, evento, criticidad);
+        }
+
+        public List<BE_Bitacora_44MM> Gestionar_Bitacora()
         {
             dal_bitacora.Recuperar_Bitacora();
             DataTable tabla_usuarios = dal_bitacora.tabla_datos;
 
-            return tabla_usuarios;
+            List<BE_Bitacora_44MM> lista_usuarios = datatable_converter.DataTable_Class(tabla_usuarios, typeof(BE_Bitacora_44MM));
+
+            return lista_usuarios;
         }
 
         public DataRow Obtener_Login(string login)
@@ -72,8 +47,9 @@ namespace Servicios
             }
         }
 
-        public (bool, string) Imprimir_Bitacora(DataTable tabla, string ruta)
+        public (bool, string) Imprimir_Bitacora(List<BE_Bitacora_44MM> lista, string ruta)
         {
+            DataTable tabla = datatable_converter.Class_DataTable(lista, typeof(BE_Bitacora_44MM));
             // Crear documento
             Document documento = new Document(PageSize.A4.Rotate(), 10f, 10f, 10f, 10f);
 

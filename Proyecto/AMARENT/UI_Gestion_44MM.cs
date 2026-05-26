@@ -1,4 +1,6 @@
-﻿using Servicios;
+﻿using BE;
+using BLL;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,20 +13,24 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_44MM : Form
+    public partial class UI_Gestion_44MM : Form , I_Idioma
     {
         private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
         private string finalidad;
-        private DataRow informacion;
-        public UI_Gestion_44MM(string fin, DataRow row)
+        private BE_Usuario_44MM informacion;
+        private UI_Gestion_Usuarios_44MM ui;
+        public UI_Gestion_44MM(string fin, BE_Usuario_44MM be, UI_Gestion_Usuarios_44MM form)
         {
             InitializeComponent();
             finalidad = fin;
-            informacion = row;
-            Definir_Objetivo(row);
+            informacion = be;
+            ui = form;
+            ui.Visible = false;
+            Definir_Objetivo(be);
+            Agregar_Form_Idioma();
         }
 
-        private void Definir_Objetivo(DataRow row)
+        private void Definir_Objetivo(BE_Usuario_44MM be)
         {
             switch (finalidad)
             {
@@ -72,9 +78,9 @@ namespace AMARENT
 
                         textBox_login.ReadOnly = true;
 
-                        textBox_email.Text = (string)row["Email"];
-                        comboBox_rol.Text = (string)row["Rol"];
-                        textBox_login.Text = (string)row["Login"];
+                        textBox_email.Text = be.Email;
+                        comboBox_rol.Text = be.Rol;
+                        textBox_login.Text = be.Login;
 
                         break;
                     }
@@ -131,14 +137,15 @@ namespace AMARENT
 
         private void Anular()
         {
-            textBox_dni.Text = (string)informacion["DNI"];
-            textBox_nombre.Text = (string)informacion["Nombre"];
-            textBox_apellido.Text = (string)informacion["Apellido"];
-            textBox_email.Text = (string)informacion["Email"];
-            comboBox_rol.Text = (string)informacion["Rol"];
-            textBox_login.Text = (string)informacion["Login"];
+            textBox_dni.Text = informacion.DNI;
+            textBox_nombre.Text = informacion.Nombre;
+            textBox_apellido.Text = informacion.Apellido;
+            textBox_email.Text = informacion.Email;
+            comboBox_rol.Text = informacion.Rol;
+            textBox_login.Text = informacion.Login;
         }
 
+        #region Botones
         private void button_confirmar_Click(object sender, EventArgs e)
         {
             Confirmacion();
@@ -157,6 +164,16 @@ namespace AMARENT
         private void UI_Gestion_44MM_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.MdiParent.Controls["menuStrip"].Enabled = true;
+            ui.Visible = true;
+            ui.Actualizar_Grillas();
         }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }

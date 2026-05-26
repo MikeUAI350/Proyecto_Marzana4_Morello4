@@ -1,8 +1,20 @@
 {
-  "UI_Menu_44MM": {
-    "Text": "Formulario Principal"
+  "UI_Cambiar_Clave_44MM": {
+    "Text": "Cambiar Contraseña"
   },
-  "usuariotoolStripMenuItem": {
-    "Text": "Usuario"
+  "label_contra": {
+    "Text": "Contraseña Actual"
   },
+  "label_nueva_contra1": {
+    "Text": "Nueva Contraseña"
+  },
+  "label_nueva_contra2": {
+    "Text": "Reperir Nueva Contraseña"
+  },
+  "button_confirmar": {
+    "Text": "Confirmar"
+  },
+  "button_salir": {
+    "Text": "Salir"
+  }
 }

@@ -1,8 +1,32 @@
 {
-  "UI_Menu_44MM": {
-    "Text": "Formulario Principal"
+  "UI_Gestion_44MM": {
+    "Text": "Gestion"
   },
-  "usuariotoolStripMenuItem": {
+  "label_dni": {
+    "Text": "DNI"
+  },
+  "label_nombre": {
+    "Text": "Nombre"
+  },
+  "label_apellido": {
+    "Text": "Apellido"
+  },
+  "label_email": {
+    "Text": "Email"
+  },
+  "label_rol": {
+    "Text": "Rol"
+  },
+  "label_login": {
     "Text": "Usuario"
   },
+  "button_confirmar": {
+    "Text": "Confirmar"
+  },
+  "button_anular": {
+    "Text": "Anular"
+  },
+  "button_salir": {
+    "Text": "Salir"
+  }
 }

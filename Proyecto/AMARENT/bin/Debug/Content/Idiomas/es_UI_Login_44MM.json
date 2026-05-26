@@ -1,8 +1,17 @@
 {
-  "UI_Menu_44MM": {
-    "Text": "Formulario Principal"
+  "UI_Login_44MM": {
+    "Text": "Iniciar Sesion"
   },
-  "usuariotoolStripMenuItem": {
+  "label_login": {
     "Text": "Usuario"
   },
+  "label_contra": {
+    "Text": "Contraseña"
+  },
+  "button_login": {
+    "Text": "Iniciar Sesion"
+  },
+  "button_salir": {
+    "Text": "Salir"
+  }
 }

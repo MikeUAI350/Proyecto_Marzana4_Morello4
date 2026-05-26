@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace DAL
         }
 
         #region Usuario
-        public DataTable Verificar_Cuenta(string login)
+        public DataTable Verificar_Login(string login)
         {
             string propiedad = "Login";
             string valor = login;
@@ -35,25 +36,72 @@ namespace DAL
 
         public void Bloquear_Usuario(string login)
         {
-            string propiedad1 = "Login";
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Bloqueado = @Bloqueado WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Bloqueado", true);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+            conexion.Close();
+            /*string propiedad1 = "Login";
             string propiedad2 = "Bloqueado";
             string valor2 = true.ToString();
 
-            Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);
+            Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);*/
         }
 
         public (bool, string) Cambiar_Clave(string login, string contra)
         {
-            bool exito = false;
+            bool exito = true;
             string mensaje = string.Empty;
 
-            string propiedad1 = "Login";
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Password = @Password, RCC = @RCC WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Password", contra);
+                cmd.Parameters.AddWithValue("@RCC", false);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                exito = false;
+                mensaje = ex.Message;
+            }
+            conexion.Close();
+
+            /*string propiedad1 = "Login";
             string propiedad2 = "Password";
 
             (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, contra, propiedad2, nombre_tabla);
+            if (exito == false)
+            {
+                return (false, mensaje);
+            }
+            else
+            {
+                propiedad2 = "RCC";
+                string valor2 = false.ToString();
+                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);
+            }*/
             return (exito, mensaje);
         }
         #endregion
+
         #region Gestion
 
         public void Recuperar_Usuarios()
@@ -64,10 +112,10 @@ namespace DAL
             tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
 
-        public (bool, string) Verificar_Login(string login)
+        public (bool, string) Verificar_DNI(string dni)
         {
-            string propiedad = "Login";
-            string valor = login;
+            string propiedad = "DNI";
+            string valor = dni;
 
             string mensaje = "Usuario ya Existente";
 
@@ -82,16 +130,16 @@ namespace DAL
             }
         }
 
-        public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string login, string email, string password, string rol, bool bloqueado, bool activo)
+        public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string login, string email, string password, string rol)
         {
-            bool exito = false;
+            bool exito = true;
             string mensaje = "Usuario Creado Exitosamente";
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (DNI, Nombre, Apellido, Login, Email, Password, Rol, Bloqueado, Activo) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol, @Bloqueado, @Activo)";
+                string sql = $"INSERT INTO [{nombre_tabla}] (DNI, Nombre, Apellido, Login, Email, Password, Rol) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol)";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.Transaction = transaction;
 
@@ -102,12 +150,9 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Email", email);
                 cmd.Parameters.AddWithValue("@Password", password);
                 cmd.Parameters.AddWithValue("@Rol", rol);
-                cmd.Parameters.AddWithValue("@Bloqueado", bloqueado);
-                cmd.Parameters.AddWithValue("@Activo", activo);
 
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
-                exito = true;
             }
             catch (Exception ex)
             {
@@ -121,38 +166,86 @@ namespace DAL
 
         public (bool, string) Modificar_Usuario(string login, string email, string rol)
         {
-            bool exito = false;
+            bool exito = true;
             string mensaje = "Usuario Modificado Exitosamente";
 
-            string propiedad1 = "Login";
-            string propiedad2 = "Email";
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Email = @Email, Rol = @Rol WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Rol", rol);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                exito = false;
+                mensaje = ex.Message;
+            }
+            conexion.Close();
+            return (exito, mensaje);
+            /* string propiedad1 = "Login";
+             string propiedad2 = "Email";
 
-            (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, email, propiedad2, nombre_tabla);
-            if (exito == false)
-            {
-                return (false, mensaje);
-            }
-            else
-            {
-                propiedad2 = "Rol";
-                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, rol, propiedad2, nombre_tabla);
-                if (exito == false)
-                {
-                    return (false, mensaje);
-                }
-                else
-                {
-                    return (true, mensaje);
-                }
-            }
+             (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, email, propiedad2, nombre_tabla);
+             if (exito == false)
+             {
+                 return (false, mensaje);
+             }
+             else
+             {
+                 propiedad2 = "Rol";
+                 (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, rol, propiedad2, nombre_tabla);
+                 if (exito == false)
+                 {
+                     return (false, mensaje);
+                 }
+                 else
+                 {
+                     return (true, mensaje);
+                 }
+             }*/
         }
 
         public (bool, string) Activar_Usuario(string login, bool activo)
         {
-            bool exito = false;
+            bool exito = true;
             string mensaje = string.Empty;
 
             if (activo == false)
+            {
+                mensaje = "Usuario Activado Exitosamente";
+            }
+            else
+            {
+                mensaje = "Usuario Desactivado Exitosamente";
+            }
+
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Activo = @Activo WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Activo", activo);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                exito = false;
+                mensaje = ex.Message;
+            }
+            conexion.Close();
+            return (exito, mensaje);
+            /*if (activo == false)
             {
                 mensaje = "Usuario Activado Exitosamente";
             }
@@ -172,15 +265,36 @@ namespace DAL
             else
             {
                 return (true, mensaje);
-            }
+            }*/
         }
 
         public (bool, string) Desbloquear_Usuario(string login, string password)
         {
-            bool exito = false;
+            bool exito = true;
             string mensaje = "Usuario Desbloqueado Exitosamente";
 
-            string propiedad1 = "Login";
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Bloqueado = @Bloqueado, Password = @Password, RCC = @RCC WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Bloqueado", false);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@RCC", true);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                exito = false;
+                mensaje = ex.Message;
+            }
+            conexion.Close();
+            return (exito, mensaje);
+            /*string propiedad1 = "Login";
             string propiedad2 = "Bloqueado";
             string valor2 = false.ToString();
 
@@ -199,9 +313,18 @@ namespace DAL
                 }
                 else
                 {
-                    return (true, mensaje);
+                    propiedad2 = "RCC";
+                    (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, true.ToString(), propiedad2, nombre_tabla);
+                    if (exito == false)
+                    {
+                        return (false, mensaje);
+                    }
+                    else
+                    {
+                        return (true, mensaje);
+                    }
                 }
-            }
+            }*/
         }
         #endregion
     }

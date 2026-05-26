@@ -1,4 +1,5 @@
-﻿using Servicios;
+﻿using BLL;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,37 +12,42 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Bitacora_Eventos_44MM : Form
+    public partial class UI_Bitacora_Eventos_44MM : Form , I_Idioma
     {
-        private DataTable tabla_datos;
+        //private DataTable tabla_datos;
+        private List<BE_Bitacora_44MM> lista_datos;
         private DataGridViewCell celda_actual;
+        private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+
         public UI_Bitacora_Eventos_44MM()
         {
             InitializeComponent();
             Actualizar_Grillas();
+            Agregar_Form_Idioma();
         }
 
+        #region Funciones Secundarias
         private void Actualizar_Grillas()
         {
-            DataTable tabla_usuarios = Bitacora_44MM.Instancia.Gestionar_Bitacora();
-            tabla_datos = tabla_usuarios;
+            lista_datos = bll_bitacora.Gestionar_Bitacora();
 
             DateTime filtro = DateTime.Now.Subtract(TimeSpan.FromDays(3));
-            DataTable tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla_usuarios, "Fecha", filtro, DateTime.Now);
+            List<BE_Bitacora_44MM> lista = lista_datos.Where(x => x.Fecha >= filtro).ToList();
 
-            dataGridView_lista.DataSource = tabla;
+            //DataTable tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla_datos, "Fecha", filtro, DateTime.Now);
 
-            celda_actual = dataGridView_lista.Rows[0].Cells[0];
+            dataGridView_lista.DataSource = lista;
         }
 
-        private DataRow Obtener_Seleccionado()
+        private BE_Bitacora_44MM Obtener_Seleccionado()
         {
             try
             {
                 DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Cod_Operacion"];
                 int cod_ope = (int)celda.Value;
-                DataRow row = tabla_datos.Rows.Find(cod_ope);
-                return row;
+                BE_Bitacora_44MM be = lista_datos.Find(x => x.Cod_Operacion == cod_ope);
+                //DataRow row = lista_datos.Find(cod_ope);
+                return be;
             }
             catch (Exception)
             {
@@ -53,53 +59,124 @@ namespace AMARENT
         private void Filtrar_Contenido()
         {
             string login = textBox_login.Text;
-            string modulo = textBox_modulo.Text;
+            string modulo = comboBox_modulo.Text;
             string evento = textBox_evento.Text;
             DateTime fecha_inicial = dateTimePicker_fecha_inicial.Value;
             DateTime fecha_final = dateTimePicker_fecha_final.Value;
             bool usar_fechas = checkBox_usar_fechas.Checked;
             int criticidad = (int)numericUpDown_criticidad.Value;
 
-            DataTable tabla = tabla_datos;
+            textBox_nombre.Text = string.Empty;
+            textBox_apellido.Text = string.Empty;
 
-            if (login != "" && login != null && login != string.Empty)
+
+            List<BE_Bitacora_44MM> lista = new List<BE_Bitacora_44MM>();
+            lista.AddRange(lista_datos);
+            //DataTable tabla = tabla_datos;
+
+            //Verificacion de fechas
+            if (fecha_inicial > fecha_final && usar_fechas == true || fecha_final > DateTime.Now && usar_fechas == true)
             {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla_datos, "Login", login);
-            }
-            if (modulo != "" && modulo != null && modulo != string.Empty)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Modulo", modulo);
-            }
-            if (evento != "" && evento != null && evento != string.Empty)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Evento", evento);
-            }
-            if (criticidad > 0)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Criticidad", criticidad.ToString());
-            }
-            if (usar_fechas == true)
-            {
-                tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", fecha_inicial, fecha_final);
+                MessageBox.Show("Fechas Invalidas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
             {
-                tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", DateTime.Now.Subtract(TimeSpan.FromDays(3)), DateTime.Now);
+                //Filtros
+                if (login != "" && login != null && login != string.Empty)
+                {
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Login != login)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla_datos, "Login", login);
+                }
+                if (modulo != "" && modulo != null && modulo != string.Empty)
+                {
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Modulo != modulo)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Modulo", modulo);
+                }
+                if (evento != "" && evento != null && evento != string.Empty)
+                {
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Evento != evento)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Evento", evento);
+                }
+                if (criticidad > 0)
+                {
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Criticidad != criticidad)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Tabla(tabla, "Criticidad", criticidad.ToString());
+                }
+
+                //Filtro para fechas
+                if (usar_fechas == true)
+                {
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Fecha < fecha_inicial || be.Fecha > fecha_final)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", fecha_inicial, fecha_final);
+                }
+                else
+                {
+                    DateTime filtro = DateTime.Now.Subtract(TimeSpan.FromDays(3));
+                    foreach (BE_Bitacora_44MM be in lista_datos)
+                    {
+                        if (be.Fecha < filtro || be.Fecha > DateTime.Now)
+                        {
+                            lista.Remove(be);
+                        }
+                    }
+                    //tabla = DataTable_Filter_44MM.Filtrar_Entre_Fechas(tabla, "Fecha", DateTime.Now.Subtract(TimeSpan.FromDays(3)), DateTime.Now);
+                }
+
+                //Error si esta vacio
+                if (lista.Count <= 0)
+                {
+                    MessageBox.Show("No se encontraron resultados con los filtros aplicados", "Sin Resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    dataGridView_lista.DataSource = lista;
+                }
             }
-
-            dataGridView_lista.DataSource = tabla;
         }
+        #endregion
 
+        #region Funciones Principales
         private void Imprimir_Contenido()
         {
-            DataTable tabla = (DataTable)dataGridView_lista.DataSource;
+            List<BE_Bitacora_44MM> lista = (List<BE_Bitacora_44MM>)dataGridView_lista.DataSource;
             DialogResult resultado = saveFileDialog_tabla_bitacora.ShowDialog();
             if (resultado == DialogResult.OK)
             {
                 string ruta = saveFileDialog_tabla_bitacora.FileName;
                 if (ruta != "" && ruta != null && ruta != string.Empty)
                 {
-                    (bool exito, string mensaje) = Bitacora_44MM.Instancia.Imprimir_Bitacora(tabla, ruta);
+                    (bool exito, string mensaje) = bll_bitacora.Imprimir_Bitacora(lista, ruta);
                     if (exito == true)
                     {
                         MessageBox.Show(mensaje);
@@ -112,9 +189,10 @@ namespace AMARENT
             }
         }
 
-        private void Obtener_Login(DataRow fila)
+        private void Obtener_Login(BE_Bitacora_44MM be)
         {
-            DataRow fila_rec = Bitacora_44MM.Instancia.Obtener_Login((string)fila["Login"]);
+            DataRow fila_rec = bll_bitacora.Obtener_Login(be.Login);
+            //DataRow fila_rec = bll_bitacora.Obtener_Login((string)fila["Login"]);
 
             textBox_nombre.Text = (string)fila_rec["Nombre"];
             textBox_apellido.Text = (string)fila_rec["Apellido"];
@@ -123,18 +201,21 @@ namespace AMARENT
         private void Limpiar_Filtros()
         {
             textBox_login.Text = "";
-            textBox_modulo.Text = "";
+            comboBox_modulo.Text = "";
             textBox_evento.Text = "";
             dateTimePicker_fecha_inicial.Value = DateTime.Now;
             dateTimePicker_fecha_final.Value = DateTime.Now;
             checkBox_usar_fechas.Checked = false;
-            numericUpDown_criticidad.Value = 0;
+            numericUpDown_criticidad.Value = 1;
             textBox_nombre.Text = "";
             textBox_apellido.Text = "";
 
+            Actualizar_Grillas();
             Filtrar_Contenido();
         }
+        #endregion
 
+        #region Botones
         private void button_aplicar_Click(object sender, EventArgs e)
         {
             Filtrar_Contenido();
@@ -153,15 +234,37 @@ namespace AMARENT
         private void button_actualizar_Click(object sender, EventArgs e)
         {
             Actualizar_Grillas();
+            Filtrar_Contenido();
         }
 
         private void dataGridView_lista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (Obtener_Seleccionado() != null)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                Obtener_Login(Obtener_Seleccionado());
+                celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (Obtener_Seleccionado() != null)
+                {
+                    Obtener_Login(Obtener_Seleccionado());
+                }
             }
         }
+
+        private void UI_Bitacora_Eventos_44MM_Load(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+
+        private void UI_Bitacora_Eventos_44MM_Shown(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }
