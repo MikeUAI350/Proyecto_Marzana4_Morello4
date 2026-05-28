@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AMARENT\Servicios\Servicios_44MM.csproj">
+      <Project>{d5d54d3e-87fe-4eb7-b365-54bb4a25d2f6}</Project>
+      <Name>Servicios_44MM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BE\BE_44MM.csproj">
       <Project>{2d951992-15dc-4d03-a029-78ccc3448196}</Project>
       <Name>BE_44MM</Name>

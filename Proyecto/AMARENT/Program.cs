@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace AMARENT
 {
     internal static class Program
@@ -16,7 +18,15 @@ namespace AMARENT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI_Menu_44MM());
+
+            if (File.Exists("Content\\Data\\DataBase") == false)
+            {
+                Application.Run(new UI_BD_Select());
+            }
+            else
+            {
+                Application.Run(new UI_Menu_44MM());
+            }
         }
     }
 }

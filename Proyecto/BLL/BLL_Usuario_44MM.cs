@@ -158,7 +158,7 @@ namespace BLL
             //Obtiene el login del usuario actual, lo quita del Sesion Manager y registra el evento en la bitacora
             string login = Sesion_Manager_44MM.Get().Login;
             Sesion_Manager_44MM.Quitar_Cuenta();
-            BLL_Intento_44MM.Instancia.Guardar_Intentos();
+            //BLL_Intento_44MM.Instancia.Guardar_Intentos();
             bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Logout", 1);
         }
         #endregion

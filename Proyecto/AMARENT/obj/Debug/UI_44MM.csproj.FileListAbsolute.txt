@@ -70,3 +70,4 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debu
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\itextsharp.xml
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debug\BouncyCastle.Cryptography.xml
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.exe.config
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_BD_Select.resources

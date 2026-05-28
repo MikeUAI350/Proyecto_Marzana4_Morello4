@@ -58,6 +58,8 @@ namespace AMARENT
                         label_rol.Enabled = true;
                         comboBox_rol.Enabled = true;
 
+                        button_anular.Enabled = false;
+
                         break;
                     }
                 case "Modificar":
