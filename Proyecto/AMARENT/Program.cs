@@ -19,14 +19,14 @@ namespace AMARENT
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (File.Exists("Content\\Data\\DataBase") == false)
+            /*if (File.Exists("Content\\Data\\DataBase") == false)
             {
                 Application.Run(new UI_BD_Select());
-            }
-            else
-            {
+            }*/
+            //else
+            //{
                 Application.Run(new UI_Menu_44MM());
-            }
+            //}
         }
     }
 }
