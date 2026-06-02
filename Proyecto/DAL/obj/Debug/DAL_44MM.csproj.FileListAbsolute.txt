@@ -16,3 +16,5 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\obj\Debug\DA
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\obj\Debug\DAL_44MM.csproj.Up2Date
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\obj\Debug\DAL.dll
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\obj\Debug\DAL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\bin\Debug\Servicios.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\DAL\bin\Debug\Servicios.pdb

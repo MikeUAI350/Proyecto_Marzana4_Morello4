@@ -79,6 +79,12 @@
   <ItemGroup>
     <Compile Include="Gestion_Idioma_44MM.cs" />
     <Compile Include="I_Idioma.cs" />
+    <Compile Include="UI_BD_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI_BD_Select.Designer.cs">
+      <DependentUpon>UI_BD_Select.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI_Cambiar_Clave_44MM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI_BD_Select.resx">
+      <DependentUpon>UI_BD_Select.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI_Cambiar_Clave_44MM.resx">
       <DependentUpon>UI_Cambiar_Clave_44MM.cs</DependentUpon>
     </EmbeddedResource>

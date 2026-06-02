@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -218,6 +219,10 @@ namespace AMARENT
             if (be != null)
             {
                 bll.Cerrar_Sesion();
+            }
+            else
+            {
+                //BLL_Intento_44MM.Instancia.Guardar_Intentos();
             }
             foreach (Form pantalla in pantallas)
             {

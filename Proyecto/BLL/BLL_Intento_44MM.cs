@@ -46,6 +46,7 @@ namespace BLL
         }
 
         #region Funciones Principales
+        private int Dias_Pasados = 1;
         public int Agregar_Intento(string login)
         {
             BE_Intento_44MM intento;
@@ -67,7 +68,7 @@ namespace BLL
                 else
                 {
                     TimeSpan diferencia = DateTime.Now - intento.Fecha;
-                    if (diferencia.TotalDays >= 1)
+                    if (diferencia.TotalDays >= Dias_Pasados)
                     {
                         intento.Fecha = DateTime.Now;
                         intento.Intentos_Restantes = 3;
@@ -75,6 +76,8 @@ namespace BLL
                     intento.Intentos_Restantes -= 1;
                 }
             }
+            dal_intentos.Modificar_Intentos(intento.Login, intento.Fecha, intento.Intentos_Restantes);
+
             return intento.Intentos_Restantes;
         }
 
@@ -85,7 +88,7 @@ namespace BLL
             {
                 intento = new BE_Intento_44MM(login);
                 Lista_Intentos.Add(intento);
-                intento.Intentos_Restantes -= 1;
+                intento.Intentos_Restantes = 3;
             }
             else
             {
@@ -95,12 +98,20 @@ namespace BLL
                     intento.Intentos_Restantes = 3;
                     intento.Fecha = DateTime.Now;
                 }
+                else
+                {
+                    intento = new BE_Intento_44MM(login);
+                    Lista_Intentos.Add(intento);
+                    intento.Intentos_Restantes = 3;
+                }
             }
+            dal_intentos.Modificar_Intentos(intento.Login, intento.Fecha, intento.Intentos_Restantes);
         }
         #endregion
 
         #region Base de Datos
         DAL_Intento_44MM dal_intentos = new DAL_Intento_44MM();
+
         public void Recuperar_Intentos()
         {
             Tabla_Intentos = dal_intentos.tabla_datos;
@@ -113,7 +124,7 @@ namespace BLL
             }
         }
 
-        public void Guardar_Intentos()
+        /*public void Guardar_Intentos()
         {
             Tabla_Intentos.Rows.Clear();
             foreach (BE_Intento_44MM intento in Lista_Intentos)
@@ -125,7 +136,7 @@ namespace BLL
                 Tabla_Intentos.Rows.Add(row);
             }
            dal_intentos.Actualizar_Intentos(Tabla_Intentos);
-        }
+        }*/
         #endregion
 
         #region Archivo
