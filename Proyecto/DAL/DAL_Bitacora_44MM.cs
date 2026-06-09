@@ -13,14 +13,22 @@ namespace DAL
     public class DAL_Bitacora_44MM
     {
         private string nombre_tabla = "Bitacora";
-        private SqlConnection conexion = Conexion_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
 
         public DataTable tabla_datos;
         private string query;
 
         public DAL_Bitacora_44MM()
         {
-            query = Conexion_44MM.Instancia.Conectar(nombre_tabla);
+            Recuperar_Bitacora();
+        }
+
+        public void Recuperar_Bitacora()
+        {
+            query = DAL_44MM.Instancia.Conectar(nombre_tabla);
+            tabla_datos = DAL_44MM.Instancia.Consultar(tabla_datos, nombre_tabla, query);
+            DataColumn p = tabla_datos.Columns["Cod_Operacion"];
+            tabla_datos.PrimaryKey = new DataColumn[] { p };
         }
 
         public void Registrar_Evento(string login, DateTime fecha, string modulo, string evento, int criticidad)
@@ -29,7 +37,7 @@ namespace DAL
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (Login, Fecha, Modulo, Evento, Criticidad) VALUES (@Login, @Fecha, @Modulo, @Evento, @Criticidad)";
+                string sql = $"INSERT INTO {nombre_tabla} (Login, Fecha, Modulo, Evento, Criticidad) VALUES (@Login, @Fecha, @Modulo, @Evento, @Criticidad)";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.Transaction = transaction;
 
@@ -47,6 +55,12 @@ namespace DAL
                 transaction.Rollback();
             }
             conexion.Close();
+        }
+
+        public DataTable Obtener_Login(string login)
+        {
+            DataTable dt = DAL_44MM.Instancia.Seleccionar("Usuario", "Login", login);
+            return dt;
         }
     }
 }

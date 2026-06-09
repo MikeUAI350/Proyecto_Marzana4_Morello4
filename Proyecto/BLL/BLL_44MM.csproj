@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.6.2\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.5, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.5\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,9 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL_Bitacora_44MM.cs" />
+    <Compile Include="BLL_Perfil_44MM.cs" />
+    <Compile Include="BLL_Usuario_44MM.cs" />
+    <Compile Include="BLL_Intento_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AMARENT\Servicios\Servicios_44MM.csproj">
+      <Project>{d5d54d3e-87fe-4eb7-b365-54bb4a25d2f6}</Project>
+      <Name>Servicios_44MM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BE\BE_44MM.csproj">
       <Project>{2d951992-15dc-4d03-a029-78ccc3448196}</Project>
       <Name>BE_44MM</Name>
@@ -52,6 +66,10 @@
       <Project>{ad6c4b08-fb69-4952-b6be-8f6edf803409}</Project>
       <Name>DAL_44MM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BLL_ClassDiagram.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,3 +22,9 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BL
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL_44MM.csproj.Up2Date
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL.dll
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\obj\Debug\BLL.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\itextsharp.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\Servicios.dll
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\Servicios.pdb
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\BLL\bin\Debug\itextsharp.xml

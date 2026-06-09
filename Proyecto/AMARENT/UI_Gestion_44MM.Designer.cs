@@ -158,9 +158,10 @@
             // 
             // button_confirmar
             // 
+            this.button_confirmar.AutoSize = true;
             this.button_confirmar.Location = new System.Drawing.Point(12, 357);
             this.button_confirmar.Name = "button_confirmar";
-            this.button_confirmar.Size = new System.Drawing.Size(121, 23);
+            this.button_confirmar.Size = new System.Drawing.Size(121, 26);
             this.button_confirmar.TabIndex = 18;
             this.button_confirmar.Text = "Confirmar";
             this.button_confirmar.UseVisualStyleBackColor = true;
@@ -181,9 +182,10 @@
             // 
             // button_anular
             // 
+            this.button_anular.AutoSize = true;
             this.button_anular.Location = new System.Drawing.Point(12, 386);
             this.button_anular.Name = "button_anular";
-            this.button_anular.Size = new System.Drawing.Size(118, 23);
+            this.button_anular.Size = new System.Drawing.Size(118, 26);
             this.button_anular.TabIndex = 22;
             this.button_anular.Text = "Anular";
             this.button_anular.UseVisualStyleBackColor = true;
@@ -191,9 +193,10 @@
             // 
             // button_salir
             // 
+            this.button_salir.AutoSize = true;
             this.button_salir.Location = new System.Drawing.Point(12, 415);
             this.button_salir.Name = "button_salir";
-            this.button_salir.Size = new System.Drawing.Size(75, 23);
+            this.button_salir.Size = new System.Drawing.Size(118, 26);
             this.button_salir.TabIndex = 23;
             this.button_salir.Text = "Salir";
             this.button_salir.UseVisualStyleBackColor = true;
@@ -204,7 +207,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(148, 450);
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_anular);
@@ -223,6 +226,7 @@
             this.Controls.Add(this.textBox_dni);
             this.Name = "UI_Gestion_44MM";
             this.Text = "UI_Gestion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UI_Gestion_44MM_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

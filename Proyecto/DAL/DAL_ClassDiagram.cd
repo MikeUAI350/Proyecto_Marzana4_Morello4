@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.DAL_Bitacora_44MM" Collapsed="true">
+    <Position X="3" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAACEAAAAAAAAAAAIAAAQEAE=</HashCode>
+      <FileName>DAL_Bitacora_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.DAL_Intento_44MM" Collapsed="true">
+    <Position X="4.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAIAAAAAAAIIAAAEAE=</HashCode>
+      <FileName>DAL_Intento_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.DAL_Usuario_44MM" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAgAEAAAAAAIAAAAAAQBEAAAAAAAIACIIkAE=</HashCode>
+      <FileName>DAL_Usuario_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.DAL_Perfil_44MM" Collapsed="true">
+    <Position X="1.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAQgABCAiQwAgWAoUgQBIAQAUAAAAEIAoIBM=</HashCode>
+      <FileName>DAL_Perfil_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.DAL_44MM" Collapsed="true">
+    <Position X="1.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAQAAAAAAAgAACACAAAAAAAAAgAAAAAAAAICAAAA=</HashCode>
+      <FileName>DAL_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

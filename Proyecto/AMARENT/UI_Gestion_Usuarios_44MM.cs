@@ -1,4 +1,6 @@
-﻿using Servicios;
+﻿using BE;
+using BLL;
+using Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,59 +13,72 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_Usuarios_44MM : Form
+    public partial class UI_Gestion_Usuarios_44MM : Form , I_Idioma
     {
-        private BLL_Gestion_Usuario_44MM bll = new BLL_Gestion_Usuario_44MM();
-        private DataTable tabla_usuarios;
-        private DataTable tabla_activos;
-        private DataTable tabla_bloqueados;
+        private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
+        private List<BE_Usuario_44MM> lista_usuarios;
         private DataGridViewCell celda_actual;
 
         public UI_Gestion_Usuarios_44MM()
         {
             InitializeComponent();
-            Iniciar_Grillas();
+            Actualizar_Grillas();
+            Agregar_Form_Idioma();
         }
 
-        private void Iniciar_Grillas()
+        #region Funciones Secundarias
+        public void Actualizar_Grillas()
         {
-            (tabla_usuarios, tabla_activos, tabla_bloqueados) = bll.Gestionar_Usuarios();
-
-            dataGridView_lista.DataSource = tabla_usuarios;
-
-            dataGridView_lista.Columns["Password"].Visible = false;
-            dataGridView_lista.Columns["Email"].Visible = false;
-            dataGridView_lista.Columns["Bloqueado"].Visible = false;
-            dataGridView_lista.Columns["Activo"].Visible = false;
-
-            celda_actual = dataGridView_lista.Rows[0].Cells[0];
+            radioButton_todos.Checked = true;
+            lista_usuarios = bll.Gestionar_Usuarios();
+            Filtrar("Todos");
         }
 
-        private DataRow Obtener_Seleccionado()
+        private BE_Usuario_44MM Obtener_Seleccionado()
         {
-            DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Login"];
-            string login = (string)celda.Value;
-            DataRow row = tabla_usuarios.Rows.Find(login);
-            return row;
+            if (celda_actual == null || celda_actual.RowIndex < 0 || celda_actual.ColumnIndex < 0)
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SeleccioneUnUsuario"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            else
+            {
+                DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Login"];
+                string login = (string)celda.Value;
+                BE_Usuario_44MM be = lista_usuarios.Find(x => x.Login == login);
+                return be;
+            }
         }
 
         private void Filtrar(string filtro)
         {
+            button_desbloquear.Enabled = false;
+            button_desbloquear.Visible = false;
             switch (filtro)
             {
                 case "Todos":
                     {
-                        dataGridView_lista.DataSource = tabla_usuarios;
+                        dataGridView_lista.DataSource = lista_usuarios;
                         break;
                     }
                 case "Activos":
                     {
-                        dataGridView_lista.DataSource = tabla_activos;
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Activo == true).ToList();
+                        dataGridView_lista.DataSource = lista;
+                        break;
+                    }
+                case "Inactivos":
+                    {
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Activo == false).ToList();
+                        dataGridView_lista.DataSource = lista;
                         break;
                     }
                 case "Bloqueados":
                     {
-                        dataGridView_lista.DataSource = tabla_bloqueados;
+                        List<BE_Usuario_44MM> lista = lista_usuarios.Where(u => u.Bloqueado == true).ToList();
+                        dataGridView_lista.DataSource = lista;
+                        button_desbloquear.Enabled = true;
+                        button_desbloquear.Visible = true;
                         break;
                     }
                 default:
@@ -72,30 +87,35 @@ namespace AMARENT
                     }
             }
 
-            dataGridView_lista.Columns["Password"].Visible = false;
             dataGridView_lista.Columns["Email"].Visible = false;
             dataGridView_lista.Columns["Bloqueado"].Visible = false;
             dataGridView_lista.Columns["Activo"].Visible = false;
+            dataGridView_lista.Columns["Idioma"].Visible = false;
+            dataGridView_lista.Columns["RCC"].Visible = false;
         }
+        #endregion
 
+        #region Funciones Principales
         private void Crear()
         {
-            UI_Gestion_44MM ui = new UI_Gestion_44MM("Crear", null);
+            UI_Gestion_44MM ui = new UI_Gestion_44MM("Crear", null, this);
+            this.MdiParent.Controls["menuStrip"].Enabled = false;
             ui.MdiParent = this.MdiParent;
             ui.Show();
         }
 
-        private void Modificar(DataRow fila)
+        private void Modificar(BE_Usuario_44MM be)
         {
-            UI_Gestion_44MM ui = new UI_Gestion_44MM("Modificar", fila);
+            UI_Gestion_44MM ui = new UI_Gestion_44MM("Modificar", be, this);
+            this.MdiParent.Controls["menuStrip"].Enabled = false;
             ui.MdiParent = this.MdiParent;
             ui.Show();
         }
 
-        private void Activar(DataRow fila)
+        private void Activar(BE_Usuario_44MM be)
         {
-            string login = (string)fila["Login"];
-            bool activo = (bool)fila["Activo"];
+            string login = be.Login;
+            bool activo = be.Activo;
 
             bool activar = false;
 
@@ -103,12 +123,12 @@ namespace AMARENT
 
             if (activo == false)
             {
-                resultado = MessageBox.Show("Desea Activar a " + login, "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaActivarA"]} {login}?", "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 activar = true;
             }
             else
             {
-                resultado = MessageBox.Show("Desea Desactivar a " + login, "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesactivarA"]} {login}?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 activar = false;
             }
 
@@ -125,21 +145,22 @@ namespace AMARENT
                 }
                 else
                 {
-                    MessageBox.Show(mensaje);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                    Actualizar_Grillas();
                 }
             }
         }
 
-        private void Desbloquear(DataRow fila)
+        private void Desbloquear(BE_Usuario_44MM be)
         {
-            string login = (string)fila["Login"];
-            DialogResult resultado = MessageBox.Show("Desea Desbloquear a " + login, "Desbloquear", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string login = be.Login;
+            DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesbloquearA"]} {login}?", "Desbloquear", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (resultado == DialogResult.Yes)
             {
                 bool exito = false;
                 string mensaje = string.Empty;
 
-                (exito, mensaje) = bll.Desbloquear_Usuario(fila);
+                (exito, mensaje) = bll.Desbloquear_Usuario(be);
 
                 if (exito == false)
                 {
@@ -147,11 +168,14 @@ namespace AMARENT
                 }
                 else
                 {
-                    MessageBox.Show(mensaje);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                    Actualizar_Grillas();
                 }
             }
         }
+        #endregion
 
+        #region Botones
         private void button_crear_Click(object sender, EventArgs e)
         {
             Crear();
@@ -159,28 +183,39 @@ namespace AMARENT
 
         private void dataGridView_lista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                celda_actual = dataGridView_lista.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            }
         }
 
         private void button_desbloquear_Click(object sender, EventArgs e)
         {
-            Desbloquear(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Desbloquear(Obtener_Seleccionado());
+            }
         }
 
         private void button_actualizar_Click(object sender, EventArgs e)
         {
-            radioButton_todos.Checked = true;
-            Iniciar_Grillas();
+            Actualizar_Grillas();
         }
 
         private void button_modificar_Click(object sender, EventArgs e)
         {
-            Modificar(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Modificar(Obtener_Seleccionado());
+            }
         }
 
         private void button_activar_desactivar_Click(object sender, EventArgs e)
         {
-            Activar(Obtener_Seleccionado());
+            if (Obtener_Seleccionado() != null)
+            {
+                Activar(Obtener_Seleccionado());
+            }
         }
 
         private void radioButton_todos_CheckedChanged(object sender, EventArgs e)
@@ -199,6 +234,14 @@ namespace AMARENT
             }
         }
 
+        private void radioButton_inactivos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton_inactivos.Checked == true)
+            {
+                Filtrar("Inactivos");
+            }
+        }
+
         private void radioButton_bloqueados_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_bloqueados.Checked == true)
@@ -206,5 +249,41 @@ namespace AMARENT
                 Filtrar("Bloqueados");
             }
         }
+
+        private void UI_Gestion_Usuarios_44MM_Load(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+
+        private void UI_Gestion_Usuarios_44MM_Shown(object sender, EventArgs e)
+        {
+            Actualizar_Grillas();
+        }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["GestionUsuarios"];
+
+            label_lista.Text = key_word["ListaUsuarios"];
+            radioButton_bloqueados.Text = key_word["Bloqueados"];
+            radioButton_inactivos.Text = key_word["Inactivos"];
+            radioButton_activos.Text = key_word["Activos"];
+            radioButton_todos.Text = key_word["Todos"];
+
+            groupBox_controles.Text = key_word["Controles"];
+            button_crear.Text = key_word["Crear"];
+            button_modificar.Text = key_word["Modificar"];
+            button_activar_desactivar.Text = key_word["ActDesact"];
+            button_desbloquear.Text = key_word["Desbloquear"];
+            button_actualizar.Text = key_word["Actualizar"];
+        }
+        #endregion
     }
 }

@@ -1,0 +1,38 @@
+{
+  "UI_Gestion_Usuarios_44MM": {
+    "Text": "User Management"
+  },
+  "label_lista": {
+    "Text": "User List"
+  },
+  "radioButton_bloqueados": {
+    "Text": "Blocked"
+  },
+  "radioButton_inactivos": {
+    "Text": "Inactive"
+  },
+  "radioButton_activos": {
+    "Text": "Active"
+  },
+  "radioButton_todos": {
+    "Text": "All"
+  },
+  "groupBox_controles": {
+    "Text": "Controls"
+  },
+  "button_crear": {
+    "Text": "Create"
+  },
+  "button_modificar": {
+    "Text": "Modify"
+  },
+  "button_activar_desactivar": {
+    "Text": "Act/Deact"
+  },
+  "button_desbloquear": {
+    "Text": "Unlock"
+  },
+  "button_actualizar": {
+    "Text": "Update"
+  }
+}
