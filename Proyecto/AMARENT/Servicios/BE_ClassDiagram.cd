@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Servicios.BE_Bitacora_44MM" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQBAgAAAAAAAAEAAAAAAAAAIoAAEAAAAAAQKAAAAAA=</HashCode>
+      <FileName>BE_Bitacora_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.BE_Familia_44MM" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAIAAAAAAAAEABkQAAAQAAAAAACAAEAAAA=</HashCode>
+      <FileName>BE_Familia_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.BE_Perfil_44MM" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAAAAIAAAAAAAAgAAkAAABQAAAAAAAAAIAAAQ=</HashCode>
+      <FileName>BE_Perfil_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.BE_Permiso_44MM" Collapsed="true">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAkAAAARAMAAAIAAAAAAAA=</HashCode>
+      <FileName>BE_Permiso_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.DataTable_Converter_44MM&lt;T&gt;" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataTable_Converter_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.DataTable_Filter_44MM" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAA=</HashCode>
+      <FileName>DataTable_Filter_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.Encriptador_44MM" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASQAAAAAAAAAAAAIAAAAAAIAAAAAAAABAAgAACDAAAA=</HashCode>
+      <FileName>Encriptador_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Servicios.Sesion_Manager_44MM" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQBAAAAABAABABAAAAAAAAAAAAAAAAAAAAEAgCAAAA=</HashCode>
+      <FileName>Sesion_Manager_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.BE_Intento_44MM" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAIAAAAAAAAEAAAAAAACAAAAAAAAAAAAQIAAAAAA=</HashCode>
+      <FileName>BE_Intento_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.BE_Usuario_44MM" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAASAKAACASEAIAAgQBAAAEAAgAgAAAQYAIAAAE=</HashCode>
+      <FileName>BE_Usuario_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

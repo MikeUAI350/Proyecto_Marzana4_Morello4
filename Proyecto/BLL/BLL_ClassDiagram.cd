@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BLL.BLL_Bitacora_44MM" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAACEBACAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>BLL_Bitacora_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.BLL_Intento_44MM" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAABAAACIQAggAAAAAABAAAgAAAAAIAAA=</HashCode>
+      <FileName>BLL_Intento_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.BLL_Perfil_44MM" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAAAABAAAAwAACAAAAQBQgIAAAAAAAgAQAoRAA=</HashCode>
+      <FileName>BLL_Perfil_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.BLL_Usuario_44MM" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>OAAAAAAAAiAAAAAEAAAAAAgAAQBGAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>BLL_Usuario_44MM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

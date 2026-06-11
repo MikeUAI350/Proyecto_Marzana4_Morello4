@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|c:\\users\\mikem\\source\\repos\\proyecto_marzana4_morello4\\proyecto\\amarent\\servicios\\gestion_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D5D54D3E-87FE-4EB7-B365-54BB4A25D2F6}|AMARENT\\Servicios\\Servicios_44MM.csproj|solutionrelative:amarent\\servicios\\gestion_intentos_44mm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,33 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Gestion_Intentos_44MM.cs",
-              "DocumentMoniker": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "RelativeDocumentMoniker": "AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "ToolTip": "C:\\Users\\mikem\\source\\repos\\Proyecto_Marzana4_Morello4\\Proyecto\\AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "RelativeToolTip": "AMARENT\\Servicios\\Gestion_Intentos_44MM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T21:25:51.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"

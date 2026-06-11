@@ -34,9 +34,9 @@ namespace Servicios
             }
         }
 
-        public static string Computar(string texto)
+        public string Computar(string texto)
         {
-            /*using (SHA256 sha256 = SHA256.Create())
+            using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(texto);
                 byte[] hash = sha256.ComputeHash(bytes);
@@ -49,8 +49,8 @@ namespace Servicios
                 }
 
                 return result.ToString();
-            }*/
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(texto));
+            }
+            //return Convert.ToBase64String(Encoding.UTF8.GetBytes(texto));
         }
 
         private const int KeySize = 256;     // AES-256
@@ -58,7 +58,7 @@ namespace Servicios
         private const int SaltSize = 16;     // 128 bits
         private const int Iterations = 100000;
 
-        public static string Encriptar(string texto, string contra)
+        public string Encriptar(string texto, string contra)
         {
             byte[] salt = new byte[SaltSize];
 
@@ -87,7 +87,7 @@ namespace Servicios
             return Convert.ToBase64String(ms.ToArray());
         }
 
-        public static string Desencriptar(string texto, string contra)
+        public string Desencriptar(string texto, string contra)
         {
             byte[] fullData = Convert.FromBase64String(texto);
 
