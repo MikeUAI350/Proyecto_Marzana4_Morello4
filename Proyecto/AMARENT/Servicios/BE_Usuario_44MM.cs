@@ -17,6 +17,10 @@ namespace BE
             Login = (string)info["Login"];
             Rol = (string)info["Rol"];
             Email = (string)info["Email"];
+            Bloqueado = (bool)info["Bloqueado"];
+            Activo = (bool)info["Activo"];
+            Idioma = (string)info["Idioma"];
+            RCC = (bool)info["RCC"];
         }
 
         private string _dni;
@@ -59,6 +63,38 @@ namespace BE
         {
             get { return _email; }
             set { _email = value; }
+        }
+
+        private bool _bloqueado;
+
+        public bool Bloqueado
+        {
+            get { return _bloqueado; }
+            set { _bloqueado = value; }
+        }
+
+        private bool _activo;
+
+        public bool Activo
+        {
+            get { return _activo; }
+            set { _activo = value; }
+        }
+
+        private string _idioma;
+
+        public string Idioma
+        {
+            get { return _idioma; }
+            set { _idioma = value; }
+        }
+
+        private bool _rcc;
+
+        public bool RCC
+        {
+            get { return _rcc; }
+            set { _rcc = value; }
         }
     }
 }

@@ -1,0 +1,50 @@
+{
+  "UI_Menu_44MM": {
+    "Text": "Main Form"
+  },
+  "usuariotoolStripMenuItem": {
+    "Text": "User"
+  },
+  "loginToolStripMenuItem": {
+    "Text": "Login"
+  },
+  "cambiarIdiomaToolStripMenuItem": {
+    "Text": "Change Language"
+  },
+  "españolToolStripMenuItem": {
+    "Text": "Spanish"
+  },
+  "inglesToolStripMenuItem": {
+    "Text": "English"
+  },
+  "cambiarClaveToolStripMenuItem": {
+    "Text": "Change Password"
+  },
+  "logoutToolStripMenuItem": {
+    "Text": "Logout"
+  },
+  "adminToolStripMenuItem": {
+    "Text": "Admin"
+  },
+  "gestionDeUsuariosToolStripMenuItem": {
+    "Text": "User Management"
+  },
+  "bitacoraDeEventosToolStripMenuItem": {
+    "Text": "Event Log"
+  },
+  "maestroToolStripMenuItem": {
+    "Text": "Master"
+  },
+  "pN1ToolStripMenuItem": {
+    "Text": "PN1"
+  },
+  "pN2ToolStripMenuItem": {
+    "Text": "PN2"
+  },
+  "reporteToolStripMenuItem": {
+    "Text": "Report"
+  },
+  "ayudaToolStripMenuItem": {
+    "Text": "Help"
+  }
+}

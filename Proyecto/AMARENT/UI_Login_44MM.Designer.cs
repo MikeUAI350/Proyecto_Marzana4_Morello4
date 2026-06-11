@@ -33,7 +33,6 @@
             this.label_contra = new System.Windows.Forms.Label();
             this.textBox_contra = new System.Windows.Forms.TextBox();
             this.button_login = new System.Windows.Forms.Button();
-            this.label_mensaje = new System.Windows.Forms.Label();
             this.button_salir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -69,30 +68,26 @@
             this.textBox_contra.Size = new System.Drawing.Size(100, 22);
             this.textBox_contra.TabIndex = 3;
             this.textBox_contra.UseSystemPasswordChar = true;
+            this.textBox_contra.MouseEnter += new System.EventHandler(this.textBox_contra_MouseEnter);
+            this.textBox_contra.MouseLeave += new System.EventHandler(this.textBox_contra_MouseLeave);
             // 
             // button_login
             // 
-            this.button_login.Location = new System.Drawing.Point(12, 116);
+            this.button_login.AutoSize = true;
+            this.button_login.Location = new System.Drawing.Point(12, 100);
             this.button_login.Name = "button_login";
-            this.button_login.Size = new System.Drawing.Size(75, 23);
+            this.button_login.Size = new System.Drawing.Size(75, 26);
             this.button_login.TabIndex = 5;
             this.button_login.Text = "Iniciar";
             this.button_login.UseVisualStyleBackColor = true;
             this.button_login.Click += new System.EventHandler(this.button_login_Click);
             // 
-            // label_mensaje
-            // 
-            this.label_mensaje.AutoSize = true;
-            this.label_mensaje.Location = new System.Drawing.Point(12, 97);
-            this.label_mensaje.Name = "label_mensaje";
-            this.label_mensaje.Size = new System.Drawing.Size(0, 16);
-            this.label_mensaje.TabIndex = 6;
-            // 
             // button_salir
             // 
-            this.button_salir.Location = new System.Drawing.Point(12, 415);
+            this.button_salir.AutoSize = true;
+            this.button_salir.Location = new System.Drawing.Point(13, 129);
             this.button_salir.Name = "button_salir";
-            this.button_salir.Size = new System.Drawing.Size(75, 23);
+            this.button_salir.Size = new System.Drawing.Size(75, 26);
             this.button_salir.TabIndex = 7;
             this.button_salir.Text = "Salir";
             this.button_salir.UseVisualStyleBackColor = true;
@@ -102,10 +97,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(148, 164);
             this.ControlBox = false;
             this.Controls.Add(this.button_salir);
-            this.Controls.Add(this.label_mensaje);
             this.Controls.Add(this.button_login);
             this.Controls.Add(this.textBox_contra);
             this.Controls.Add(this.label_contra);
@@ -113,6 +108,7 @@
             this.Controls.Add(this.textBox_login);
             this.Name = "UI_Login_44MM";
             this.Text = "UI_Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UI_Login_44MM_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +121,6 @@
         private System.Windows.Forms.Label label_contra;
         private System.Windows.Forms.TextBox textBox_contra;
         private System.Windows.Forms.Button button_login;
-        private System.Windows.Forms.Label label_mensaje;
         private System.Windows.Forms.Button button_salir;
     }
 }

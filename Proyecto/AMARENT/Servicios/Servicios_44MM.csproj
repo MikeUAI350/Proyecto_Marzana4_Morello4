@@ -41,25 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE_Bitacora_44MM.cs" />
+    <Compile Include="BE_Familia_44MM.cs" />
+    <Compile Include="BE_Perfil_44MM.cs" />
+    <Compile Include="BE_Permiso_44MM.cs" />
     <Compile Include="BE_Usuario_44MM.cs" />
-    <Compile Include="Bitacora_44MM.cs" />
-    <Compile Include="BLL_Gestion_Usuario_44MM.cs" />
+    <Compile Include="DataTable_Converter_44MM.cs" />
     <Compile Include="DataTable_Filter_44MM.cs" />
-    <Compile Include="Gestion_Intentos_44MM.cs" />
-    <Compile Include="Intento_44MM.cs" />
+    <Compile Include="BE_Intento_44MM.cs" />
     <Compile Include="Sesion_Manager_44MM.cs" />
     <Compile Include="Encriptador_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BLL_Usuario_44MM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\DAL\DAL_44MM.csproj">
-      <Project>{ad6c4b08-fb69-4952-b6be-8f6edf803409}</Project>
-      <Name>DAL_44MM</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
