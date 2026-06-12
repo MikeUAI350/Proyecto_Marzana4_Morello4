@@ -91,7 +91,7 @@ namespace BLL
                 documento.Add(tablaPDF);
                 documento.Close();
 
-                return (true, "PDF generado exitosamente en: " + ruta);
+                return (true, "PDFGeneradoExitosamenteEn");
             }
             catch (Exception ex)
             {

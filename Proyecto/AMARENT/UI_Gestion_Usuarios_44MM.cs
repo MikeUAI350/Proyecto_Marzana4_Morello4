@@ -13,12 +13,9 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_Usuarios_44MM : Form , I_Idioma
+    public partial class UI_Gestion_Usuarios_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
-        /*private DataTable tabla_usuarios;
-        private DataTable tabla_activos;
-        private DataTable tabla_bloqueados;*/
         private List<BE_Usuario_44MM> lista_usuarios;
         private DataGridViewCell celda_actual;
 
@@ -39,17 +36,17 @@ namespace AMARENT
 
         private BE_Usuario_44MM Obtener_Seleccionado()
         {
-            try
+            if (celda_actual == null || celda_actual.RowIndex < 0 || celda_actual.ColumnIndex < 0)
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SeleccioneUnUsuario"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            else
             {
                 DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Login"];
                 string login = (string)celda.Value;
                 BE_Usuario_44MM be = lista_usuarios.Find(x => x.Login == login);
                 return be;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Seleccione un Usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
             }
         }
 
@@ -95,7 +92,6 @@ namespace AMARENT
             dataGridView_lista.Columns["Activo"].Visible = false;
             dataGridView_lista.Columns["Idioma"].Visible = false;
             dataGridView_lista.Columns["RCC"].Visible = false;
-            //dataGridView_lista.Columns["Password"].Visible = false;
         }
         #endregion
 
@@ -127,12 +123,12 @@ namespace AMARENT
 
             if (activo == false)
             {
-                resultado = MessageBox.Show("Desea Activar a " + login, "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaActivarA"]} {login}?", "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 activar = true;
             }
             else
             {
-                resultado = MessageBox.Show("Desea Desactivar a " + login, "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesactivarA"]} {login}?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 activar = false;
             }
 
@@ -149,7 +145,7 @@ namespace AMARENT
                 }
                 else
                 {
-                    MessageBox.Show(mensaje);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
                     Actualizar_Grillas();
                 }
             }
@@ -158,7 +154,7 @@ namespace AMARENT
         private void Desbloquear(BE_Usuario_44MM be)
         {
             string login = be.Login;
-            DialogResult resultado = MessageBox.Show("Desea Desbloquear a " + login, "Desbloquear", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesbloquearA"]} {login}?", "Desbloquear", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (resultado == DialogResult.Yes)
             {
                 bool exito = false;
@@ -172,7 +168,7 @@ namespace AMARENT
                 }
                 else
                 {
-                    MessageBox.Show(mensaje);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
                     Actualizar_Grillas();
                 }
             }
@@ -268,7 +264,25 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["GestionUsuarios"];
+
+            label_lista.Text = key_word["ListaUsuarios"];
+            radioButton_bloqueados.Text = key_word["Bloqueados"];
+            radioButton_inactivos.Text = key_word["Inactivos"];
+            radioButton_activos.Text = key_word["Activos"];
+            radioButton_todos.Text = key_word["Todos"];
+
+            groupBox_controles.Text = key_word["Controles"];
+            button_crear.Text = key_word["Crear"];
+            button_modificar.Text = key_word["Modificar"];
+            button_activar_desactivar.Text = key_word["ActDesact"];
+            button_desbloquear.Text = key_word["Desbloquear"];
+            button_actualizar.Text = key_word["Actualizar"];
         }
         #endregion
     }

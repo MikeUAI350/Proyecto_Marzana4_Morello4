@@ -37,7 +37,7 @@ namespace DAL
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (Login, Fecha, Modulo, Evento, Criticidad) VALUES (@Login, @Fecha, @Modulo, @Evento, @Criticidad)";
+                string sql = $"INSERT INTO {nombre_tabla} (Login, Fecha, Modulo, Evento, Criticidad) VALUES (@Login, @Fecha, @Modulo, @Evento, @Criticidad)";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.Transaction = transaction;
 

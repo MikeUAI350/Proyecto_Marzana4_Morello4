@@ -38,6 +38,7 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitacoraDeEventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maestroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pN1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +124,7 @@
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gestionDeUsuariosToolStripMenuItem,
+            this.gestionDePerfilesToolStripMenuItem,
             this.bitacoraDeEventosToolStripMenuItem});
             this.adminToolStripMenuItem.Enabled = false;
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
@@ -136,6 +138,13 @@
             this.gestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.gestionDeUsuariosToolStripMenuItem.Text = "Gestion de Usuarios";
             this.gestionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeUsuariosToolStripMenuItem_Click);
+            // 
+            // gestionDePerfilesToolStripMenuItem
+            // 
+            this.gestionDePerfilesToolStripMenuItem.Name = "gestionDePerfilesToolStripMenuItem";
+            this.gestionDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.gestionDePerfilesToolStripMenuItem.Text = "Gestion de Perfiles";
+            this.gestionDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.gestionDePerfilesToolStripMenuItem_Click);
             // 
             // bitacoraDeEventosToolStripMenuItem
             // 
@@ -222,6 +231,8 @@
         private System.Windows.Forms.ToolStripMenuItem inglesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem maestroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionDePerfilesToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 

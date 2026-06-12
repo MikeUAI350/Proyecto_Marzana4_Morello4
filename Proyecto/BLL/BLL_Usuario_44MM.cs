@@ -14,6 +14,7 @@ namespace BLL
     {
         private DAL_Usuario_44MM dal_usuarios = new DAL_Usuario_44MM();
         private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+        private BLL_Perfil_44MM bll_perfil = new BLL_Perfil_44MM();
 
         private DataTable_Converter_44MM<BE_Usuario_44MM> datatable_converter = new DataTable_Converter_44MM<BE_Usuario_44MM>();
 
@@ -24,16 +25,16 @@ namespace BLL
             DataRow info;
 
             //Valida si hay una cuenta logueada
-            bool login_rec = Sesion_Manager_44MM.Validar_Cuenta();
+            bool login_rec = Sesion_Manager_44MM.Instancia.Validar_Cuenta();
             if (login_rec == true)
             {
                 //Ya hay una cuenta logueada
-                return (0, "Sesion ya Iniciada");
+                return (0, "SesionYaIniciada");
             }
             else
             {
                 //Encripta la contraseña y verifica la informacion de Login
-                string contra_enc = Encriptador_44MM.Computar(contra);
+                string contra_enc = Encriptador_44MM.Instancia.Computar(contra);
                 DataTable tabla_datos = dal_usuarios.Verificar_Login(login);
 
                 if (tabla_datos.Rows.Count != 1)
@@ -41,12 +42,12 @@ namespace BLL
                     if (tabla_datos.Rows.Count != 0)
                     {
                         //Inconsistencia en la base de datos
-                        return (0, "Inconsistencia en Base de Datos");
+                        return (0, "AccesoDenegado");
                     }
                     else
                     {
                         //Usuario no existe
-                        return (0, "Usuario Inexistente");
+                        return (0, "UsuarioInexistente");
                     }
                 }
                 else
@@ -61,11 +62,11 @@ namespace BLL
                     if (bloqueado_rec == true)
                     {
                         //Usuario bloqueado
-                        return (0, "Usuario Bloqueado");
+                        return (0, "UsuarioBloqueado");
                     }
                     else if (activo_rec == false)
                     {
-                        return (0, "Usuario Inactivo");
+                        return (0, "UsuarioInactivo");
                     }
                     else if (contra_enc != contra_rec)
                     {
@@ -77,49 +78,50 @@ namespace BLL
                         {
                             dal_usuarios.Bloquear_Usuario(login);
                             bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Bloqueo", 1);
-                            return (0, "Usuario fue Bloqueado");
+                            return (0, "UsuarioFueBloqueado");
                         }
                         else
                         {
                             //Contraseña incorrecta
-                            return (0, "Contraseña Incorrecta");
+                            return (0, "ContraIncorrecta");
                         }
                     }
                     else if (rcc == true)
                     {
                         //Usuario requiere cambio de contraseña
                         BE_Usuario_44MM usuario = new BE_Usuario_44MM(info);
-                        Sesion_Manager_44MM.Set(usuario);
+                        Sesion_Manager_44MM.Instancia.Set(usuario);
                         bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Nuevo Ingreso", 1);
                         //Reinicia intentos
                         BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
-                        return (-1, "Requiere Cambio de Clave");
+                        return (-1, "RequiereCambioDeContra");
                     }
                     else
                     {
                         //Crea la sesion del usuario, lo coloca en el Sesion Manager y registra el evento en la bitacora
                         BE_Usuario_44MM usuario = new BE_Usuario_44MM(info);
-                        Sesion_Manager_44MM.Set(usuario);
+                        Sesion_Manager_44MM.Instancia.Set(usuario);
                         bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Login", 1);
                         //Reinicia intentos
                         BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                         //Sesion iniciada
-                        return (1, "Inicio de Sesion Exitoso");
+                        return (1, "InicioDeSesionExitoso");
                     }
                 }
             }
         }
 
-        public (bool, string) Cambiar_Clave(string contra, string nueva_contra)
+        //Devuelve : exito (0 : contraseña incorrecta ; -1 : inconsistencia de datos ; 1 : exito
+        public (int, string) Cambiar_Clave(string contra, string nueva_contra)
         {
             bool exito = false;
             string mensaje = string.Empty;
             DataRow info;
 
             // Recupera el login, encripta la contraseña y verifica la informacion de Login
-            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Get();
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
             string login = usuario.Login;
-            string contra_enc = Encriptador_44MM.Computar(contra);
+            string contra_enc = Encriptador_44MM.Instancia.Computar(contra);
             DataTable tabla_datos = dal_usuarios.Verificar_Login(login);
 
             info = tabla_datos.Rows[0];
@@ -128,40 +130,47 @@ namespace BLL
             //Compara la contraseña ingresada con la contraseña recuperada
             if (contra_enc != contra_rec)
             {
-                mensaje = "Contraseña Actual Incorrecta";
-                return (false, mensaje);
+                mensaje = "ContraActualIncorrecta";
+                return (0, mensaje);
             }
             else
             {
                 //Encripta la nueva contraseña y la actualiza en la base de datos
-                string nueva_contra_enc = Encriptador_44MM.Computar(nueva_contra);
+                string nueva_contra_enc = Encriptador_44MM.Instancia.Computar(nueva_contra);
                 (exito, mensaje) = dal_usuarios.Cambiar_Clave(login, nueva_contra_enc);
                 if (exito == false)
                 {
-                    return (false, mensaje);
+                    return (-1, mensaje);
                 }
                 else
                 {
                     //Registra el evento en la bitacora
-                    mensaje = "Contraseña Actualizada";
                     bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Cambiar Clave", 1);
                     //Reinicia Intentos
                     BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
-                    return (true, mensaje);
+                    return (1, mensaje);
                 }
             }
+        }
+
+        public List<BE_Permiso_44MM> Recuperar_Permisos(string codigo)
+        {
+            List<BE_Permiso_44MM> lista_permisos = bll_perfil.Asignar_Permisos_Perfil(codigo);
+            return lista_permisos;
         }
 
         //Devuelve : pin blanco / dni blanco
         public void Cerrar_Sesion()
         {
             //Obtiene el login del usuario actual, lo quita del Sesion Manager y registra el evento en la bitacora
-            string login = Sesion_Manager_44MM.Get().Login;
-            Sesion_Manager_44MM.Quitar_Cuenta();
-            //BLL_Intento_44MM.Instancia.Guardar_Intentos();
+            string login = Sesion_Manager_44MM.Instancia.Get().Login;
+            string idioma = Sesion_Manager_44MM.Instancia.Get().Idioma;
+            dal_usuarios.Cambiar_Idioma(login, idioma);
+            Sesion_Manager_44MM.Instancia.Quitar_Cuenta();
             bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Logout", 1);
         }
         #endregion
+
         #region Gestion
         //Devuelve : tabla completa / tabla deactivos / tabla bloqueados
         public List<BE_Usuario_44MM> Gestionar_Usuarios()
@@ -170,18 +179,10 @@ namespace BLL
             dal_usuarios.Recuperar_Usuarios();
             DataTable tabla_usuarios = dal_usuarios.tabla_datos;
             List<BE_Usuario_44MM> lista_usuarios = datatable_converter.DataTable_Class(tabla_usuarios, typeof(BE_Usuario_44MM));
-            
-            //Filtra los activos y bloqueados
-            //DataTable tabla_activos = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Activo", true.ToString());
-            //DataTable tabla_bloqueados = DataTable_Filter_44MM.Filtrar_Tabla(tabla_usuarios, "Bloqueado", true.ToString());
-
-            //List<BE_Usuario_44MM> lista_activos = datatable_converter.DataTable_Class(tabla_activos, typeof(BE_Usuario_44MM));
-            //List<BE_Usuario_44MM> lista_bloqueados = datatable_converter.DataTable_Class(tabla_bloqueados, typeof(BE_Usuario_44MM));
-
             return lista_usuarios;
         }
 
-        public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string email, string rol)
+        public (int, string) Crear_Usuario(string dni, string nombre, string apellido, string email, string rol)
         {
             bool exito = false;
             string mensaje;
@@ -196,30 +197,30 @@ namespace BLL
                 string login = nombre + dni;
 
                 //Crea y encripta la contraseña por defecto (apellido + dni)
-                string password = Encriptador_44MM.Computar(apellido + dni);
+                string password = Encriptador_44MM.Instancia.Computar(apellido + dni);
 
                 //Crea el nuevo usuario a la base de datos
                 (exito, mensaje) = dal_usuarios.Crear_Usuario(dni, nombre, apellido, login, email, password, rol);
 
                 if (exito == true)
                 {
-                    string login_sesion = Sesion_Manager_44MM.Get().Login;
+                    string login_sesion = Sesion_Manager_44MM.Instancia.Get().Login;
                     //Registra el evento en la bitacora
                     bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Crear Usuario " + login, 1);
-                    return (true, mensaje);
+                    return (1, mensaje);
                 }
                 else
                 {
-                    return (false, mensaje);
+                    return (-1, mensaje);
                 }
             }
             else
             {
-                return (false, mensaje);
+                return (0, mensaje);
             }
         }
 
-        public (bool, string) Modificar_Usuario(string login, string email, string rol)
+        public (int, string) Modificar_Usuario(string login, string email, string rol)
         {
             bool exito = false;
             string mensaje = string.Empty;
@@ -228,14 +229,14 @@ namespace BLL
             (exito, mensaje) = dal_usuarios.Modificar_Usuario(login, email, rol);
             if (exito == true)
             {
-                string login_sesion = Sesion_Manager_44MM.Get().Login;
+                string login_sesion = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Registra el evento en la bitacora
                 bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Modificar Usuario " + login, 1);
-                return (true, mensaje);
+                return (1, mensaje);
             }
             else
             {
-                return (false, mensaje);
+                return (-1, mensaje);
             }
         }
 
@@ -248,7 +249,7 @@ namespace BLL
             (exito, mensaje) = dal_usuarios.Activar_Usuario(login, activo);
             if (exito == true)
             {
-                string login_sesion = Sesion_Manager_44MM.Get().Login;
+                string login_sesion = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Registra el evento en la bitacora
                 bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Activar Usuario " + login, 1);
                 return (true, mensaje);
@@ -270,13 +271,13 @@ namespace BLL
             string dni = be.DNI;
 
             //Encripta la contraseña por defecto (apellido + dni)
-            string password = Encriptador_44MM.Computar(apellido + dni);
+            string password = Encriptador_44MM.Instancia.Computar(apellido + dni);
 
             //Modifica el estado "Bloqueado" del usuario seleccionado
             (exito, mensaje) = dal_usuarios.Desbloquear_Usuario(login, password);
             if (exito == true)
             {
-                string login_sesion = Sesion_Manager_44MM.Get().Login;
+                string login_sesion = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Registra el evento en la bitacora
                 bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Desbloquear Usuario " + login, 1);
                 //Reinicia Intentos para el Login Desbloqueado
@@ -289,6 +290,7 @@ namespace BLL
             }
         }
         #endregion
+
         #region Con DataTable
         /*#region Gestion
         //Devuelve : tabla completa / tabla deactivos / tabla bloqueados

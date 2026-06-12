@@ -34,7 +34,7 @@ namespace Servicios
             }
         }
 
-        public static bool Validar_Cuenta()
+        public bool Validar_Cuenta()
         {
             if (Usuario != null)
             {
@@ -46,24 +46,24 @@ namespace Servicios
             }
         }
 
-        public static void Quitar_Cuenta()
+        public void Quitar_Cuenta()
         {
             Usuario = null;
         }
 
-        public static void Set(BE_Usuario_44MM cuenta)
+        public void Set(BE_Usuario_44MM cuenta)
         {
             Usuario = cuenta;
         }
 
-        public static BE_Usuario_44MM Get()
+        public BE_Usuario_44MM Get()
         {
             return Usuario;
         }
 
-        private static BE_Usuario_44MM _usuario;
+        private BE_Usuario_44MM _usuario;
 
-        public static BE_Usuario_44MM Usuario
+        public BE_Usuario_44MM Usuario
         {
             get { return _usuario; }
             set { _usuario = value; }

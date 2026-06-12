@@ -9,14 +9,14 @@ namespace Servicios
 {
     public class BE_Bitacora_44MM
     {
-        public BE_Bitacora_44MM(DataRow fila)
+        public BE_Bitacora_44MM(DataRow row)
         {
-            Cod_Operacion = (int)fila["Cod_Operacion"];
-            Login = (string)fila["Login"];
-            Fecha = (DateTime)fila["Fecha"];
-            Modulo = (string)fila["Modulo"];
-            Evento = (string)fila["Evento"];
-            Criticidad = (int)fila["Criticidad"];
+            Cod_Operacion = (int)row["Cod_Operacion"];
+            Login = (string)row["Login"];
+            Fecha = (DateTime)row["Fecha"];
+            Modulo = (string)row["Modulo"];
+            Evento = (string)row["Evento"];
+            Criticidad = (int)row["Criticidad"];
         }
 
         private int _cod_operacion;

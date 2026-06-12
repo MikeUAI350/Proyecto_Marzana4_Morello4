@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Cambiar_Clave_44MM : Form , I_Idioma
+    public partial class UI_Cambiar_Clave_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
         public UI_Cambiar_Clave_44MM(UI_Menu_44MM menu)
@@ -24,15 +24,19 @@ namespace AMARENT
 
         private void Verificar_Coincidencia(string contra_a, string contra1, string contra2)
         {
-            bool exito = false;
+            int exito = 0;
             string mensaje = string.Empty;
             if (contra_a == string.Empty || contra1 == string.Empty || contra2 == string.Empty || contra_a == null || contra1 == null || contra2 == null || contra_a == "" || contra1 == "" || contra2 == "")
             {
-                MessageBox.Show("No debe haber Espacios en Blanco", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoDebeHaberEspaciosEnBlanco"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (contra1 != contra2)
             {
-                MessageBox.Show("Las Contraseñas no Coinciden", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["LasContraNoCoinciden"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (contra_a == contra1 || contra_a == contra2)
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["LaNuevaContraNoPuedeSerIgualALaAnterior"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (contra_a == contra1 || contra_a == contra2)
             {
@@ -41,15 +45,19 @@ namespace AMARENT
             else
             {
                 (exito, mensaje) = bll_usuario.Cambiar_Clave(contra_a, contra1);
-                if (exito == false)
+                if (exito == 0)
                 {
-                    MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (exito == 1)
+                {
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                    Sesion_Manager_44MM.Instancia.Quitar_Cuenta();
+                    Application.Restart();
                 }
                 else
                 {
-                    MessageBox.Show(mensaje);
-                    Sesion_Manager_44MM.Quitar_Cuenta();
-                    Application.Restart();
+                    MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -122,7 +130,19 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["CambiarContra"];
+
+            label_contra.Text = key_word["ContraActual"];
+            label_nueva_contra1.Text = key_word["NuevaContra"];
+            label_nueva_contra2.Text = key_word["RepetirNuevaContra"];
+
+            button_confirmar.Text = key_word["Confirmar"];
+            button_salir.Text = key_word["Salir"];
         }
         #endregion
     }

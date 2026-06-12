@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Login_44MM : Form , I_Idioma
+    public partial class UI_Login_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
         public UI_Login_44MM(UI_Menu_44MM menu)
@@ -30,9 +30,10 @@ namespace AMARENT
             int exito;
             string mensaje = string.Empty;
 
+            //Verifica si no esta en blanco
             if (login == string.Empty || contra == string.Empty || login == null || contra == null || login == "" || contra == "")
             {
-                MessageBox.Show("No debe haber Espacios en Blanco", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoDebeHaberEspaciosEnBlanco"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -40,9 +41,10 @@ namespace AMARENT
 
                 switch (exito)
                 {
+                    //Requiere de cambio de contraseña
                     case -1:
                         {
-                            MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             UI_Cambiar_Clave_44MM ui = new UI_Cambiar_Clave_44MM((UI_Menu_44MM)this.MdiParent);
                             ui.Controls["button_salir"].Enabled = false;
                             ui.MdiParent = this.MdiParent;
@@ -50,17 +52,35 @@ namespace AMARENT
                             this.Close();
                             break;
                         }
+                    //Error de Inicio
                     case 0:
                         {
-                            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
+                    //Inicio de Sesion Exitoso
                     case 1:
                         {
-                            MessageBox.Show(mensaje);
+                            Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(Sesion_Manager_44MM.Instancia.Usuario.Idioma);
+                            MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+
                             UI_Menu_44MM menu = (UI_Menu_44MM)this.MdiParent;
                             this.MdiParent.Controls["menuStrip"].Enabled = true;
-                            menu.Activar_Menus(Sesion_Manager_44MM.Get().Rol);
+
+                            //Recupera los permisos y activa los menustrips de cada permiso
+                            List<BE_Permiso_44MM> lista_permisos = bll_usuario.Recuperar_Permisos(Sesion_Manager_44MM.Instancia.Get().Rol);
+                            if (lista_permisos != null)
+                            {
+                                foreach (BE_Permiso_44MM permiso in lista_permisos)
+                                {
+                                    menu.Activar_Menus(permiso.Cod_Permiso);
+                                    menu.Activar_Menus(permiso.Nombre);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["AccesoDenegado"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                             this.Close();
                             break;
                         }
@@ -113,7 +133,17 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["Login"];
+
+            label_login.Text = key_word["Usuario"];
+            label_contra.Text = key_word["Contra"];
+            button_login.Text = key_word["Login"];
+            button_salir.Text = key_word["Salir"];
         }
         #endregion
     }

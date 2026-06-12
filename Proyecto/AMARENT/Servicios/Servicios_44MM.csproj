@@ -73,17 +73,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BE_Bitacora_44MM.cs" />
-    <Compile Include="BE_Intento_44MM.cs" />
+    <Compile Include="BE_Familia_44MM.cs" />
+    <Compile Include="BE_Perfil_44MM.cs" />
+    <Compile Include="BE_Permiso_44MM.cs" />
     <Compile Include="BE_Usuario_44MM.cs" />
     <Compile Include="DataTable_Converter_44MM.cs" />
     <Compile Include="DataTable_Filter_44MM.cs" />
+    <Compile Include="BE_Intento_44MM.cs" />
     <Compile Include="Sesion_Manager_44MM.cs" />
     <Compile Include="Encriptador_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('..\..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />

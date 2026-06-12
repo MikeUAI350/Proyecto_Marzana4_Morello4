@@ -48,8 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL_Bitacora_44MM.cs" />
-    <Compile Include="BLL_Usuario_44MM.cs" />
     <Compile Include="BLL_Intento_44MM.cs" />
+    <Compile Include="BLL_Perfil_44MM.cs" />
+    <Compile Include="BLL_Usuario_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

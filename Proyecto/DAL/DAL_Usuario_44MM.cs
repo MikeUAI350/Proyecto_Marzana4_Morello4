@@ -52,17 +52,12 @@ namespace DAL
                 transaction.Rollback();
             }
             conexion.Close();
-            /*string propiedad1 = "Login";
-            string propiedad2 = "Bloqueado";
-            string valor2 = true.ToString();
-
-            Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);*/
         }
 
         public (bool, string) Cambiar_Clave(string login, string contra)
         {
             bool exito = true;
-            string mensaje = string.Empty;
+            string mensaje = "ContraActualizada";
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -83,22 +78,27 @@ namespace DAL
                 mensaje = ex.Message;
             }
             conexion.Close();
-
-            /*string propiedad1 = "Login";
-            string propiedad2 = "Password";
-
-            (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, contra, propiedad2, nombre_tabla);
-            if (exito == false)
-            {
-                return (false, mensaje);
-            }
-            else
-            {
-                propiedad2 = "RCC";
-                string valor2 = false.ToString();
-                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);
-            }*/
             return (exito, mensaje);
+        }
+
+        public void Cambiar_Idioma(string login, string idioma)
+        {
+            conexion.Open();
+            SqlTransaction transaction = conexion.BeginTransaction();
+            try
+            {
+                string sql = $"UPDATE {nombre_tabla} SET Idioma = @Idioma WHERE Login = @Login";
+                SqlCommand cmd = new SqlCommand(sql, conexion, transaction);
+                cmd.Parameters.AddWithValue("@Idioma", idioma);
+                cmd.Parameters.AddWithValue("@Login", login);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+            conexion.Close();
         }
         #endregion
 
@@ -117,7 +117,7 @@ namespace DAL
             string propiedad = "DNI";
             string valor = dni;
 
-            string mensaje = "Usuario ya Existente";
+            string mensaje = "UsuarioYaExiste";
 
             tabla_datos = DAL_44MM.Instancia.Seleccionar(nombre_tabla, propiedad, valor);
             if (tabla_datos.Rows.Count == 0)
@@ -133,13 +133,13 @@ namespace DAL
         public (bool, string) Crear_Usuario(string dni, string nombre, string apellido, string login, string email, string password, string rol)
         {
             bool exito = true;
-            string mensaje = "Usuario Creado Exitosamente";
+            string mensaje = "UsuarioCreadoExitosamente";
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                string sql = $"INSERT INTO [{nombre_tabla}] (DNI, Nombre, Apellido, Login, Email, Password, Rol) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol)";
+                string sql = $"INSERT INTO {nombre_tabla} (DNI, Nombre, Apellido, Login, Email, Password, Rol) VALUES (@DNI, @Nombre, @Apellido, @Login, @Email, @Password, @Rol)";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.Transaction = transaction;
 
@@ -167,7 +167,7 @@ namespace DAL
         public (bool, string) Modificar_Usuario(string login, string email, string rol)
         {
             bool exito = true;
-            string mensaje = "Usuario Modificado Exitosamente";
+            string mensaje = "UsuarioModificadoExitosamente";
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -189,27 +189,6 @@ namespace DAL
             }
             conexion.Close();
             return (exito, mensaje);
-            /* string propiedad1 = "Login";
-             string propiedad2 = "Email";
-
-             (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, email, propiedad2, nombre_tabla);
-             if (exito == false)
-             {
-                 return (false, mensaje);
-             }
-             else
-             {
-                 propiedad2 = "Rol";
-                 (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, rol, propiedad2, nombre_tabla);
-                 if (exito == false)
-                 {
-                     return (false, mensaje);
-                 }
-                 else
-                 {
-                     return (true, mensaje);
-                 }
-             }*/
         }
 
         public (bool, string) Activar_Usuario(string login, bool activo)
@@ -219,11 +198,11 @@ namespace DAL
 
             if (activo == false)
             {
-                mensaje = "Usuario Activado Exitosamente";
+                mensaje = "UsuarioActivadoExitosamente";
             }
             else
             {
-                mensaje = "Usuario Desactivado Exitosamente";
+                mensaje = "UsuarioDesactivadoExitosamente";
             }
 
             conexion.Open();
@@ -245,33 +224,12 @@ namespace DAL
             }
             conexion.Close();
             return (exito, mensaje);
-            /*if (activo == false)
-            {
-                mensaje = "Usuario Activado Exitosamente";
-            }
-            else
-            {
-                mensaje = "Usuario Desactivado Exitosamente";
-            }
-
-            string propiedad1 = "Login";
-            string propiedad2 = "Activo";
-
-            (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, activo.ToString(), propiedad2, nombre_tabla);
-            if (exito == false)
-            {
-                return (false, mensaje);
-            }
-            else
-            {
-                return (true, mensaje);
-            }*/
         }
 
         public (bool, string) Desbloquear_Usuario(string login, string password)
         {
             bool exito = true;
-            string mensaje = "Usuario Desbloqueado Exitosamente";
+            string mensaje = "UsuarioDesbloqueadoExitosamente";
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -294,37 +252,6 @@ namespace DAL
             }
             conexion.Close();
             return (exito, mensaje);
-            /*string propiedad1 = "Login";
-            string propiedad2 = "Bloqueado";
-            string valor2 = false.ToString();
-
-            (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, valor2, propiedad2, nombre_tabla);
-            if (exito == false)
-            {
-                return (false, mensaje);
-            }
-            else
-            {
-                propiedad2 = "Password";
-                (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, password, propiedad2, nombre_tabla);
-                if (exito == false)
-                {
-                    return (false, mensaje);
-                }
-                else
-                {
-                    propiedad2 = "RCC";
-                    (exito, mensaje) = Conexion_44MM.Instancia.Modificar(login, propiedad1, true.ToString(), propiedad2, nombre_tabla);
-                    if (exito == false)
-                    {
-                        return (false, mensaje);
-                    }
-                    else
-                    {
-                        return (true, mensaje);
-                    }
-                }
-            }*/
         }
         #endregion
     }

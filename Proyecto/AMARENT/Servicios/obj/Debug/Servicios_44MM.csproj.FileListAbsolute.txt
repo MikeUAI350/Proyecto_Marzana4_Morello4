@@ -11,7 +11,6 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicio
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\Servicios.pdb
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.AssemblyReference.cache
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios_44MM.csproj.CoreCompileInputs.cache
-C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicio.5F0C4F0D.Up2Date
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.dll
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicios.pdb
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\BouncyCastle.Cryptography.dll
@@ -32,3 +31,4 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicio
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\Servicios\obj\Debug\Servicio.5F0C4F0D.Up2Date

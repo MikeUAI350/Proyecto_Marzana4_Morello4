@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Bitacora_Eventos_44MM : Form , I_Idioma
+    public partial class UI_Bitacora_Eventos_44MM : Form, I_Idioma
     {
         //private DataTable tabla_datos;
         private List<BE_Bitacora_44MM> lista_datos;
@@ -41,18 +41,17 @@ namespace AMARENT
 
         private BE_Bitacora_44MM Obtener_Seleccionado()
         {
-            try
+            if (celda_actual == null || celda_actual.RowIndex < 0 || celda_actual.ColumnIndex < 0)
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SeleccioneUnRegistro"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            else
             {
                 DataGridViewCell celda = dataGridView_lista.Rows[celda_actual.RowIndex].Cells["Cod_Operacion"];
                 int cod_ope = (int)celda.Value;
                 BE_Bitacora_44MM be = lista_datos.Find(x => x.Cod_Operacion == cod_ope);
-                //DataRow row = lista_datos.Find(cod_ope);
                 return be;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Seleccione una Fila", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
             }
         }
 
@@ -77,7 +76,7 @@ namespace AMARENT
             //Verificacion de fechas
             if (fecha_inicial > fecha_final && usar_fechas == true || fecha_final > DateTime.Now && usar_fechas == true)
             {
-                MessageBox.Show("Fechas Invalidas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["FechasInvalidas"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -156,7 +155,7 @@ namespace AMARENT
                 //Error si esta vacio
                 if (lista.Count <= 0)
                 {
-                    MessageBox.Show("No se encontraron resultados con los filtros aplicados", "Sin Resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoSeEncontraronResultados"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -179,7 +178,7 @@ namespace AMARENT
                     (bool exito, string mensaje) = bll_bitacora.Imprimir_Bitacora(lista, ruta);
                     if (exito == true)
                     {
-                        MessageBox.Show(mensaje);
+                        MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[mensaje]} {ruta}");
                     }
                     else
                     {
@@ -263,7 +262,29 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["BitacoraEventos"];
+
+            groupBox_filtro.Text = key_word["Filtros"];
+            label_login.Text = key_word["Usuario"];
+            label_modulo.Text = key_word["Modulo"];
+            label_evento.Text = key_word["Evento"];
+            label_fecha_inicial.Text = key_word["FechaInicial"];
+            label_fecha_final.Text = key_word["FechaFinal"];
+            checkBox_usar_fechas.Text = key_word["UsarFechas"];
+            label_criticidad.Text = key_word["Criticidad"];
+
+            button_aplicar.Text = key_word["Aplicar"];
+            button_imprimir.Text = key_word["Imprimir"];
+            button_limpiar.Text = key_word["Limpiar"];
+            button_actualizar.Text = key_word["Actualizar"];
+
+            label_nombre.Text = key_word["Nombre"];
+            label_apellido.Text = key_word["Apellido"];
         }
         #endregion
     }

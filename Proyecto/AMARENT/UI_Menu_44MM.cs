@@ -15,7 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace AMARENT
 {
-    public partial class UI_Menu_44MM : Form , I_Idioma
+    public partial class UI_Menu_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM bll = new BLL_Usuario_44MM();
         public UI_Menu_44MM()
@@ -41,15 +41,19 @@ namespace AMARENT
 
         private void Abrir_Cambiar_Idioma(string idioma)
         {
-            Gestion_Idioma_44MM.Instancia.Notificar_Cambio_Idioma(idioma);
+            if (Sesion_Manager_44MM.Instancia.Get() != null)
+            {
+                Sesion_Manager_44MM.Instancia.Usuario.Idioma = idioma;
+            }
+            Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(idioma);
         }
 
         private void Abrir_Cambiar_Clave()
         {
-            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Get();
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
             if (usuario == null)
             {
-                MessageBox.Show("Sesion no Iniciada", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SesionNoIniciada"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -66,19 +70,19 @@ namespace AMARENT
 
         private void Abrir_Logout()
         {
-            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Get();
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
             if (usuario == null)
             {
-                MessageBox.Show("Sesion no Iniciada", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SesionNoIniciada"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                DialogResult resultado = MessageBox.Show("Desea cerrar sesion?", "Cerrar Sesion?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult resultado = MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["DeseaCerrarSesion"], Gestion_Idioma_44MM.Instancia.Texto["Logout"], MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
                 {
                     bll.Cerrar_Sesion();
                     Activar_Menus("");
-                    MessageBox.Show("Sesion cerrada");
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SesionCerrada"]);
                     foreach (Form pantalla in pantallas)
                     {
                         pantalla.Visible = false;
@@ -93,6 +97,11 @@ namespace AMARENT
             Gestion_Pantalla(ui_gestion_usuarios);
         }
 
+        private void Abrir_Gestion_Perfiles()
+        {
+            Gestion_Pantalla(ui_gestion_perfiles);
+        }
+
         private void Abrir_Bitacora_Eventos()
         {
             Gestion_Pantalla(ui_bitacora_eventos);
@@ -100,13 +109,16 @@ namespace AMARENT
         #endregion
 
         #region Pantallas
-        private UI_Bitacora_Eventos_44MM ui_bitacora_eventos = new UI_Bitacora_Eventos_44MM();
         private UI_Gestion_Usuarios_44MM ui_gestion_usuarios = new UI_Gestion_Usuarios_44MM();
+        private UI_Gestion_Perfiles_44MM ui_gestion_perfiles = new UI_Gestion_Perfiles_44MM();
+        private UI_Bitacora_Eventos_44MM ui_bitacora_eventos = new UI_Bitacora_Eventos_44MM();
+
         private List<Form> pantallas = new List<Form>();
 
         private void Total_Pantallas()
         {
             pantallas.Add(ui_gestion_usuarios);
+            pantallas.Add(ui_gestion_perfiles);
             pantallas.Add(ui_bitacora_eventos);
 
             foreach (Form pantalla in pantallas)
@@ -136,41 +148,41 @@ namespace AMARENT
                 case "Admin":
                     {
                         adminToolStripMenuItem.Visible = true;
-                        reporteToolStripMenuItem.Visible = true;
-                        ayudaToolStripMenuItem.Visible = true;
-
                         adminToolStripMenuItem.Enabled = true;
-                        reporteToolStripMenuItem.Enabled = true;
-                        ayudaToolStripMenuItem.Enabled = true;
-
                         break;
                     }
-                case "Base":
+                case "Maestro":
+                    {
+                        maestroToolStripMenuItem.Visible = true;
+                        maestroToolStripMenuItem.Enabled = true;
+                        break;
+                    }
+                case "PN1":
                     {
                         pN1ToolStripMenuItem.Visible = true;
-                        pN2ToolStripMenuItem.Visible = true;
-
                         pN1ToolStripMenuItem.Enabled = true;
+                        break;
+                    }
+                case "PN2":
+                    {
+                        pN2ToolStripMenuItem.Visible = true;
                         pN2ToolStripMenuItem.Enabled = true;
-
+                        break;
+                    }
+                case "Reporte":
+                    {
+                        reporteToolStripMenuItem.Visible = true;
+                        reporteToolStripMenuItem.Enabled = true;
+                        break;
+                    }
+                case "Ayuda":
+                    {
+                        ayudaToolStripMenuItem.Visible = true;
+                        ayudaToolStripMenuItem.Enabled = true;
                         break;
                     }
                 default:
                     {
-                        adminToolStripMenuItem.Visible = false;
-                        maestroToolStripMenuItem.Visible = false;
-                        pN1ToolStripMenuItem.Visible = false;
-                        pN2ToolStripMenuItem.Visible = false;
-                        reporteToolStripMenuItem.Visible = false;
-                        ayudaToolStripMenuItem.Visible = false;
-
-                        adminToolStripMenuItem.Enabled = false;
-                        maestroToolStripMenuItem.Enabled = false;
-                        pN1ToolStripMenuItem.Enabled = false;
-                        pN2ToolStripMenuItem.Enabled = false;
-                        reporteToolStripMenuItem.Enabled = false;
-                        ayudaToolStripMenuItem.Enabled = false;
-
                         break;
                     }
             }
@@ -198,6 +210,11 @@ namespace AMARENT
             Abrir_Gestion_Usuarios();
         }
 
+        private void gestionDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Abrir_Gestion_Perfiles();
+        }
+
         private void bitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Abrir_Bitacora_Eventos();
@@ -205,24 +222,20 @@ namespace AMARENT
 
         private void españolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Abrir_Cambiar_Idioma("es");
+            Abrir_Cambiar_Idioma("Español");
         }
 
         private void inglesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Abrir_Cambiar_Idioma("en");
+            Abrir_Cambiar_Idioma("Ingles");
         }
 
         private void UI_Menu_44MM_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BE_Usuario_44MM be = Sesion_Manager_44MM.Get();
+            BE_Usuario_44MM be = Sesion_Manager_44MM.Instancia.Get();
             if (be != null)
             {
                 bll.Cerrar_Sesion();
-            }
-            else
-            {
-                //BLL_Intento_44MM.Instancia.Guardar_Intentos();
             }
             foreach (Form pantalla in pantallas)
             {
@@ -277,8 +290,41 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["FormularioPrincipal"];
+
+            usuariotoolStripMenuItem.Text = key_word["Usuario"];
+            loginToolStripMenuItem.Text = key_word["Login"];
+            cambiarIdiomaToolStripMenuItem.Text = key_word["CambiarIdioma"];
+            españolToolStripMenuItem.Text = key_word["Español"];
+            inglesToolStripMenuItem.Text = key_word["Ingles"];
+            cambiarClaveToolStripMenuItem.Text = key_word["CambiarContra"];
+            logoutToolStripMenuItem.Text = key_word["Logout"];
+
+            adminToolStripMenuItem.Text = key_word["Administracion"];
+            gestionDeUsuariosToolStripMenuItem.Text = key_word["GestionUsuarios"];
+            gestionDePerfilesToolStripMenuItem.Text = key_word["GestionPerfiles"];
+            bitacoraDeEventosToolStripMenuItem.Text = key_word["BitacoraEventos"];
+
+            maestroToolStripMenuItem.Text = key_word["Maestro"];
+
+            pN1ToolStripMenuItem.Text = key_word["PN1"];
+
+            pN2ToolStripMenuItem.Text = key_word["PN2"];
+
+            reporteToolStripMenuItem.Text = key_word["Reporte"];
+
+            ayudaToolStripMenuItem.Text = key_word["Ayuda"];
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ui_gestion_perfiles.Show();
+        }
     }
 }

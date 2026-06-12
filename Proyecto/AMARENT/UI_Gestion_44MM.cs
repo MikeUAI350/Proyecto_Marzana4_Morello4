@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Gestion_44MM : Form , I_Idioma
+    public partial class UI_Gestion_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
         private string finalidad;
@@ -88,7 +88,7 @@ namespace AMARENT
                     }
                 default:
                     {
-                        MessageBox.Show("Error al cargar la interfaz", "Error de Carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["ErrorAlCargarLaInterfaz"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     }
@@ -105,7 +105,7 @@ namespace AMARENT
             string login = textBox_login.Text;
 
             string mensaje = string.Empty;
-            bool exito = false;
+            int exito = 0;
 
             switch (finalidad)
             {
@@ -121,19 +121,23 @@ namespace AMARENT
                     }
                 default:
                     {
-                        MessageBox.Show("Error al cargar la interfaz", "Error de Carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["ErrorAlCargarLaInterfaz"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     }
             }
-            if (exito == false)
+            if (exito == 0)
             {
-                MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (exito == 1)
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                this.Close();
             }
             else
             {
-                MessageBox.Show(mensaje);
-                this.Close();
+                MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -174,7 +178,23 @@ namespace AMARENT
         #region Idioma
         public void Agregar_Form_Idioma()
         {
-            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+            Gestion_Idioma_44MM.Instancia.Suscribir_Form(this);
+        }
+
+        public void Actualizar_Idioma(Dictionary<string, string> key_word)
+        {
+            this.Text = key_word["Gestion"];
+
+            label_dni.Text = key_word["DNI"];
+            label_nombre.Text = key_word["Nombre"];
+            label_apellido.Text = key_word["Apellido"];
+            label_email.Text = key_word["Email"];
+            label_rol.Text = key_word["Rol"];
+            label_login.Text = key_word["Usuario"];
+
+            button_confirmar.Text = key_word["Confirmar"];
+            button_anular.Text = key_word["Anular"];
+            button_salir.Text = key_word["Salir"];
         }
         #endregion
     }

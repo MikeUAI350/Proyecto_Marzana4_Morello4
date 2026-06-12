@@ -34,7 +34,7 @@ namespace Servicios
             }
         }
 
-        public static string Computar(string texto)
+        public string Computar(string texto)
         {
             using (SHA256 sha256 = SHA256.Create())
             {
@@ -58,7 +58,7 @@ namespace Servicios
         private const int SaltSize = 16;     // 128 bits
         private const int Iterations = 100000;
 
-        public static string Encriptar(string texto, string contra)
+        public string Encriptar(string texto, string contra)
         {
             byte[] salt = new byte[SaltSize];
 
@@ -87,7 +87,7 @@ namespace Servicios
             return Convert.ToBase64String(ms.ToArray());
         }
 
-        public static string Desencriptar(string texto, string contra)
+        public string Desencriptar(string texto, string contra)
         {
             byte[] fullData = Convert.FromBase64String(texto);
 
