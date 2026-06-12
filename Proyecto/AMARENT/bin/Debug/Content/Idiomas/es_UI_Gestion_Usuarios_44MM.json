@@ -1,0 +1,38 @@
+{
+  "UI_Gestion_Usuarios_44MM": {
+    "Text": "Gestion Usuarios"
+  },
+  "label_lista": {
+    "Text": "Lista de Usuarios"
+  },
+  "radioButton_bloqueados": {
+    "Text": "Bloqueados"
+  },
+  "radioButton_inactivos": {
+    "Text": "Inactivos"
+  },
+  "radioButton_activos": {
+    "Text": "Activos"
+  },
+  "radioButton_todos": {
+    "Text": "Todos"
+  },
+  "groupBox_controles": {
+    "Text": "Controles"
+  },
+  "button_crear": {
+    "Text": "Crear"
+  },
+  "button_modificar": {
+    "Text": "Modificar"
+  },
+  "button_activar_desactivar": {
+    "Text": "Act/Desact"
+  },
+  "button_desbloquear": {
+    "Text": "Desbloquear"
+  },
+  "button_actualizar": {
+    "Text": "Actualizar"
+  }
+}

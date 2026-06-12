@@ -326,5 +326,78 @@ namespace AMARENT
         {
             ui_gestion_perfiles.Show();
         }
+
+        private void inglesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Abrir_Cambiar_Idioma("en");
+        }
+
+        private void UI_Menu_44MM_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BE_Usuario_44MM be = Sesion_Manager_44MM.Get();
+            if (be != null)
+            {
+                bll.Cerrar_Sesion();
+            }
+            else
+            {
+                //BLL_Intento_44MM.Instancia.Guardar_Intentos();
+            }
+            foreach (Form pantalla in pantallas)
+            {
+                pantalla.Visible = false;
+            }
+            GC.Collect();
+        }
+
+        private Keys key0;
+        private Keys key1;
+        private Keys key2;
+        private Keys key3;
+        private Keys key4;
+        private Keys key5;
+        private Keys key6;
+        private Keys key7;
+        private Keys key8;
+        private Keys key9;
+        private void UI_Menu_44MM_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                if (
+                key0 == Keys.Up &&
+                key1 == Keys.Up &&
+                key2 == Keys.Down &&
+                key3 == Keys.Down &&
+                key4 == Keys.Left &&
+                key5 == Keys.Right &&
+                key6 == Keys.Left &&
+                key7 == Keys.Right &&
+                key8 == Keys.B &&
+                key9 == Keys.A
+                )
+                {
+                    Abrir_Gestion_Usuarios();
+                }
+            }
+            key0 = key1;
+            key1 = key2;
+            key2 = key3;
+            key3 = key4;
+            key4 = key5;
+            key5 = key6;
+            key6 = key7;
+            key7 = key8;
+            key8 = key9;
+            key9 = e.KeyCode;
+        }
+        #endregion
+
+        #region Idioma
+        public void Agregar_Form_Idioma()
+        {
+            Gestion_Idioma_44MM.Instancia.Agregar_Form_Idioma(this);
+        }
+        #endregion
     }
 }

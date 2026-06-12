@@ -38,6 +38,10 @@ namespace AMARENT
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["LaNuevaContraNoPuedeSerIgualALaAnterior"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if (contra_a == contra1 || contra_a == contra2)
+            {
+                MessageBox.Show("La Nueva Contraseña no puede ser igual a la Anterior", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 (exito, mensaje) = bll_usuario.Cambiar_Clave(contra_a, contra1);
