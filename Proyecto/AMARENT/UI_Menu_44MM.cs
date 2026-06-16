@@ -322,7 +322,7 @@ namespace AMARENT
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             ui_gestion_perfiles.Show();
         }

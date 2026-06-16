@@ -43,6 +43,8 @@ namespace DAL
         public DataTable tabla_datos_familia_permiso;
         private string query_familia_permiso;
 
+        private string nombre_tabla_usuario = "Usuario";
+
 
         private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
 
@@ -132,6 +134,38 @@ namespace DAL
             //DataRelation relacion_inferior = new DataRelation(nombre_tabla_familia_permiso + "_Hijo", tabla_datos_permiso.Columns["Cod_Permiso"], tabla_datos_familia_permiso.Columns["Cod_Permiso"]);
             //dataSet.Relations.Add(relacion_superior);
             //dataSet.Relations.Add(relacion_inferior);
+        }
+        #endregion
+
+        #region Verificacion
+        public bool Verificar_Existencia_Perfil(string codigo, string nombre)
+        {
+            DataTable tabla_codigo = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil, "Cod_Perfil", codigo);
+            DataTable tabla_nombre = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil, "Nombre", nombre);
+
+            if (tabla_codigo.Rows.Count > 0 || tabla_nombre.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Verificar_Existencia_Familia(string codigo, string nombre)
+        {
+            DataTable tabla_codigo = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia, "Cod_Familia", codigo);
+            DataTable tabla_nombre = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia, "Nombre", nombre);
+
+            if (tabla_codigo.Rows.Count > 0 || tabla_nombre.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
@@ -466,6 +500,18 @@ namespace DAL
                 cmd.Transaction = transaction;
                 cmd.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
                 cmd.ExecuteNonQuery();
+
+                DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
+                foreach (DataRow item in tabla_usuarios.Rows)
+                {
+                    string login = (string)item["Login"];
+                    string sql_u = $"UPDATE {nombre_tabla_usuario} SET Rol = @Rol WHERE Login = @Login";
+                    SqlCommand cmd_u = new SqlCommand(sql_u, conexion);
+                    cmd_u.Transaction = transaction;
+                    cmd_u.Parameters.AddWithValue("@Rol", "Base");
+                    cmd_u.Parameters.AddWithValue("@Login", login);
+                    cmd.ExecuteNonQuery();
+                }
 
                 transaction.Commit();
             }

@@ -175,6 +175,11 @@ namespace BLL
                 return lista_permisos_seleccionados;
             }
         }
+
+        public List<BE_Perfil_44MM> Recuoerar_Perfiles()
+        {
+            return lista_perfiles;
+        }
         #endregion
 
         #region Privado
@@ -195,6 +200,20 @@ namespace BLL
                 }
             }
             return (lista_nombres_familias, lista_nombres_permisos);
+        }
+        #endregion
+
+        #region Verificacion
+        public bool Verificar_Existencia_Perfil(string codigo, string nombre)
+        {
+            bool existe = dal_perfil.Verificar_Existencia_Perfil(codigo, nombre);
+            return existe;
+        }
+
+        public bool Verificar_Existencia_Familia(string codigo, string nombre)
+        {
+            bool existe = dal_perfil.Verificar_Existencia_Familia(codigo, nombre);
+            return existe;
         }
         #endregion
 

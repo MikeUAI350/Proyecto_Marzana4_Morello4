@@ -54,10 +54,12 @@ namespace BLL
                 {
                     //Como es la unica fila, se recupera la informacion del usuario
                     info = tabla_datos.Rows[0];
+                    string email = (string)info["Email"];
                     string contra_rec = (string)info["Password"];
                     bool bloqueado_rec = (bool)info["Bloqueado"];
                     bool activo_rec = (bool)info["Activo"];
                     bool rcc = (bool)info["RCC"];
+                    string rol = (string)info["Rol"];
 
                     if (bloqueado_rec == true)
                     {
@@ -98,6 +100,15 @@ namespace BLL
                     }
                     else
                     {
+                        //Cambiar el rol a Base si es que el actual fue eliminado
+                        List<BE_Perfil_44MM> lista = Recuperar_Perfiles();
+                        BE_Perfil_44MM perfil = lista.FirstOrDefault(x => x.Cod_Perfil == rol);
+                        if (perfil == null)
+                        {
+                            dal_usuarios.Modificar_Usuario(login, email, "Base");
+                            info["Rol"] = "Base";
+                        }
+
                         //Crea la sesion del usuario, lo coloca en el Sesion Manager y registra el evento en la bitacora
                         BE_Usuario_44MM usuario = new BE_Usuario_44MM(info);
                         Sesion_Manager_44MM.Instancia.Set(usuario);
@@ -180,6 +191,11 @@ namespace BLL
             DataTable tabla_usuarios = dal_usuarios.tabla_datos;
             List<BE_Usuario_44MM> lista_usuarios = datatable_converter.DataTable_Class(tabla_usuarios, typeof(BE_Usuario_44MM));
             return lista_usuarios;
+        }
+
+        public List<BE_Perfil_44MM> Recuperar_Perfiles()
+        {
+            return bll_perfil.Recuoerar_Perfiles();
         }
 
         public (int, string) Crear_Usuario(string dni, string nombre, string apellido, string email, string rol)

@@ -15,7 +15,8 @@ namespace AMARENT
 {
     public partial class UI_Gestion_44MM : Form, I_Idioma
     {
-        private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
+        private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
+        private List<BE_Perfil_44MM> lista_perfiles;
         private string finalidad;
         private BE_Usuario_44MM informacion;
         private UI_Gestion_Usuarios_44MM ui;
@@ -32,6 +33,11 @@ namespace AMARENT
 
         private void Definir_Objetivo(BE_Usuario_44MM be)
         {
+            lista_perfiles = bll_usuario.Recuperar_Perfiles();
+            foreach (BE_Perfil_44MM item in lista_perfiles)
+            {
+                comboBox_rol.Items.Add(item.Cod_Perfil);
+            }
             switch (finalidad)
             {
                 case "Crear":
@@ -95,6 +101,15 @@ namespace AMARENT
             }
         }
 
+        private void Nombre_Perfil(string cod)
+        {
+            BE_Perfil_44MM perfil = lista_perfiles.FirstOrDefault(x => x.Cod_Perfil == cod);
+            if (perfil != null)
+            {
+                textBox_perfil.Text = perfil.Nombre;
+            }
+        }
+
         private void Confirmacion()
         {
             string dni = textBox_dni.Text;
@@ -111,12 +126,12 @@ namespace AMARENT
             {
                 case "Crear":
                     {
-                        (exito, mensaje) = gestion_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
+                        (exito, mensaje) = bll_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
                         break;
                     }
                 case "Modificar":
                     {
-                        (exito, mensaje) = gestion_usuario.Modificar_Usuario(login, email, rol);
+                        (exito, mensaje) = bll_usuario.Modificar_Usuario(login, email, rol);
                         break;
                     }
                 default:
@@ -165,6 +180,11 @@ namespace AMARENT
         private void button_salir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void comboBox_rol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Nombre_Perfil(comboBox_rol.Text);
         }
 
         private void UI_Gestion_44MM_FormClosing(object sender, FormClosingEventArgs e)
