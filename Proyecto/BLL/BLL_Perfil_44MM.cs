@@ -247,27 +247,27 @@ namespace BLL
         #endregion
 
         #region Modificacion
-        public (bool, string) Modificar_Perfil(BE_Perfil_44MM perfil)
+        public (bool, string) Modificar_Perfil(BE_Perfil_44MM perfil, List<BE_Perfil_44MM> lista)
         {
             bool exito = false;
             string mensaje = string.Empty;
 
             List<string> lista_nombres_familias = new List<string>();
             List<string> lista_nombres_permisos = new List<string>();
-            (lista_nombres_familias, lista_nombres_permisos) = Listar_Familias_Permisos(perfil.Obtener_Hijos());
+            (lista_nombres_familias, lista_nombres_permisos) = Listar_Familias_Permisos(lista);
 
             (exito, mensaje) = dal_perfil.Modificar_Perfil(perfil.Cod_Perfil, lista_nombres_familias, lista_nombres_permisos);
             return (exito, mensaje);
         }
 
-        public (bool, string) Modificar_Familia(BE_Perfil_44MM perfil)
+        public (bool, string) Modificar_Familia(BE_Perfil_44MM perfil, List<BE_Perfil_44MM> lista)
         {
             bool exito = false;
             string mensaje = string.Empty;
 
             List<string> lista_nombres_familias = new List<string>();
             List<string> lista_nombres_permisos = new List<string>();
-            (lista_nombres_familias, lista_nombres_permisos) = Listar_Familias_Permisos(perfil.Obtener_Hijos());
+            (lista_nombres_familias, lista_nombres_permisos) = Listar_Familias_Permisos(lista);
 
             (exito, mensaje) = dal_perfil.Modificar_Familia(perfil.Cod_Perfil, lista_nombres_familias, lista_nombres_permisos);
             return (exito, mensaje);

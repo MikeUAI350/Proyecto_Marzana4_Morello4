@@ -45,6 +45,7 @@
     <Compile Include="DAL_Bitacora_44MM.cs" />
     <Compile Include="DAL_Intento_44MM.cs" />
     <Compile Include="DAL_Perfil_44MM.cs" />
+    <Compile Include="DAL_Respaldo_44MM.cs" />
     <Compile Include="DAL_Usuario_44MM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

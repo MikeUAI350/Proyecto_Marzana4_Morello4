@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -211,29 +212,40 @@ namespace AMARENT
 
             string codigo = textBox_codigo.Text;
             string nombre = textBox_nombre.Text;
-            if (radioButton_perfil.Checked == true)
+
+            Match ER_codigo = Regex.Match(codigo, "^(?=.{1,50}$)+$");
+            Match ER_nombre = Regex.Match(nombre, "^(?=.{1,50}$)[A-Za-z]+$");
+
+            if (ER_codigo.Success == true && ER_codigo.Success == true)
             {
-                existe = bll_perfil.Verificar_Existencia_Perfil(codigo, nombre);
-                if (existe == false)
+                if (radioButton_perfil.Checked == true)
                 {
-                    (exito, mensaje) = bll_perfil.Agregar_Perfil(codigo, nombre, lista_seleccionados);
+                    existe = bll_perfil.Verificar_Existencia_Perfil(codigo, nombre);
+                    if (existe == false)
+                    {
+                        (exito, mensaje) = bll_perfil.Agregar_Perfil(codigo, nombre, lista_seleccionados);
+                    }
+                    else
+                    {
+                        mensaje = $"Perfil {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                    }
                 }
-                else
+                else if (radioButton_familia.Checked == true)
                 {
-                    mensaje = $"Perfil {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                    existe = bll_perfil.Verificar_Existencia_Familia(codigo, nombre);
+                    if (existe == false)
+                    {
+                        (exito, mensaje) = bll_perfil.Agregar_Familia(codigo, nombre, lista_seleccionados);
+                    }
+                    else
+                    {
+                        mensaje = $"Familia {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                    }
                 }
             }
-            else if (radioButton_familia.Checked == true)
+            else
             {
-                existe = bll_perfil.Verificar_Existencia_Familia(codigo, nombre);
-                if (existe == false)
-                {
-                    (exito, mensaje) = bll_perfil.Agregar_Familia(codigo, nombre, lista_seleccionados);
-                }
-                else
-                {
-                    mensaje = $"Familia {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
-                }
+                mensaje = Gestion_Idioma_44MM.Instancia.Texto[""];
             }
 
             if (exito == true)
@@ -261,7 +273,7 @@ namespace AMARENT
                     DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (resultado == DialogResult.Yes)
                     {
-                        (exito, mensaje) = bll_perfil.Modificar_Perfil(perfil);
+                        (exito, mensaje) = bll_perfil.Modificar_Perfil(perfil, lista_seleccionados.ToList());
                         if (exito == true)
                         {
                             MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
@@ -295,7 +307,7 @@ namespace AMARENT
                     DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (resultado == DialogResult.Yes)
                     {
-                        (exito, mensaje) = bll_perfil.Modificar_Familia(perfil);
+                        (exito, mensaje) = bll_perfil.Modificar_Familia(perfil, lista_seleccionados.ToList());
                         if (exito == true)
                         {
                             MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);

@@ -54,6 +54,8 @@
   "Quitar": "Quitar",
   "RepetirNuevaContra": "Repetir Nueva Contraseña",
   "Reporte": "Reporte",
+  "Respaldar": "Respaldar",
+  "Restaurar": "Restaurar",
   "Rol": "Rol",
   "Salir": "Salir",
   "Todos": "Todos",
@@ -116,5 +118,12 @@
   "SeleccioneUnRegistro": "Seleccione un Registro",
   "FechasInvalidas": "Fechas Invalidas",
   "NoSeEncontraronResultados": "No se encontraron Resultados",
-  "PDFGeneradoExitosamenteEn": "PDF generado exitosamente en:"
+  "PDFGeneradoExitosamenteEn": "PDF generado exitosamente en:",
+
+  "BackupExitoso": "Respaldo hecho Exitosamente en",
+  "ErrorBackup": "Error haciendo el Respaldo",
+  "SeleccioneRutaDelBackup": "Seleccione la ubicacion del Respaldo",
+  "RestoreExitoso": "Restauracion hecha Exitosamente de",
+  "ErrorRestore": "Error haciendo la Restauracion",
+  "SeleccioneRutaDelRestore": "Seleccione el archivo de Restauracion"
 }

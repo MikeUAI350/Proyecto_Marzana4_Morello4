@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,7 +27,13 @@ namespace AMARENT
         {
             int exito = 0;
             string mensaje = string.Empty;
-            if (contra_a == string.Empty || contra1 == string.Empty || contra2 == string.Empty || contra_a == null || contra1 == null || contra2 == null || contra_a == "" || contra1 == "" || contra2 == "")
+
+            //Mínimo 8 caracteres. Al menos una letra mayúscula. Al menos una letra minúscula. Al menos un número. Al menos un carácter especial. Sin espacios.
+            string cadena = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[^\\s]{8,}$";
+            Match ER1 = Regex.Match(contra1, cadena);
+            Match ER2 = Regex.Match(contra2, cadena);
+
+            if (ER1.Success != true || ER2.Success != true)
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoDebeHaberEspaciosEnBlanco"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -37,10 +44,6 @@ namespace AMARENT
             else if (contra_a == contra1 || contra_a == contra2)
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["LaNuevaContraNoPuedeSerIgualALaAnterior"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (contra_a == contra1 || contra_a == contra2)
-            {
-                MessageBox.Show("La Nueva Contraseña no puede ser igual a la Anterior", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

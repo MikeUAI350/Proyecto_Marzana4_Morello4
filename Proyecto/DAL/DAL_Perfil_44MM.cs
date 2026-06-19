@@ -301,19 +301,19 @@ namespace DAL
             bool exito = true;
             string mensaje = "PerfilModificadoExitosamente";
 
+            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod_perfil);
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                DataTable tabla = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod_perfil);
-
                 string sql_p = $"DELETE FROM {nombre_tabla_perfil_permiso} WHERE Cod_Perfil = @Cod_Perfil";
                 SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
                 cmd_p.Transaction = transaction;
                 cmd_p.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
                 cmd_p.ExecuteNonQuery();
 
-                foreach (DataRow row in tabla.Rows)
+                foreach (DataRow row in tabla_familias.Rows)
                 {
                     string cod_familia = (string)row["Cod_Familia"];
                     bool se_libera = Verificar_Ultimo(cod_familia);
@@ -382,19 +382,19 @@ namespace DAL
             bool exito = true;
             string mensaje = "FamiliaModificadoExitosamente";
 
+            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod_familia);
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
             {
-                DataTable tabla = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod_familia);
-
                 string sql_p = $"DELETE FROM {nombre_tabla_familia_permiso} WHERE Cod_Familia = @Cod_Familia";
                 SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
                 cmd_p.Transaction = transaction;
                 cmd_p.Parameters.AddWithValue("@Cod_Familia", cod_familia);
                 cmd_p.ExecuteNonQuery();
 
-                foreach (DataRow row in tabla.Rows)
+                foreach (DataRow row in tabla_familias.Rows)
                 {
                     string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
                     bool se_libera = Verificar_Ultimo(cod_familia_hijo);
@@ -465,6 +465,8 @@ namespace DAL
             bool exito = true;
             string mensaje = "PerfilEliminadoExitosamente";
 
+            DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
@@ -501,7 +503,6 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
                 cmd.ExecuteNonQuery();
 
-                DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
                 foreach (DataRow item in tabla_usuarios.Rows)
                 {
                     string login = (string)item["Login"];

@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -126,12 +127,47 @@ namespace AMARENT
             {
                 case "Crear":
                     {
-                        (exito, mensaje) = bll_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
+                        Match ER_dni = Regex.Match("^\\d{1,10}$", dni);
+                        Match ER_nombre = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", nombre);
+                        Match ER_apellido = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", apellido);
+                        Match ER_email = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", email);
+                        if (ER_dni.Success != true || ER_nombre.Success != true || ER_apellido.Success != true || ER_email.Success != true)
+                        {
+                            mensaje += Gestion_Idioma_44MM.Instancia.Texto[""];
+                            if (ER_dni.Success != true)
+                            {
+                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            }
+                            if (ER_nombre.Success != true)
+                            {
+                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            }
+                            if (ER_apellido.Success != true)
+                            {
+                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            }
+                            if (ER_email.Success != true)
+                            {
+                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            }
+                        }
+                        else
+                        {
+                            (exito, mensaje) = bll_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
+                        }
                         break;
                     }
                 case "Modificar":
                     {
-                        (exito, mensaje) = bll_usuario.Modificar_Usuario(login, email, rol);
+                        Match ER_email = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", email);
+                        if (ER_email.Success == true)
+                        {
+                            (exito, mensaje) = bll_usuario.Modificar_Usuario(login, email, rol);
+                        }
+                        else
+                        {
+                            mensaje = Gestion_Idioma_44MM.Instancia.Texto[""];
+                        }
                         break;
                     }
                 default:

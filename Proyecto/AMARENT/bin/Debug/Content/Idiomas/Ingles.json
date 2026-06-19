@@ -54,6 +54,8 @@
   "Quitar": "Remove",
   "RepetirNuevaContra": "Repeat New Password",
   "Reporte": "Report",
+  "Respaldar": "Backup",
+  "Restaurar": "Restore",
   "Rol": "Role",
   "Salir": "Exit",
   "Todos": "All",
@@ -116,5 +118,12 @@
   "SeleccioneUnRegistro": "Select a Record",
   "FechasInvalidas": "Invalid Dates",
   "NoSeEncontraronResultados": "No Results found",
-  "PDFGeneradoExitosamenteEn": "PDF successfully generated in:"
+  "PDFGeneradoExitosamenteEn": "PDF successfully generated in:",
+
+  "BackupExitoso": "Backup Successfully made in",
+  "ErrorBackup": "Error doing Backup",
+  "SeleccioneRutaDelBackup": "Select the Backup location",
+  "RestoreExitoso": "Restoration Successfully done from",
+  "ErrorRestore": "Error doing Restoration",
+  "SeleccioneRutaDelRestore": "Select the Restore file"
 }
