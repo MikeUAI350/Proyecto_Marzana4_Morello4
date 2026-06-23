@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,8 @@ namespace AMARENT
 {
     public partial class UI_Gestion_44MM : Form, I_Idioma
     {
-        private BLL_Usuario_44MM gestion_usuario = new BLL_Usuario_44MM();
+        private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
+        private List<BE_Perfil_44MM> lista_perfiles;
         private string finalidad;
         private BE_Usuario_44MM informacion;
         private UI_Gestion_Usuarios_44MM ui;
@@ -32,6 +34,11 @@ namespace AMARENT
 
         private void Definir_Objetivo(BE_Usuario_44MM be)
         {
+            lista_perfiles = bll_usuario.Recuperar_Perfiles();
+            foreach (BE_Perfil_44MM item in lista_perfiles)
+            {
+                comboBox_rol.Items.Add(item.Cod_Perfil);
+            }
             switch (finalidad)
             {
                 case "Crear":
@@ -95,6 +102,15 @@ namespace AMARENT
             }
         }
 
+        private void Nombre_Perfil(string cod)
+        {
+            BE_Perfil_44MM perfil = lista_perfiles.FirstOrDefault(x => x.Cod_Perfil == cod);
+            if (perfil != null)
+            {
+                textBox_perfil.Text = perfil.Nombre;
+            }
+        }
+
         private void Confirmacion()
         {
             string dni = textBox_dni.Text;
@@ -111,12 +127,47 @@ namespace AMARENT
             {
                 case "Crear":
                     {
-                        (exito, mensaje) = gestion_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
+                        Match ER_dni = Regex.Match( dni, "^[0-9]{1,10}$");
+                        Match ER_nombre = Regex.Match(nombre, "^[A-Z][a-zA-Z]{0,49}$");
+                        Match ER_apellido = Regex.Match(apellido, "^[A-Z][a-zA-Z]{0,49}$");
+                        Match ER_email = Regex.Match(email, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,49}$");
+                        if (ER_dni.Success != true || ER_nombre.Success != true || ER_apellido.Success != true || ER_email.Success != true)
+                        {
+                            mensaje = Gestion_Idioma_44MM.Instancia.Texto["FormatoInvalido"];
+                            //if (ER_dni.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_nombre.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_apellido.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_email.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                        }
+                        else
+                        {
+                            (exito, mensaje) = bll_usuario.Crear_Usuario(dni, nombre, apellido, email, rol);
+                        }
                         break;
                     }
                 case "Modificar":
                     {
-                        (exito, mensaje) = gestion_usuario.Modificar_Usuario(login, email, rol);
+                        Match ER_email = Regex.Match(email, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,49}$");
+                        if (ER_email.Success == true)
+                        {
+                            (exito, mensaje) = bll_usuario.Modificar_Usuario(login, email, rol);
+                        }
+                        else
+                        {
+                            mensaje = Gestion_Idioma_44MM.Instancia.Texto[""];
+                        }
                         break;
                     }
                 default:
@@ -165,6 +216,11 @@ namespace AMARENT
         private void button_salir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void comboBox_rol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Nombre_Perfil(comboBox_rol.Text);
         }
 
         private void UI_Gestion_44MM_FormClosing(object sender, FormClosingEventArgs e)

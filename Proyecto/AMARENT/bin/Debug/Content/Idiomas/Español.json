@@ -54,6 +54,8 @@
   "Quitar": "Quitar",
   "RepetirNuevaContra": "Repetir Nueva Contraseña",
   "Reporte": "Reporte",
+  "Respaldar": "Respaldar",
+  "Restaurar": "Restaurar",
   "Rol": "Rol",
   "Salir": "Salir",
   "Todos": "Todos",
@@ -92,9 +94,10 @@
   "PermisosDuplicados": "Permisos Duplicados: ",
   "ConfirmarModificacion": "Confirmar Modificacion",
   "ConfirmarEliminacion": "Confirmar Eliminacion",
-  "EstaSeguroDeEliminar": "¿Está seguro que desea Eliminar el/la",
-  "EstaSeguroDeModificar": "¿Está seguro que desea Modificar el/la",
+  "EstaSeguroDeEliminar": "¿Desea Eliminar el/la",
+  "EstaSeguroDeModificar": "¿Desea Modificar el/la",
   "NoExistente": "no Existente",
+  "YaExistente": "ya Existente",
   "DeseaCrear": "¿Desea Crear el/la",
   "NoSePuedeModificar": "No se puede Modificar",
   "NoSePuedeEliminar": "No se puede Eliminar",
@@ -106,6 +109,7 @@
   "FamiliaEliminadoExitosamente": "Familia Eliminado Exitosamente",
 
   "ErrorAlCargarLaInterfaz": "Error al Cargar la Intefaz",
+  "FormatoInvalido": "Formato Invalido",
 
   "LasContraNoCoinciden": "Las Contraseñas no Coinciden",
   "LaNuevaContraNoPuedeSerIgualALaAnterior": "La Nueva Contraseña no puede ser igual a la Anterior",
@@ -115,5 +119,12 @@
   "SeleccioneUnRegistro": "Seleccione un Registro",
   "FechasInvalidas": "Fechas Invalidas",
   "NoSeEncontraronResultados": "No se encontraron Resultados",
-  "PDFGeneradoExitosamenteEn": "PDF generado exitosamente en:"
+  "PDFGeneradoExitosamenteEn": "PDF generado exitosamente en:",
+
+  "BackupExitoso": "Respaldo hecho Exitosamente en",
+  "ErrorBackup": "Error haciendo el Respaldo",
+  "SeleccioneRutaDelBackup": "Seleccione la ubicacion del Respaldo",
+  "RestoreExitoso": "Restauracion hecha Exitosamente de",
+  "ErrorRestore": "Error haciendo la Restauracion",
+  "SeleccioneRutaDelRestore": "Seleccione el archivo de Restauracion"
 }

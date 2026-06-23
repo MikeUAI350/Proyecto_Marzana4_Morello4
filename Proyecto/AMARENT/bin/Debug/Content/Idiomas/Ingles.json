@@ -54,6 +54,8 @@
   "Quitar": "Remove",
   "RepetirNuevaContra": "Repeat New Password",
   "Reporte": "Report",
+  "Respaldar": "Backup",
+  "Restaurar": "Restore",
   "Rol": "Role",
   "Salir": "Exit",
   "Todos": "All",
@@ -92,9 +94,10 @@
   "PermisosDuplicados": "Duplicate Permissions: ",
   "ConfirmarModificacion": "Confirm Modification",
   "ConfirmarEliminacion": "Confirm Deletion",
-  "EstaSeguroDeEliminar": "Are you sure you want to Delete the",
-  "EstaSeguroDeModificar": "Are you sure you want to Modify the",
+  "EstaSeguroDeEliminar": "Do you want to Delete the",
+  "EstaSeguroDeModificar": "Do you want to Modify the",
   "NoExistente": "Non-Existent",
+  "YaExistente": "already Existing",
   "DeseaCrear": "Would you want to create the",
   "NoSePuedeModificar": "Cannot be Modified",
   "NoSePuedeEliminar": "Cannot be Deleted",
@@ -106,6 +109,7 @@
   "FamiliaEliminadoExitosamente": "Family Deleted Successfully",
 
   "ErrorAlCargarLaInterfaz": "Error Loading Interface",
+  "FormatoInvalido": "Invalid Format",
 
   "LasContraNoCoinciden": "Passwords Do Not Match",
   "LaNuevaContraNoPuedeSerIgualALaAnterior": "The New Password cannot be the same as the Previous One",
@@ -115,5 +119,12 @@
   "SeleccioneUnRegistro": "Select a Record",
   "FechasInvalidas": "Invalid Dates",
   "NoSeEncontraronResultados": "No Results found",
-  "PDFGeneradoExitosamenteEn": "PDF successfully generated in:"
+  "PDFGeneradoExitosamenteEn": "PDF successfully generated in:",
+
+  "BackupExitoso": "Backup Successfully made in",
+  "ErrorBackup": "Error doing Backup",
+  "SeleccioneRutaDelBackup": "Select the Backup location",
+  "RestoreExitoso": "Restoration Successfully done from",
+  "ErrorRestore": "Error doing Restoration",
+  "SeleccioneRutaDelRestore": "Select the Restore file"
 }

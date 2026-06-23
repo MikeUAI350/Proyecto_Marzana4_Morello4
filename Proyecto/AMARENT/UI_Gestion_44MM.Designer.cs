@@ -43,6 +43,7 @@
             this.comboBox_rol = new System.Windows.Forms.ComboBox();
             this.button_anular = new System.Windows.Forms.Button();
             this.button_salir = new System.Windows.Forms.Button();
+            this.textBox_perfil = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox_dni
@@ -109,7 +110,7 @@
             // 
             this.label_login.AutoSize = true;
             this.label_login.Enabled = false;
-            this.label_login.Location = new System.Drawing.Point(12, 231);
+            this.label_login.Location = new System.Drawing.Point(9, 259);
             this.label_login.Name = "label_login";
             this.label_login.Size = new System.Drawing.Size(40, 16);
             this.label_login.TabIndex = 7;
@@ -119,7 +120,7 @@
             // textBox_login
             // 
             this.textBox_login.Enabled = false;
-            this.textBox_login.Location = new System.Drawing.Point(12, 250);
+            this.textBox_login.Location = new System.Drawing.Point(9, 278);
             this.textBox_login.Name = "textBox_login";
             this.textBox_login.Size = new System.Drawing.Size(121, 22);
             this.textBox_login.TabIndex = 6;
@@ -171,14 +172,12 @@
             // 
             this.comboBox_rol.Enabled = false;
             this.comboBox_rol.FormattingEnabled = true;
-            this.comboBox_rol.Items.AddRange(new object[] {
-            "Base",
-            "Admin"});
             this.comboBox_rol.Location = new System.Drawing.Point(12, 204);
             this.comboBox_rol.Name = "comboBox_rol";
             this.comboBox_rol.Size = new System.Drawing.Size(121, 24);
             this.comboBox_rol.TabIndex = 19;
             this.comboBox_rol.Visible = false;
+            this.comboBox_rol.SelectedIndexChanged += new System.EventHandler(this.comboBox_rol_SelectedIndexChanged);
             // 
             // button_anular
             // 
@@ -202,6 +201,14 @@
             this.button_salir.UseVisualStyleBackColor = true;
             this.button_salir.Click += new System.EventHandler(this.button_salir_Click);
             // 
+            // textBox_perfil
+            // 
+            this.textBox_perfil.Location = new System.Drawing.Point(12, 234);
+            this.textBox_perfil.Name = "textBox_perfil";
+            this.textBox_perfil.ReadOnly = true;
+            this.textBox_perfil.Size = new System.Drawing.Size(121, 22);
+            this.textBox_perfil.TabIndex = 24;
+            // 
             // UI_Gestion_44MM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -209,6 +216,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(148, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.textBox_perfil);
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_anular);
             this.Controls.Add(this.comboBox_rol);
@@ -249,5 +257,6 @@
         private System.Windows.Forms.ComboBox comboBox_rol;
         private System.Windows.Forms.Button button_anular;
         private System.Windows.Forms.Button button_salir;
+        private System.Windows.Forms.TextBox textBox_perfil;
     }
 }
