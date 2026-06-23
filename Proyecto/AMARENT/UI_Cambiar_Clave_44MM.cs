@@ -33,10 +33,14 @@ namespace AMARENT
             Match ER1 = Regex.Match(contra1, cadena);
             Match ER2 = Regex.Match(contra2, cadena);
 
-            if (ER1.Success != true || ER2.Success != true)
+            if (string.IsNullOrEmpty(contra_a) || string.IsNullOrEmpty(contra1) || string.IsNullOrEmpty(contra2))
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoDebeHaberEspaciosEnBlanco"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            //else if (ER1.Success != true || ER2.Success != true)
+            //{
+            //    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["FormatoInvalido"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
             else if (contra1 != contra2)
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["LasContraNoCoinciden"], "", MessageBoxButtons.OK, MessageBoxIcon.Error);

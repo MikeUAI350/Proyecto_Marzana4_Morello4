@@ -291,6 +291,15 @@ namespace DAL
             //Obtiene las familias viejas del perfil
             DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod_perfil);
 
+            //Añade las familias que seran topes
+            List<bool> familias_liberadas = new List<bool>();
+            foreach (DataRow row in tabla_familias.Rows)
+            {
+                string cod_familia = (string)row["Cod_Familia"];
+                bool se_libera = Verificar_Ultimo(cod_familia);
+                familias_liberadas.Add(se_libera);
+            }
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
@@ -305,8 +314,9 @@ namespace DAL
                 //Actualiza las familias si es que seran topes
                 foreach (DataRow row in tabla_familias.Rows)
                 {
+                    int posicion = tabla_familias.Rows.IndexOf(row);
                     string cod_familia = (string)row["Cod_Familia"];
-                    bool se_libera = Verificar_Ultimo(cod_familia);
+                    bool se_libera = familias_liberadas[posicion];
                     if (se_libera == true)
                     {
                         string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
@@ -379,6 +389,15 @@ namespace DAL
             //Obtiene las familias viejas del perfil
             DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod_familia);
 
+            //Añade las familias que seran topes
+            List<bool> familias_liberadas = new List<bool>();
+            foreach (DataRow row in tabla_familias.Rows)
+            {
+                string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
+                bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+                familias_liberadas.Add(se_libera);
+            }
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
@@ -393,8 +412,9 @@ namespace DAL
                 //Actualiza las familias si es que seran topes
                 foreach (DataRow row in tabla_familias.Rows)
                 {
+                    int posicion = tabla_familias.Rows.IndexOf(row);
                     string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
-                    bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+                    bool se_libera = familias_liberadas[posicion];
                     if (se_libera == true)
                     {
                         string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
@@ -469,6 +489,14 @@ namespace DAL
             string rol_predeterminado = "Base";
             DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
 
+            //Añade las familias que seran topes
+            List<bool> familias_liberadas = new List<bool>();
+            foreach (string cod_familia in lista_nombres_familias)
+            {
+                bool se_libera = Verificar_Ultimo(cod_familia);
+                familias_liberadas.Add(se_libera);
+            }
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
@@ -483,7 +511,8 @@ namespace DAL
                 //Actualiza las familias si es que seran topes
                 foreach (string cod_familia in lista_nombres_familias)
                 {
-                    bool se_libera = Verificar_Ultimo(cod_familia);
+                    int posicion = lista_nombres_familias.IndexOf(cod_familia);
+                    bool se_libera = familias_liberadas[posicion];
                     if (se_libera == true)
                     {
                         string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
@@ -538,6 +567,14 @@ namespace DAL
             bool exito = true;
             string mensaje = "FamiliaEliminadoExitosamente";
 
+            //Añade las familias que seran topes
+            List<bool> familias_liberadas = new List<bool>();
+            foreach (string cod_familia_hijo in lista_nombres_familias)
+            {
+                bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+                familias_liberadas.Add(se_libera);
+            }
+
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
             try
@@ -552,7 +589,8 @@ namespace DAL
                 //Actualiza las familias si es que seran topes
                 foreach (string cod_familia_hijo in lista_nombres_familias)
                 {
-                    bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+                    int posicion = lista_nombres_familias.IndexOf(cod_familia_hijo);
+                    bool se_libera = familias_liberadas[posicion];
                     if (se_libera == true)
                     {
                         string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";

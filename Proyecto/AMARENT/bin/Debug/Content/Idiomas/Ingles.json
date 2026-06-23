@@ -109,6 +109,7 @@
   "FamiliaEliminadoExitosamente": "Family Deleted Successfully",
 
   "ErrorAlCargarLaInterfaz": "Error Loading Interface",
+  "FormatoInvalido": "Invalid Format",
 
   "LasContraNoCoinciden": "Passwords Do Not Match",
   "LaNuevaContraNoPuedeSerIgualALaAnterior": "The New Password cannot be the same as the Previous One",

@@ -127,29 +127,29 @@ namespace AMARENT
             {
                 case "Crear":
                     {
-                        Match ER_dni = Regex.Match("^\\d{1,10}$", dni);
-                        Match ER_nombre = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", nombre);
-                        Match ER_apellido = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", apellido);
-                        Match ER_email = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", email);
+                        Match ER_dni = Regex.Match( dni, "^[0-9]{1,10}$");
+                        Match ER_nombre = Regex.Match(nombre, "^[A-Z][a-zA-Z]{0,49}$");
+                        Match ER_apellido = Regex.Match(apellido, "^[A-Z][a-zA-Z]{0,49}$");
+                        Match ER_email = Regex.Match(email, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,49}$");
                         if (ER_dni.Success != true || ER_nombre.Success != true || ER_apellido.Success != true || ER_email.Success != true)
                         {
-                            mensaje += Gestion_Idioma_44MM.Instancia.Texto[""];
-                            if (ER_dni.Success != true)
-                            {
-                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
-                            }
-                            if (ER_nombre.Success != true)
-                            {
-                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
-                            }
-                            if (ER_apellido.Success != true)
-                            {
-                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
-                            }
-                            if (ER_email.Success != true)
-                            {
-                                mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
-                            }
+                            mensaje = Gestion_Idioma_44MM.Instancia.Texto["FormatoInvalido"];
+                            //if (ER_dni.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_nombre.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_apellido.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
+                            //if (ER_email.Success != true)
+                            //{
+                            //    mensaje += $"\n\r{Gestion_Idioma_44MM.Instancia.Texto[""]}";
+                            //}
                         }
                         else
                         {
@@ -159,7 +159,7 @@ namespace AMARENT
                     }
                 case "Modificar":
                     {
-                        Match ER_email = Regex.Match("^[A-Z][a-zA-Z]{0,49}$", email);
+                        Match ER_email = Regex.Match(email, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,49}$");
                         if (ER_email.Success == true)
                         {
                             (exito, mensaje) = bll_usuario.Modificar_Usuario(login, email, rol);

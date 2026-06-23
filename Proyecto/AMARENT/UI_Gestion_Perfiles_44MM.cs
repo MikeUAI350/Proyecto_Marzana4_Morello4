@@ -164,6 +164,7 @@ namespace AMARENT
         {
             //Verifica si hay duplicados
             List<BE_Perfil_44MM> lista = new List<BE_Perfil_44MM>(lista_seleccionados);
+            lista.Add(perfil);
             (List<BE_Permiso_44MM> permisos, List<BE_Permiso_44MM> duplicados) = bll_perfil.Obtener_Permisos(lista);
             if (duplicados.Count <= 0)
             {
@@ -207,6 +208,14 @@ namespace AMARENT
                 }
                 textBox_codigo.Text = perfil.Cod_Perfil;
                 textBox_nombre.Text = perfil.Nombre;
+                if (perfil.Tipo == "Perfil")
+                {
+                    radioButton_perfil.Checked = true;
+                }
+                else if (perfil.Tipo == "Familia")
+                {
+                    radioButton_familia.Checked = true;
+                }
             }
         }
         #endregion
@@ -225,43 +234,51 @@ namespace AMARENT
             Match ER_codigo = Regex.Match(codigo, "^(?=.{1,50}$)+$");
             Match ER_nombre = Regex.Match(nombre, "^(?=.{1,50}$)[A-Za-z]+$");
 
-            if (ER_codigo.Success == true && ER_codigo.Success == true)
+            if (string.IsNullOrEmpty(codigo) == false && string.IsNullOrEmpty(nombre) == false)
+            //if (ER_codigo.Success == true && ER_codigo.Success == true)
             {
-                //Obtiene el seleccionado
-                if (radioButton_perfil.Checked == true)
+                if (lista_seleccionados.Count > 0)
                 {
-                    //Verifica si existe un perfil con ese codigo o nombre
-                    existe = bll_perfil.Verificar_Existencia_Perfil(codigo, nombre);
-                    if (existe == false)
+                    //Obtiene el seleccionado
+                    if (radioButton_perfil.Checked == true)
                     {
-                        (exito, mensaje) = bll_perfil.Agregar_Perfil(codigo, nombre, lista_seleccionados);
+                        //Verifica si existe un perfil con ese codigo o nombre
+                        existe = bll_perfil.Verificar_Existencia_Perfil(codigo, nombre);
+                        if (existe == false)
+                        {
+                            (exito, mensaje) = bll_perfil.Agregar_Perfil(codigo, nombre, lista_seleccionados);
+                        }
+                        else
+                        {
+                            mensaje = $"Perfil {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                        }
+                    }
+                    else if (radioButton_familia.Checked == true)
+                    {
+                        //Verifica si existe una familia con ese codigo o nombre
+                        existe = bll_perfil.Verificar_Existencia_Familia(codigo, nombre);
+                        if (existe == false)
+                        {
+                            (exito, mensaje) = bll_perfil.Agregar_Familia(codigo, nombre, lista_seleccionados);
+                        }
+                        else
+                        {
+                            mensaje = $"Familia {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                        }
                     }
                     else
                     {
-                        mensaje = $"Perfil {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
-                    }
-                }
-                else if (radioButton_familia.Checked == true)
-                {
-                    //Verifica si existe una familia con ese codigo o nombre
-                    existe = bll_perfil.Verificar_Existencia_Familia(codigo, nombre);
-                    if (existe == false)
-                    {
-                        (exito, mensaje) = bll_perfil.Agregar_Familia(codigo, nombre, lista_seleccionados);
-                    }
-                    else
-                    {
-                        mensaje = $"Familia {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}";
+                        MessageBox.Show("?", "?", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("?", "?", MessageBoxButtons.OK,MessageBoxIcon.Question);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoDebeHaberEspaciosEnBlanco"], "ERROR", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
             else
             {
-                mensaje = Gestion_Idioma_44MM.Instancia.Texto[""];
+                mensaje = Gestion_Idioma_44MM.Instancia.Texto["FormatoInvalido"];
             }
 
             if (exito == true)

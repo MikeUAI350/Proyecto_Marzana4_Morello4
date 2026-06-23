@@ -321,10 +321,5 @@ namespace AMARENT
             ayudaToolStripMenuItem.Text = key_word["Ayuda"];
         }
         #endregion
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ui_gestion_perfiles.Show();
-        }
     }
 }
