@@ -195,7 +195,7 @@ namespace BLL
 
         public List<BE_Perfil_44MM> Recuperar_Perfiles()
         {
-            return bll_perfil.Recuoerar_Perfiles();
+            return bll_perfil.Recuperar_Perfiles();
         }
 
         public (int, string) Crear_Usuario(string dni, string nombre, string apellido, string email, string rol)
