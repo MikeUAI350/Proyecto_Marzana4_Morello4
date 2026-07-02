@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DAL_44MM.cs" />
     <Compile Include="DAL_Bitacora_44MM.cs" />
+    <Compile Include="DAL_Digito_Verificador_44MM.cs" />
     <Compile Include="DAL_Intento_44MM.cs" />
     <Compile Include="DAL_Perfil_44MM.cs" />
     <Compile Include="DAL_Respaldo_44MM.cs" />

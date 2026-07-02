@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Digito_Verificador_IS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace AMARENT
     public partial class UI_Login_44MM : Form, I_Idioma
     {
         private BLL_Usuario_44MM bll_usuario = new BLL_Usuario_44MM();
+        private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+        private BLL_Digito_Verificador_44MM bll_dv = new BLL_Digito_Verificador_44MM();
         public UI_Login_44MM(UI_Menu_44MM menu)
         {
             InitializeComponent();
@@ -44,12 +47,33 @@ namespace AMARENT
                     //Requiere de cambio de contraseña
                     case -1:
                         {
-                            MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            UI_Cambiar_Clave_44MM ui = new UI_Cambiar_Clave_44MM((UI_Menu_44MM)this.MdiParent);
-                            ui.Controls["button_salir"].Enabled = false;
-                            ui.MdiParent = this.MdiParent;
-                            ui.Show();
-                            this.Close();
+                            bool dv = bll_dv.Recalcular();
+                            if (dv == false)
+                            {
+                                Verificar_DV(Recuperar_Permisos());
+                            }
+                            else
+                            {
+                                //Desactiva el menu Usuario por alguna razon
+                                UI_Menu_44MM menu = (UI_Menu_44MM)this.MdiParent;
+                                MenuStrip menustrip = (MenuStrip)menu.Controls["menuStrip"];
+                                menustrip.Items["usuariotoolStripMenuItem"].Visible = false;
+                                menustrip.Items["usuariotoolStripMenuItem"].Enabled = false;
+
+                                BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
+                                //Bitacora
+                                bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Nuevo Ingreso", 1);
+                                //Cambia el idioma
+                                Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(Sesion_Manager_44MM.Instancia.Get().Idioma);
+                                //Mensaje
+                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                UI_Cambiar_Clave_44MM ui = new UI_Cambiar_Clave_44MM((UI_Menu_44MM)this.MdiParent);
+                                ui.Controls["button_salir"].Enabled = false;
+                                ui.MdiParent = this.MdiParent;
+                                ui.Show();
+
+                                this.Close();
+                            }
                             break;
                         }
                     //Error de Inicio
@@ -61,30 +85,98 @@ namespace AMARENT
                     //Inicio de Sesion Exitoso
                     case 1:
                         {
-                            Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(Sesion_Manager_44MM.Instancia.Usuario.Idioma);
-                            MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
-
+                            //Desactiva el menu Usuario por alguna razon
                             UI_Menu_44MM menu = (UI_Menu_44MM)this.MdiParent;
-                            this.MdiParent.Controls["menuStrip"].Enabled = true;
+                            MenuStrip menustrip = (MenuStrip)menu.Controls["menuStrip"];
+                            menustrip.Items["usuariotoolStripMenuItem"].Visible = false;
+                            menustrip.Items["usuariotoolStripMenuItem"].Enabled = false;
 
-                            //Recupera los permisos y activa los menustrips de cada permiso
-                            List<BE_Permiso_44MM> lista_permisos = bll_usuario.Recuperar_Permisos(Sesion_Manager_44MM.Instancia.Get().Rol);
-                            if (lista_permisos != null)
+                            bool es_admin = Recuperar_Permisos();
+
+                            bool dv = bll_dv.Recalcular();
+                            if (dv == false)
                             {
-                                foreach (BE_Permiso_44MM permiso in lista_permisos)
-                                {
-                                    menu.Activar_Menus(permiso.Cod_Permiso);
-                                    menu.Activar_Menus(permiso.Nombre);
-                                }
+                                Verificar_DV(es_admin);
                             }
                             else
                             {
-                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["AccesoDenegado"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
+                                //Bitacora
+                                bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Login", 1);
+                                //Cambia el idioma
+                                Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(Sesion_Manager_44MM.Instancia.Get().Idioma);
+                                //Mensaje
+                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                                menustrip.Enabled = true;
+                                this.Close();
                             }
-                            this.Close();
                             break;
                         }
+                    //Agregacion de Intentos Fallidos
+                    case 2:
+                        {
+                            bool dv = bll_dv.Recalcular();
+                            if (dv == false)
+                            {
+                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["ContraIncorrecta"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            else
+                            {
+                                mensaje = bll_usuario.Agregar_Intento(login);
+                                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        }
+
                 }
+            }
+        }
+
+        private bool Recuperar_Permisos()
+        {
+            //Desactiva el menu Usuario por alguna razon
+            UI_Menu_44MM menu = (UI_Menu_44MM)this.MdiParent;
+            MenuStrip menustrip = (MenuStrip)menu.Controls["menuStrip"];
+            menustrip.Items["usuariotoolStripMenuItem"].Visible = false;
+            menustrip.Items["usuariotoolStripMenuItem"].Enabled = false;
+
+            menustrip.Enabled = true;
+
+            //Recupera los permisos y activa los menustrips de cada permiso
+            bool es_admin = false;
+            List<BE_Permiso_44MM> lista_permisos = bll_usuario.Recuperar_Permisos(Sesion_Manager_44MM.Instancia.Get().Rol);
+            if (lista_permisos != null)
+            {
+                foreach (BE_Permiso_44MM permiso in lista_permisos)
+                {
+                    menu.Activar_Menus(permiso.Cod_Permiso);
+                    menu.Activar_Menus(permiso.Nombre);
+
+                    if (permiso.Cod_Permiso == "Admin" || permiso.Nombre == "Admin")
+                    {
+                        es_admin = true;
+                    }
+                }
+            }
+
+            return es_admin;
+        }
+
+        private void Verificar_DV(bool es_admin)
+        {
+            UI_Menu_44MM menu = (UI_Menu_44MM)this.MdiParent;
+            MenuStrip menustrip = (MenuStrip)menu.Controls["menuStrip"];
+            if (es_admin == true)
+            {
+                //MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["DVVInconsistente"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UI_Digito_Verificador_44MM ui_dv = new UI_Digito_Verificador_44MM();
+                ui_dv.MdiParent = this.MdiParent;
+                ui_dv.Show();
+                menustrip.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["AccesoDenegado"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

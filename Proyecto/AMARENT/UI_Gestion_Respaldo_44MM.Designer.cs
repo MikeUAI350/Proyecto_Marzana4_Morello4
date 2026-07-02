@@ -1,6 +1,6 @@
 ﻿namespace AMARENT
 {
-    partial class UI_Respaldo_44MM
+    partial class UI_Gestion_Respaldo_44MM
     {
         /// <summary>
         /// Required designer variable.
@@ -44,6 +44,7 @@
             // 
             this.textBox_backup.Location = new System.Drawing.Point(12, 27);
             this.textBox_backup.Name = "textBox_backup";
+            this.textBox_backup.ReadOnly = true;
             this.textBox_backup.Size = new System.Drawing.Size(100, 22);
             this.textBox_backup.TabIndex = 0;
             // 
@@ -69,6 +70,7 @@
             // 
             this.textBox_restore.Location = new System.Drawing.Point(12, 101);
             this.textBox_restore.Name = "textBox_restore";
+            this.textBox_restore.ReadOnly = true;
             this.textBox_restore.Size = new System.Drawing.Size(100, 22);
             this.textBox_restore.TabIndex = 2;
             // 
@@ -114,19 +116,12 @@
             this.button_restore.UseVisualStyleBackColor = true;
             this.button_restore.Click += new System.EventHandler(this.button_restore_Click);
             // 
-            // openFileDialog_restore
-            // 
-            this.openFileDialog_restore.DefaultExt = "bak";
-            // 
-            // saveFileDialog_backup
-            // 
-            this.saveFileDialog_backup.DefaultExt = "bak";
-            // 
-            // UI_Respaldo_44MM
+            // UI_Gestion_Respaldo_44MM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.button_restore);
             this.Controls.Add(this.button_backup);
             this.Controls.Add(this.button_direccion_restore);
@@ -135,7 +130,7 @@
             this.Controls.Add(this.textBox_restore);
             this.Controls.Add(this.label_backup);
             this.Controls.Add(this.textBox_backup);
-            this.Name = "UI_Respaldo_44MM";
+            this.Name = "UI_Gestion_Respaldo_44MM";
             this.Text = "UI_Respaldo_44MM";
             this.ResumeLayout(false);
             this.PerformLayout();

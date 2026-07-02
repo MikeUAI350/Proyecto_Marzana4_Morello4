@@ -14,7 +14,7 @@ namespace DAL
     public class DAL_Intento_44MM
     {
         private string nombre_tabla = "Intentos";
-        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Nueva_Conexion();
 
         public DataTable tabla_datos;
         private string query;

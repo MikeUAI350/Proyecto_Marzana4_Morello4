@@ -46,7 +46,7 @@ namespace DAL
         private string nombre_tabla_usuario = "Usuario";
 
 
-        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Nueva_Conexion();
 
         public DAL_Perfil_44MM()
         {
@@ -146,6 +146,67 @@ namespace DAL
                 return false;
             }
         }
+
+        public bool Verificar_Ultimo_Elemento(string codigo)
+        {
+            //Obtiene tablas y verifica la cantidad de filas
+            DataTable tabla_perfiles = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Familia", codigo);
+            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Hijo", codigo);
+            bool hay_ultimo = false;
+
+            foreach (DataRow row in tabla_perfiles.Rows)
+            {
+                if (hay_ultimo == false)
+                {
+                    string cod = (string)row["Cod_Perfil"];
+                    DataTable tabla_perfil_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod);
+                    DataTable tabla_perfil_permisos = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_permiso, "Cod_Perfil", cod);
+                    if (tabla_perfil_familias.Rows.Count + tabla_perfil_permisos.Rows.Count <= 1)
+                    {
+                        hay_ultimo = true;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            foreach (DataRow row in tabla_familias.Rows)
+            {
+                if (hay_ultimo == false)
+                {
+                    string cod = (string)row["Cod_Familia_Padre"];
+                    DataTable tabla_familia_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod);
+                    DataTable tabla_familia_permisos = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_permiso, "Cod_Familia", cod);
+                    if (tabla_familia_familias.Rows.Count + tabla_familia_permisos.Rows.Count <= 1)
+                    {
+                        hay_ultimo = true;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return hay_ultimo;
+        }
+
+        private bool Verificar_Ultimo(string codigo)
+        {
+            //Verifica si una familia solo tiene un perfil o familia como padre
+            DataTable tabla_perfiles_ocupantes = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Familia", codigo);
+            DataTable tabla_familias_ocupantes = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Hijo", codigo);
+
+            if (tabla_perfiles_ocupantes.Rows.Count + tabla_familias_ocupantes.Rows.Count <= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region Creacion
@@ -169,38 +230,40 @@ namespace DAL
                 cmd.ExecuteNonQuery();
 
                 //Inserta cada relacion perfil-Familia
-                foreach (string cod_familia in lista_nombres_familias)
-                {
-                    string sql_f = $"INSERT INTO {nombre_tabla_perfil_familia} (Cod_Perfil, Cod_Familia) VALUES (@Cod_Perfil, @Cod_Familia)";
-                    SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                    cmd_f.Transaction = transaction;
+                Insert_Familias(cod_perfil, lista_nombres_familias, transaction, false);
+                //foreach (string cod_familia in lista_nombres_familias)
+                //{
+                //    string sql_f = $"INSERT INTO {nombre_tabla_perfil_familia} (Cod_Perfil, Cod_Familia) VALUES (@Cod_Perfil, @Cod_Familia)";
+                //    SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //    cmd_f.Transaction = transaction;
 
-                    cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                    cmd_f.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_f.ExecuteNonQuery();
+                //    cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //    cmd_f.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_f.ExecuteNonQuery();
 
-                    //Modifica la familia porque ya no es tope
-                    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                    cmd_ft.Transaction = transaction;
+                //    //Modifica la familia porque ya no es tope
+                //    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //    cmd_ft.Transaction = transaction;
 
-                    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
-                    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_ft.ExecuteNonQuery();
-                }
+                //    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
+                //    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_ft.ExecuteNonQuery();
+                //}
 
                 //Inserta cada relacion perfil-permiso
-                foreach (string cod_permiso in lista_nombres_permisos)
-                {
-                    string sql_p = $"INSERT INTO {nombre_tabla_perfil_permiso} (Cod_Perfil, Cod_Permiso) VALUES (@Cod_Perfil, @Cod_Permiso)";
-                    SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
-                    cmd_p.Transaction = transaction;
+                Insert_Permisos(cod_perfil, lista_nombres_permisos, transaction, false);
+                //foreach (string cod_permiso in lista_nombres_permisos)
+                //{
+                //    string sql_p = $"INSERT INTO {nombre_tabla_perfil_permiso} (Cod_Perfil, Cod_Permiso) VALUES (@Cod_Perfil, @Cod_Permiso)";
+                //    SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
+                //    cmd_p.Transaction = transaction;
 
-                    cmd_p.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                    cmd_p.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
+                //    cmd_p.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //    cmd_p.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
 
-                    cmd_p.ExecuteNonQuery();
-                }
+                //    cmd_p.ExecuteNonQuery();
+                //}
 
                 transaction.Commit();
             }
@@ -235,38 +298,40 @@ namespace DAL
                 cmd.ExecuteNonQuery();
 
                 //Inserta cada relacion familia-familia
-                foreach (string cod_familia_hijo in lista_nombres_familias)
-                {
-                    string sql_f = $"INSERT INTO {nombre_tabla_familia_familia} (Cod_Familia_Padre, Cod_Familia_Hijo) VALUES (@Cod_Familia_Padre, @Cod_Familia_Hijo)";
-                    SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                    cmd_f.Transaction = transaction;
+                Insert_Familias(cod_familia, lista_nombres_familias, transaction, true);
+                //foreach (string cod_familia_hijo in lista_nombres_familias)
+                //{
+                //    string sql_f = $"INSERT INTO {nombre_tabla_familia_familia} (Cod_Familia_Padre, Cod_Familia_Hijo) VALUES (@Cod_Familia_Padre, @Cod_Familia_Hijo)";
+                //    SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //    cmd_f.Transaction = transaction;
 
-                    cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
-                    cmd_f.Parameters.AddWithValue("@Cod_Familia_Hijo", cod_familia_hijo);
-                    cmd_f.ExecuteNonQuery();
+                //    cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
+                //    cmd_f.Parameters.AddWithValue("@Cod_Familia_Hijo", cod_familia_hijo);
+                //    cmd_f.ExecuteNonQuery();
 
-                    //Modifica la familia porque ya no es tope
-                    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                    cmd_ft.Transaction = transaction;
+                //    //Modifica la familia porque ya no es tope
+                //    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //    cmd_ft.Transaction = transaction;
 
-                    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
-                    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
-                    cmd_ft.ExecuteNonQuery();
-                }
+                //    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
+                //    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                //    cmd_ft.ExecuteNonQuery();
+                //}
 
                 //Inserta cada relacion familia-permiso
-                foreach (string cod_permiso in lista_nombres_permisos)
-                {
-                    string sql_p = $"INSERT INTO {nombre_tabla_familia_permiso} (Cod_Familia, Cod_Permiso) VALUES (@Cod_Familia, @Cod_Permiso)";
-                    SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
-                    cmd_p.Transaction = transaction;
+                Insert_Permisos(cod_familia, lista_nombres_permisos, transaction, true);
+                //foreach (string cod_permiso in lista_nombres_permisos)
+                //{
+                //    string sql_p = $"INSERT INTO {nombre_tabla_familia_permiso} (Cod_Familia, Cod_Permiso) VALUES (@Cod_Familia, @Cod_Permiso)";
+                //    SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
+                //    cmd_p.Transaction = transaction;
 
-                    cmd_p.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_p.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
+                //    cmd_p.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_p.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
 
-                    cmd_p.ExecuteNonQuery();
-                }
+                //    cmd_p.ExecuteNonQuery();
+                //}
 
                 transaction.Commit();
             }
@@ -288,17 +353,17 @@ namespace DAL
             bool exito = true;
             string mensaje = "PerfilModificadoExitosamente";
 
-            //Obtiene las familias viejas del perfil
-            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod_perfil);
+            ////Obtiene las familias viejas del perfil
+            //DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Perfil", cod_perfil);
 
-            //Añade las familias que seran topes
-            List<bool> familias_liberadas = new List<bool>();
-            foreach (DataRow row in tabla_familias.Rows)
-            {
-                string cod_familia = (string)row["Cod_Familia"];
-                bool se_libera = Verificar_Ultimo(cod_familia);
-                familias_liberadas.Add(se_libera);
-            }
+            ////Añade las familias que seran topes
+            //List<bool> familias_liberadas = new List<bool>();
+            //foreach (DataRow row in tabla_familias.Rows)
+            //{
+            //    string cod_familia = (string)row["Cod_Familia"];
+            //    bool se_libera = Verificar_Ultimo(cod_familia);
+            //    familias_liberadas.Add(se_libera);
+            //}
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -312,62 +377,65 @@ namespace DAL
                 cmd_p.ExecuteNonQuery();
 
                 //Actualiza las familias si es que seran topes
-                foreach (DataRow row in tabla_familias.Rows)
-                {
-                    int posicion = tabla_familias.Rows.IndexOf(row);
-                    string cod_familia = (string)row["Cod_Familia"];
-                    bool se_libera = familias_liberadas[posicion];
-                    if (se_libera == true)
-                    {
-                        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                        cmd_ft.Transaction = transaction;
-                        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
-                        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                        cmd_ft.ExecuteNonQuery();
-                    }
-                }
+                Update_Tope_Familias(cod_perfil, transaction, false);
+                //foreach (DataRow row in tabla_familias.Rows)
+                //{
+                //    int posicion = tabla_familias.Rows.IndexOf(row);
+                //    string cod_familia = (string)row["Cod_Familia"];
+                //    bool se_libera = familias_liberadas[posicion];
+                //    if (se_libera == true)
+                //    {
+                //        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //        cmd_ft.Transaction = transaction;
+                //        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
+                //        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //        cmd_ft.ExecuteNonQuery();
+                //    }
+                //}
 
-                //Elimina las relaciones perfil-familia viejas
-                string sql_f = $"DELETE FROM {nombre_tabla_perfil_familia} WHERE Cod_Perfil = @Cod_Perfil";
-                SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                cmd_f.Transaction = transaction;
-                cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                cmd_f.ExecuteNonQuery();
+                ////Elimina las relaciones perfil-familia viejas
+                //string sql_f = $"DELETE FROM {nombre_tabla_perfil_familia} WHERE Cod_Perfil = @Cod_Perfil";
+                //SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //cmd_f.Transaction = transaction;
+                //cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //cmd_f.ExecuteNonQuery();
 
                 //Inserta las relaciones perfil-familia nuevas
-                foreach (string cod_familia in lista_nombres_familias)
-                {
-                    string sql_ff = $"INSERT INTO {nombre_tabla_perfil_familia} (Cod_Perfil, Cod_Familia) VALUES (@Cod_Perfil, @Cod_Familia)";
-                    SqlCommand cmd_ff = new SqlCommand(sql_ff, conexion);
-                    cmd_ff.Transaction = transaction;
+                Insert_Familias(cod_perfil, lista_nombres_familias, transaction, false);
+                //foreach (string cod_familia in lista_nombres_familias)
+                //{
+                //    string sql_ff = $"INSERT INTO {nombre_tabla_perfil_familia} (Cod_Perfil, Cod_Familia) VALUES (@Cod_Perfil, @Cod_Familia)";
+                //    SqlCommand cmd_ff = new SqlCommand(sql_ff, conexion);
+                //    cmd_ff.Transaction = transaction;
 
-                    cmd_ff.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                    cmd_ff.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_ff.ExecuteNonQuery();
+                //    cmd_ff.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //    cmd_ff.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_ff.ExecuteNonQuery();
 
-                    //Actualiza la familia porque ya no es tope
-                    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                    cmd_ft.Transaction = transaction;
+                //    //Actualiza la familia porque ya no es tope
+                //    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //    cmd_ft.Transaction = transaction;
 
-                    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
-                    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_ft.ExecuteNonQuery();
-                }
+                //    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
+                //    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_ft.ExecuteNonQuery();
+                //}
 
                 //Inserta las relaciones perfil-permiso nuevas
-                foreach (string cod_permiso in lista_nombres_permisos)
-                {
-                    string sql_pp = $"INSERT INTO {nombre_tabla_perfil_permiso} (Cod_Perfil, Cod_Permiso) VALUES (@Cod_Perfil, @Cod_Permiso)";
-                    SqlCommand cmd_pp = new SqlCommand(sql_pp, conexion);
-                    cmd_pp.Transaction = transaction;
+                Insert_Permisos(cod_perfil, lista_nombres_permisos, transaction, false);
+                //foreach (string cod_permiso in lista_nombres_permisos)
+                //{
+                //    string sql_pp = $"INSERT INTO {nombre_tabla_perfil_permiso} (Cod_Perfil, Cod_Permiso) VALUES (@Cod_Perfil, @Cod_Permiso)";
+                //    SqlCommand cmd_pp = new SqlCommand(sql_pp, conexion);
+                //    cmd_pp.Transaction = transaction;
 
-                    cmd_pp.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                    cmd_pp.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
+                //    cmd_pp.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //    cmd_pp.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
 
-                    cmd_pp.ExecuteNonQuery();
-                }
+                //    cmd_pp.ExecuteNonQuery();
+                //}
 
                 transaction.Commit();
             }
@@ -386,17 +454,17 @@ namespace DAL
             bool exito = true;
             string mensaje = "FamiliaModificadoExitosamente";
 
-            //Obtiene las familias viejas del perfil
-            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod_familia);
+            ////Obtiene las familias viejas del perfil
+            //DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Padre", cod_familia);
 
-            //Añade las familias que seran topes
-            List<bool> familias_liberadas = new List<bool>();
-            foreach (DataRow row in tabla_familias.Rows)
-            {
-                string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
-                bool se_libera = Verificar_Ultimo(cod_familia_hijo);
-                familias_liberadas.Add(se_libera);
-            }
+            ////Añade las familias que seran topes
+            //List<bool> familias_liberadas = new List<bool>();
+            //foreach (DataRow row in tabla_familias.Rows)
+            //{
+            //    string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
+            //    bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+            //    familias_liberadas.Add(se_libera);
+            //}
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -410,61 +478,65 @@ namespace DAL
                 cmd_p.ExecuteNonQuery();
 
                 //Actualiza las familias si es que seran topes
-                foreach (DataRow row in tabla_familias.Rows)
-                {
-                    int posicion = tabla_familias.Rows.IndexOf(row);
-                    string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
-                    bool se_libera = familias_liberadas[posicion];
-                    if (se_libera == true)
-                    {
-                        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                        cmd_ft.Transaction = transaction;
-                        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
-                        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
-                        cmd_ft.ExecuteNonQuery();
-                    }
-                }
+                Update_Tope_Familias(cod_familia, transaction, true);
 
-                //Elimina las relaciones familia-familia viejas
-                string sql_f = $"DELETE FROM {nombre_tabla_familia_familia} WHERE Cod_Familia_Padre = @Cod_Familia_Padre";
-                SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                cmd_f.Transaction = transaction;
-                cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
-                cmd_f.ExecuteNonQuery();
+                //foreach (DataRow row in tabla_familias.Rows)
+                //{
+                //    int posicion = tabla_familias.Rows.IndexOf(row);
+                //    string cod_familia_hijo = (string)row["Cod_Familia_Hijo"];
+                //    bool se_libera = familias_liberadas[posicion];
+                //    if (se_libera == true)
+                //    {
+                //        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //        cmd_ft.Transaction = transaction;
+                //        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
+                //        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                //        cmd_ft.ExecuteNonQuery();
+                //    }
+                //}
+
+                ////Elimina las relaciones familia-familia viejas
+                //string sql_f = $"DELETE FROM {nombre_tabla_familia_familia} WHERE Cod_Familia_Padre = @Cod_Familia_Padre";
+                //SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //cmd_f.Transaction = transaction;
+                //cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
+                //cmd_f.ExecuteNonQuery();
 
                 //Inserta las relaciones familia-familia nuevas
-                foreach (string cod_familia_hijo in lista_nombres_familias)
-                {
-                    string sql_ff = $"INSERT INTO {nombre_tabla_familia_familia} (Cod_Familia_Padre, Cod_Familia_Hijo) VALUES (@Cod_Familia_Padre, @Cod_Familia_Hijo)";
-                    SqlCommand cmd_ff = new SqlCommand(sql_ff, conexion);
-                    cmd_ff.Transaction = transaction;
+                Insert_Familias(cod_familia, lista_nombres_familias, transaction, true);
+                //foreach (string cod_familia_hijo in lista_nombres_familias)
+                //{
+                //    string sql_ff = $"INSERT INTO {nombre_tabla_familia_familia} (Cod_Familia_Padre, Cod_Familia_Hijo) VALUES (@Cod_Familia_Padre, @Cod_Familia_Hijo)";
+                //    SqlCommand cmd_ff = new SqlCommand(sql_ff, conexion);
+                //    cmd_ff.Transaction = transaction;
 
-                    cmd_ff.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
-                    cmd_ff.Parameters.AddWithValue("@Cod_Familia_Hijo", cod_familia_hijo);
-                    cmd_ff.ExecuteNonQuery();
+                //    cmd_ff.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
+                //    cmd_ff.Parameters.AddWithValue("@Cod_Familia_Hijo", cod_familia_hijo);
+                //    cmd_ff.ExecuteNonQuery();
 
-                    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                    cmd_ft.Transaction = transaction;
+                //    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //    cmd_ft.Transaction = transaction;
 
-                    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
-                    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
-                    cmd_ft.ExecuteNonQuery();
-                }
+                //    cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
+                //    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                //    cmd_ft.ExecuteNonQuery();
+                //}
 
                 //Inserta las relaciones familia-permiso nuevas
-                foreach (string cod_permiso in lista_nombres_permisos)
-                {
-                    string sql_pp = $"INSERT INTO {nombre_tabla_familia_permiso} (Cod_Familia, Cod_Permiso) VALUES (@Cod_Familia, @Cod_Permiso)";
-                    SqlCommand cmd_pp = new SqlCommand(sql_pp, conexion);
-                    cmd_pp.Transaction = transaction;
+                Insert_Permisos(cod_familia, lista_nombres_permisos, transaction, true);
+                //foreach (string cod_permiso in lista_nombres_permisos)
+                //{
+                //    string sql_pp = $"INSERT INTO {nombre_tabla_familia_permiso} (Cod_Familia, Cod_Permiso) VALUES (@Cod_Familia, @Cod_Permiso)";
+                //    SqlCommand cmd_pp = new SqlCommand(sql_pp, conexion);
+                //    cmd_pp.Transaction = transaction;
 
-                    cmd_pp.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                    cmd_pp.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
+                //    cmd_pp.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //    cmd_pp.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
 
-                    cmd_pp.ExecuteNonQuery();
-                }
+                //    cmd_pp.ExecuteNonQuery();
+                //}
 
                 transaction.Commit();
             }
@@ -485,17 +557,13 @@ namespace DAL
             bool exito = true;
             string mensaje = "PerfilEliminadoExitosamente";
 
-            //Obtiene todos los usuarios con el perfil/rol
-            string rol_predeterminado = "Base";
-            DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
-
-            //Añade las familias que seran topes
-            List<bool> familias_liberadas = new List<bool>();
-            foreach (string cod_familia in lista_nombres_familias)
-            {
-                bool se_libera = Verificar_Ultimo(cod_familia);
-                familias_liberadas.Add(se_libera);
-            }
+            ////Añade las familias que seran topes
+            //List<bool> familias_liberadas = new List<bool>();
+            //foreach (string cod_familia in lista_nombres_familias)
+            //{
+            //    bool se_libera = Verificar_Ultimo(cod_familia);
+            //    familias_liberadas.Add(se_libera);
+            //}
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -509,27 +577,28 @@ namespace DAL
                 cmd_p.ExecuteNonQuery();
 
                 //Actualiza las familias si es que seran topes
-                foreach (string cod_familia in lista_nombres_familias)
-                {
-                    int posicion = lista_nombres_familias.IndexOf(cod_familia);
-                    bool se_libera = familias_liberadas[posicion];
-                    if (se_libera == true)
-                    {
-                        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                        cmd_ft.Transaction = transaction;
-                        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
-                        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
-                        cmd_ft.ExecuteNonQuery();
-                    }
-                }
+                Update_Tope_Familias(cod_perfil, transaction, false);
+                //foreach (string cod_familia in lista_nombres_familias)
+                //{
+                //    int posicion = lista_nombres_familias.IndexOf(cod_familia);
+                //    bool se_libera = familias_liberadas[posicion];
+                //    if (se_libera == true)
+                //    {
+                //        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //        cmd_ft.Transaction = transaction;
+                //        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
+                //        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia);
+                //        cmd_ft.ExecuteNonQuery();
+                //    }
+                //}
 
-                //Elimina las relaciones perfil-familia
-                string sql_f = $"DELETE FROM {nombre_tabla_perfil_familia} WHERE Cod_Perfil = @Cod_Perfil";
-                SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                cmd_f.Transaction = transaction;
-                cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
-                cmd_f.ExecuteNonQuery();
+                ////Elimina las relaciones perfil-familia
+                //string sql_f = $"DELETE FROM {nombre_tabla_perfil_familia} WHERE Cod_Perfil = @Cod_Perfil";
+                //SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //cmd_f.Transaction = transaction;
+                //cmd_f.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                //cmd_f.ExecuteNonQuery();
 
                 //Elimina el perfil
                 string sql = $"DELETE FROM {nombre_tabla_perfil} WHERE Cod_Perfil = @Cod_Perfil";
@@ -537,6 +606,10 @@ namespace DAL
                 cmd.Transaction = transaction;
                 cmd.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
                 cmd.ExecuteNonQuery();
+
+                //Obtiene todos los usuarios con el perfil/rol
+                string rol_predeterminado = "Base";
+                DataTable tabla_usuarios = DAL_44MM.Instancia.Seleccionar(nombre_tabla_usuario, "Rol", cod_perfil);
 
                 //Modifica el perfil de cada usuario que lo tenia al predeterminado
                 foreach (DataRow item in tabla_usuarios.Rows)
@@ -567,13 +640,13 @@ namespace DAL
             bool exito = true;
             string mensaje = "FamiliaEliminadoExitosamente";
 
-            //Añade las familias que seran topes
-            List<bool> familias_liberadas = new List<bool>();
-            foreach (string cod_familia_hijo in lista_nombres_familias)
-            {
-                bool se_libera = Verificar_Ultimo(cod_familia_hijo);
-                familias_liberadas.Add(se_libera);
-            }
+            ////Añade las familias que seran topes
+            //List<bool> familias_liberadas = new List<bool>();
+            //foreach (string cod_familia_hijo in lista_nombres_familias)
+            //{
+            //    bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+            //    familias_liberadas.Add(se_libera);
+            //}
 
             conexion.Open();
             SqlTransaction transaction = conexion.BeginTransaction();
@@ -587,27 +660,28 @@ namespace DAL
                 cmd_p.ExecuteNonQuery();
 
                 //Actualiza las familias si es que seran topes
-                foreach (string cod_familia_hijo in lista_nombres_familias)
-                {
-                    int posicion = lista_nombres_familias.IndexOf(cod_familia_hijo);
-                    bool se_libera = familias_liberadas[posicion];
-                    if (se_libera == true)
-                    {
-                        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
-                        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
-                        cmd_ft.Transaction = transaction;
-                        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
-                        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
-                        cmd_ft.ExecuteNonQuery();
-                    }
-                }
+                Update_Tope_Familias(cod_familia, transaction, true);
+                //foreach (string cod_familia_hijo in lista_nombres_familias)
+                //{
+                //    int posicion = lista_nombres_familias.IndexOf(cod_familia_hijo);
+                //    bool se_libera = familias_liberadas[posicion];
+                //    if (se_libera == true)
+                //    {
+                //        string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                //        SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                //        cmd_ft.Transaction = transaction;
+                //        cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
+                //        cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                //        cmd_ft.ExecuteNonQuery();
+                //    }
+                //}
 
-                //Elimina cada relacion familia-familia
-                string sql_f = $"DELETE FROM {nombre_tabla_familia_familia} WHERE Cod_Familia_Padre = @Cod_Familia_Padre";
-                SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
-                cmd_f.Transaction = transaction;
-                cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
-                cmd_f.ExecuteNonQuery();
+                ////Elimina cada relacion familia-familia
+                //string sql_f = $"DELETE FROM {nombre_tabla_familia_familia} WHERE Cod_Familia_Padre = @Cod_Familia_Padre";
+                //SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                //cmd_f.Transaction = transaction;
+                //cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_familia);
+                //cmd_f.ExecuteNonQuery();
 
                 //Elimina la familia
                 string sql = $"DELETE FROM {nombre_tabla_familia} WHERE Cod_Familia = @Cod_Familia";
@@ -629,21 +703,117 @@ namespace DAL
         }
         #endregion
 
-        #region Otros
-        private bool Verificar_Ultimo(string codigo)
+        #region Funciones Privadas
+        private void Insert_Familias(string cod_perfil, List<string> lista_nombres_familias, SqlTransaction transaction, bool es_familia)
         {
-            //Verifica si una familia solo tiene un perfil o familia como padre
-            DataTable tabla_perfiles_ocupantes = DAL_44MM.Instancia.Seleccionar(nombre_tabla_perfil_familia, "Cod_Familia", codigo);
-            DataTable tabla_familias_ocupantes = DAL_44MM.Instancia.Seleccionar(nombre_tabla_familia_familia, "Cod_Familia_Hijo", codigo);
+            //Cambiar los valores si es que el Perfil no es una familia
+            string atributo_familia_padre = "Cod_Familia_Padre";
+            string atributo_familia_hijo = "Cod_Familia_Hijo";
+            string nombre_tabla = nombre_tabla_familia_familia;
 
-            if (tabla_perfiles_ocupantes.Rows.Count + tabla_familias_ocupantes.Rows.Count <= 1)
+            if (es_familia == false)
             {
-                return true;
+                atributo_familia_padre = "Cod_Perfil";
+                atributo_familia_hijo = "Cod_Familia";
+                nombre_tabla = nombre_tabla_perfil_familia;
             }
-            else
+
+            //Inserta cada relacion perfil-Familia
+            foreach (string cod_familia_hijo in lista_nombres_familias)
             {
-                return false;
+                string sql_f = $"INSERT INTO {nombre_tabla} ({atributo_familia_padre}, {atributo_familia_hijo}) VALUES (@Cod_Familia_Padre, @Cod_Familia_Hijo)";
+                SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+                cmd_f.Transaction = transaction;
+
+                cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_perfil);
+                cmd_f.Parameters.AddWithValue("@Cod_Familia_Hijo", cod_familia_hijo);
+                cmd_f.ExecuteNonQuery();
+
+                //Modifica la familia porque ya no es tope
+                string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                cmd_ft.Transaction = transaction;
+
+                cmd_ft.Parameters.AddWithValue("@Es_Tope", false);
+                cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                cmd_ft.ExecuteNonQuery();
             }
+        }
+
+        private void Insert_Permisos(string cod_perfil, List<string> lista_nombres_permisos, SqlTransaction transaction, bool es_familia)
+        {
+            //Cambiar los valores si es que el Perfil no es una familia
+            string atributo_perfil = "Cod_Familia";
+            string nombre_tabla = nombre_tabla_familia_permiso;
+
+            if (es_familia == false)
+            {
+                atributo_perfil = "Cod_Perfil";
+                nombre_tabla = nombre_tabla_perfil_permiso;
+            }
+
+            foreach (string cod_permiso in lista_nombres_permisos)
+            {
+                string sql_p = $"INSERT INTO {nombre_tabla} ({atributo_perfil}, Cod_Permiso) VALUES (@Cod_Perfil, @Cod_Permiso)";
+                SqlCommand cmd_p = new SqlCommand(sql_p, conexion);
+                cmd_p.Transaction = transaction;
+
+                cmd_p.Parameters.AddWithValue("@Cod_Perfil", cod_perfil);
+                cmd_p.Parameters.AddWithValue("@Cod_Permiso", cod_permiso);
+
+                cmd_p.ExecuteNonQuery();
+            }
+        }
+
+        private void Update_Tope_Familias(string cod_perfil, SqlTransaction transaction, bool es_familia)
+        {
+            //Cambiar los valores si es que el Perfil no es una familia
+            string nombre_tabla = nombre_tabla_familia_familia;
+            string atributo_perfil_padre = "Cod_Familia_Padre";
+            string atributo_perfil_hijo = "Cod_Familia_Hijo";
+
+            if (es_familia == false)
+            {
+                atributo_perfil_padre = "Cod_Perfil";
+                atributo_perfil_hijo = "Cod_Familia";
+                nombre_tabla = nombre_tabla_perfil_familia;
+            }
+
+            //Obtiene las familias viejas del perfil
+            DataTable tabla_familias = DAL_44MM.Instancia.Seleccionar(nombre_tabla, atributo_perfil_padre, cod_perfil);
+
+            //Añade las familias que seran topes
+            List<bool> familias_liberadas = new List<bool>();
+            foreach (DataRow row in tabla_familias.Rows)
+            {
+                string cod_familia_hijo = (string)row[atributo_perfil_hijo];
+                bool se_libera = Verificar_Ultimo(cod_familia_hijo);
+                familias_liberadas.Add(se_libera);
+            }
+
+            //Actualiza las familias si es que seran topes
+            foreach (DataRow row in tabla_familias.Rows)
+            {
+                int posicion = tabla_familias.Rows.IndexOf(row);
+                string cod_familia_hijo = (string)row[atributo_perfil_hijo];
+                bool se_libera = familias_liberadas[posicion];
+                if (se_libera == true)
+                {
+                    string sql_ft = $"UPDATE {nombre_tabla_familia} SET Es_Tope = @Es_Tope WHERE Cod_Familia = @Cod_Familia";
+                    SqlCommand cmd_ft = new SqlCommand(sql_ft, conexion);
+                    cmd_ft.Transaction = transaction;
+                    cmd_ft.Parameters.AddWithValue("@Es_Tope", true);
+                    cmd_ft.Parameters.AddWithValue("@Cod_Familia", cod_familia_hijo);
+                    cmd_ft.ExecuteNonQuery();
+                }
+            }
+
+            //Elimina las relaciones perfil-familia
+            string sql_f = $"DELETE FROM {nombre_tabla} WHERE {atributo_perfil_padre} = @Cod_Familia_Padre";
+            SqlCommand cmd_f = new SqlCommand(sql_f, conexion);
+            cmd_f.Transaction = transaction;
+            cmd_f.Parameters.AddWithValue("@Cod_Familia_Padre", cod_perfil);
+            cmd_f.ExecuteNonQuery();
         }
         #endregion
     }

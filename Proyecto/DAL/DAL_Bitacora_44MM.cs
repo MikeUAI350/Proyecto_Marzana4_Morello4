@@ -13,7 +13,7 @@ namespace DAL
     public class DAL_Bitacora_44MM
     {
         private string nombre_tabla = "Bitacora";
-        private SqlConnection conexion = DAL_44MM.Instancia.Conexion;
+        private SqlConnection conexion = DAL_44MM.Instancia.Nueva_Conexion();
 
         public DataTable tabla_datos;
         private string query;

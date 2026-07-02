@@ -72,4 +72,5 @@ C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\bin\Debu
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_Perfiles_44MM.resources
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_BD_Select.resources
 C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.exe.config
-C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Respaldo_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\AMARENT.UI_Gestion_Respaldo_44MM.resources
+C:\Users\mikem\source\repos\Proyecto_Marzana4_Morello4\Proyecto\AMARENT\obj\Debug\Digito_Verificador_IS.UI_Digito_Verificador_44MM.resources

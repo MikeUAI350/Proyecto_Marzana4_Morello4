@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Digito_Verificador_IS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -232,6 +233,25 @@ namespace BLL
             bool existe = dal_perfil.Verificar_Existencia_Familia(codigo, nombre);
             return existe;
         }
+
+        public bool Verificar_Ultimo_Elemento(string codigo)
+        {
+            bool es_ultimo = dal_perfil.Verificar_Ultimo_Elemento(codigo);
+            return es_ultimo;
+        }
+
+        public bool Verificar_Mismo_Perfil(string codigo)
+        {
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
+            if (usuario != null && usuario.Rol == codigo)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         #region Creacion
@@ -248,6 +268,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Crear Perfil", 1);
             }
             return (exito, mensaje);
@@ -266,6 +287,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Crear Familia", 1);
             }
             return (exito, mensaje);
@@ -286,6 +308,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Modificar Perfil", 1);
             }
             return (exito, mensaje);
@@ -304,6 +327,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Modificar Familia", 1);
             }
             return (exito, mensaje);
@@ -324,6 +348,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Eliminar Perfil", 1);
             }
             return (exito, mensaje);
@@ -342,6 +367,7 @@ namespace BLL
             if (exito == true)
             {
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
+                //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Eliminar Familia", 1);
             }
             return (exito, mensaje);

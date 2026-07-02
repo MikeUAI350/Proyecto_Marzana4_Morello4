@@ -179,7 +179,7 @@ namespace AMARENT
             }
             if (exito == 0)
             {
-                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (exito == 1)
             {
@@ -246,7 +246,7 @@ namespace AMARENT
             label_apellido.Text = key_word["Apellido"];
             label_email.Text = key_word["Email"];
             label_rol.Text = key_word["Rol"];
-            label_login.Text = key_word["Usuario"];
+            label_login.Text = key_word["NombreUsuario"];
 
             button_confirmar.Text = key_word["Confirmar"];
             button_anular.Text = key_word["Anular"];

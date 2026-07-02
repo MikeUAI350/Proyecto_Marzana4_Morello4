@@ -11,10 +11,10 @@ namespace Servicios
     public sealed class Sesion_Manager_44MM
     {
         private static readonly object _candado = new object();
-
         private Sesion_Manager_44MM() { }
-
         private static Sesion_Manager_44MM _Instancia;
+
+        private BE_Usuario_44MM Usuario;
 
         public static Sesion_Manager_44MM Instancia
         {
@@ -59,14 +59,6 @@ namespace Servicios
         public BE_Usuario_44MM Get()
         {
             return Usuario;
-        }
-
-        private BE_Usuario_44MM _usuario;
-
-        public BE_Usuario_44MM Usuario
-        {
-            get { return _usuario; }
-            set { _usuario = value; }
         }
     }
 }

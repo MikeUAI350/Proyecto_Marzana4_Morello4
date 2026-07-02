@@ -270,7 +270,7 @@ namespace AMARENT
             this.Text = key_word["BitacoraEventos"];
 
             groupBox_filtro.Text = key_word["Filtros"];
-            label_login.Text = key_word["Usuario"];
+            label_login.Text = key_word["NombreUsuario"];
             label_modulo.Text = key_word["Modulo"];
             label_evento.Text = key_word["Evento"];
             label_fecha_inicial.Text = key_word["FechaInicial"];
@@ -285,6 +285,13 @@ namespace AMARENT
 
             label_nombre.Text = key_word["Nombre"];
             label_apellido.Text = key_word["Apellido"];
+
+            dataGridView_lista.Columns["Cod_Operacion"].HeaderText = key_word["Codigo"];
+            dataGridView_lista.Columns["Login"].HeaderText = key_word["NombreUsuario"];
+            dataGridView_lista.Columns["Fecha"].HeaderText = key_word["Fecha"];
+            dataGridView_lista.Columns["Modulo"].HeaderText = key_word["Modulo"];
+            dataGridView_lista.Columns["Evento"].HeaderText = key_word["Evento"];
+            dataGridView_lista.Columns["Criticidad"].HeaderText = key_word["Criticidad"];
         }
         #endregion
     }

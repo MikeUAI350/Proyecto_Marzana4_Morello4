@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Digito_Verificador_IS;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace BLL
         private DAL_Usuario_44MM dal_usuarios = new DAL_Usuario_44MM();
         private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
         private BLL_Perfil_44MM bll_perfil = new BLL_Perfil_44MM();
+        private BLL_Digito_Verificador_44MM bll_dv = new BLL_Digito_Verificador_44MM();
 
         private DataTable_Converter_44MM<BE_Usuario_44MM> datatable_converter = new DataTable_Converter_44MM<BE_Usuario_44MM>();
 
@@ -73,49 +75,30 @@ namespace BLL
                     else if (contra_enc != contra_rec)
                     {
                         //Agrega un intento fallido
-                        int intentos = BLL_Intento_44MM.Instancia.Agregar_Intento(login);
-
-                        //Si se alcanzan los 3 intentos, bloquea el usuario
-                        if (intentos <= 0)
-                        {
-                            dal_usuarios.Bloquear_Usuario(login);
-                            bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Bloqueo", 1);
-                            return (0, "UsuarioFueBloqueado");
-                        }
-                        else
-                        {
-                            //Contraseña incorrecta
-                            return (0, "ContraIncorrecta");
-                        }
+                        return (2, "");
                     }
                     else if (rcc == true)
                     {
                         //Usuario requiere cambio de contraseña
                         BE_Usuario_44MM usuario = new BE_Usuario_44MM(info);
                         Sesion_Manager_44MM.Instancia.Set(usuario);
-                        bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Nuevo Ingreso", 1);
-                        //Reinicia intentos
-                        BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
                         return (-1, "RequiereCambioDeContra");
                     }
                     else
                     {
-                        //Cambiar el rol a Base si es que el actual fue eliminado
-                        List<BE_Perfil_44MM> lista = Recuperar_Perfiles();
-                        BE_Perfil_44MM perfil = lista.FirstOrDefault(x => x.Cod_Perfil == rol);
-                        if (perfil == null)
-                        {
-                            dal_usuarios.Modificar_Usuario(login, email, "Base");
-                            info["Rol"] = "Base";
-                        }
+                        ////Cambiar el rol a Base si es que el actual fue eliminado
+                        //List<BE_Perfil_44MM> lista = Recuperar_Perfiles();
+                        //BE_Perfil_44MM perfil = lista.FirstOrDefault(x => x.Cod_Perfil == rol);
+                        //if (perfil == null)
+                        //{
+                        //    dal_usuarios.Modificar_Usuario(login, email, "Base");
+                        //    info["Rol"] = "Base";
+                        //}
 
-                        //Crea la sesion del usuario, lo coloca en el Sesion Manager y registra el evento en la bitacora
+                        //Crea la sesion del usuario, lo coloca en el Sesion Manager
                         BE_Usuario_44MM usuario = new BE_Usuario_44MM(info);
                         Sesion_Manager_44MM.Instancia.Set(usuario);
-                        bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Login", 1);
-                        //Reinicia intentos
-                        BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
-                        //Sesion iniciada
+                        ////Sesion iniciada
                         return (1, "InicioDeSesionExitoso");
                     }
                 }
@@ -155,10 +138,10 @@ namespace BLL
                 }
                 else
                 {
-                    //Registra el evento en la bitacora
-                    bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Cambiar Clave", 1);
                     //Reinicia Intentos
                     BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
+                    //Registra el evento en la bitacora
+                    bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Cambiar Clave", 1);
                     return (1, mensaje);
                 }
             }
@@ -170,6 +153,36 @@ namespace BLL
             return lista_permisos;
         }
 
+        public string Agregar_Intento(string login)
+        {
+            //Agrega un intento fallido
+            int intentos = BLL_Intento_44MM.Instancia.Agregar_Intento(login);
+
+            //Si se alcanzan los 3 intentos, bloquea el usuario
+            if (intentos <= 0)
+            {
+                dal_usuarios.Bloquear_Usuario(login);
+                //Bitacora
+                bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Bloqueo", 1);
+                return "UsuarioFueBloqueado";
+            }
+            else
+            {
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
+                //Contraseña incorrecta
+                return "ContraIncorrecta";
+            }
+        }
+
+        public void Cambiar_Idioma(string idioma)
+        {
+            string login = Sesion_Manager_44MM.Instancia.Get().Login;
+            dal_usuarios.Cambiar_Idioma(login, idioma);
+            //Bitacora
+            bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", $"Cambiar Idioma: {idioma}", 1);
+        }
+
         //Devuelve : pin blanco / dni blanco
         public void Cerrar_Sesion()
         {
@@ -178,6 +191,7 @@ namespace BLL
             string idioma = Sesion_Manager_44MM.Instancia.Get().Idioma;
             dal_usuarios.Cambiar_Idioma(login, idioma);
             Sesion_Manager_44MM.Instancia.Quitar_Cuenta();
+            //Bitacora
             bll_bitacora.Registrar_Evento(login, DateTime.Now, "Usuarios", "Logout", 1);
         }
         #endregion
@@ -294,10 +308,10 @@ namespace BLL
             if (exito == true)
             {
                 string login_sesion = Sesion_Manager_44MM.Instancia.Get().Login;
-                //Registra el evento en la bitacora
-                bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Desbloquear Usuario " + login, 1);
                 //Reinicia Intentos para el Login Desbloqueado
                 BLL_Intento_44MM.Instancia.Resetear_Intentos(login);
+                //Registra el evento en la bitacora
+                bll_bitacora.Registrar_Evento(login_sesion, DateTime.Now, "Usuarios", "Desbloquear Usuario " + login, 1);
                 return (true, mensaje);
             }
             else

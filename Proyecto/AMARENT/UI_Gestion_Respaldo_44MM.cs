@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace AMARENT
 {
-    public partial class UI_Respaldo_44MM : Form , I_Idioma
+    public partial class UI_Gestion_Respaldo_44MM : Form , I_Idioma
     {
         private BLL_Respaldo_44MM bll_respaldo = new BLL_Respaldo_44MM();
-        public UI_Respaldo_44MM()
+        public UI_Gestion_Respaldo_44MM()
         {
             InitializeComponent();
+            Agregar_Form_Idioma();
         }
 
         #region Funciones Principales
@@ -25,7 +26,15 @@ namespace AMARENT
         {
             if (saveFileDialog_backup.ShowDialog() == DialogResult.OK)
             {
-                textBox_backup.Text = saveFileDialog_backup.FileName;
+                string[] vector = saveFileDialog_backup.FileName.Split('\\');
+                int max = vector.Length - 2;
+                string ruta = string.Empty;
+
+                for (int i = 0; i <= max; i++)
+                {
+                    ruta += vector[i] + "\\";
+                }
+                textBox_backup.Text = ruta;
             }
         }
 
@@ -43,9 +52,16 @@ namespace AMARENT
             {
                 try
                 {
-                    bll_respaldo.Hacer_BackUp(textBox_backup.Text);
-                    MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["BackupExitoso"]}\n\r{textBox_backup.Text}");
-                    textBox_backup.Text = "";
+                    (bool exito, string mensaje) = bll_respaldo.Hacer_BackUp(textBox_backup.Text);
+                    if (exito == true)
+                    {
+                        MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[mensaje]}\n\r{textBox_backup.Text}");
+                        textBox_backup.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch
                 {
@@ -61,13 +77,22 @@ namespace AMARENT
 
         private void Restore()
         {
+            bool hecho = false;
             if (!string.IsNullOrEmpty(textBox_restore.Text))
             {
                 try
                 {
-                    bll_respaldo.Hacer_Restore(textBox_restore.Text);
-                    MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["RestoreExitoso"]}\n\r{textBox_restore.Text}");
-                    textBox_restore.Text = "";
+                    (bool exito, string mensaje) = bll_respaldo.Hacer_Restore(textBox_restore.Text);
+                    if (exito == true)
+                    {
+                        hecho = true;
+                        MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[mensaje]}\n\r{textBox_restore.Text}");
+                        textBox_restore.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch
                 {
@@ -78,6 +103,11 @@ namespace AMARENT
             {
                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["SeleccioneRutaDelRestore"], "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Direccion_Restore();
+            }
+            if (hecho == true)
+            {
+                Sesion_Manager_44MM.Instancia.Quitar_Cuenta();
+                Application.Restart();
             }
         }
         #endregion

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL_Bitacora_44MM.cs" />
+    <Compile Include="BLL_Digito_Verificador_44MM.cs" />
     <Compile Include="BLL_Intento_44MM.cs" />
     <Compile Include="BLL_Perfil_44MM.cs" />
     <Compile Include="BLL_Respaldo_44MM.cs" />

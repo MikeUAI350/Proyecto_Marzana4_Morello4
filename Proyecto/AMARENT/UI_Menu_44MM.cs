@@ -43,9 +43,22 @@ namespace AMARENT
         {
             if (Sesion_Manager_44MM.Instancia.Get() != null)
             {
-                Sesion_Manager_44MM.Instancia.Usuario.Idioma = idioma;
+                if (idioma != Sesion_Manager_44MM.Instancia.Get().Idioma)
+                {
+                    Sesion_Manager_44MM.Instancia.Get().Idioma = idioma;
+                    bll.Cambiar_Idioma(idioma);
+                    Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(idioma);
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["IdiomaCambiado"]);
+                }
+                else
+                {
+                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["ErrorAlCambiarElIdioma"], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(idioma);
+            else
+            {
+                Gestion_Idioma_44MM.Instancia.Cambiar_Idioma(idioma);
+            }
         }
 
         private void Abrir_Cambiar_Clave()
@@ -102,6 +115,11 @@ namespace AMARENT
             Gestion_Pantalla(ui_gestion_perfiles);
         }
 
+        private void Abrir_Gestion_Respaldo()
+        {
+            Gestion_Pantalla(ui_gestion_respaldo);
+        }
+
         private void Abrir_Bitacora_Eventos()
         {
             Gestion_Pantalla(ui_bitacora_eventos);
@@ -111,6 +129,7 @@ namespace AMARENT
         #region Pantallas
         private UI_Gestion_Usuarios_44MM ui_gestion_usuarios = new UI_Gestion_Usuarios_44MM();
         private UI_Gestion_Perfiles_44MM ui_gestion_perfiles = new UI_Gestion_Perfiles_44MM();
+        private UI_Gestion_Respaldo_44MM ui_gestion_respaldo = new UI_Gestion_Respaldo_44MM();
         private UI_Bitacora_Eventos_44MM ui_bitacora_eventos = new UI_Bitacora_Eventos_44MM();
 
         private List<Form> pantallas = new List<Form>();
@@ -119,6 +138,7 @@ namespace AMARENT
         {
             pantallas.Add(ui_gestion_usuarios);
             pantallas.Add(ui_gestion_perfiles);
+            pantallas.Add(ui_gestion_respaldo);
             pantallas.Add(ui_bitacora_eventos);
 
             foreach (Form pantalla in pantallas)
@@ -181,6 +201,12 @@ namespace AMARENT
                         ayudaToolStripMenuItem.Enabled = true;
                         break;
                     }
+                case "Usuario":
+                    {
+                        usuariotoolStripMenuItem.Visible = true;
+                        usuariotoolStripMenuItem.Enabled = true;
+                        break;
+                    }
                 default:
                     {
                         break;
@@ -215,6 +241,11 @@ namespace AMARENT
             Abrir_Gestion_Perfiles();
         }
 
+        private void gestionDeRespaldoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Abrir_Gestion_Respaldo();
+        }
+
         private void bitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Abrir_Bitacora_Eventos();
@@ -237,10 +268,10 @@ namespace AMARENT
             {
                 bll.Cerrar_Sesion();
             }
-            foreach (Form pantalla in pantallas)
-            {
-                pantalla.Visible = false;
-            }
+            //foreach (Form pantalla in pantallas)
+            //{
+            //    pantalla.Visible = false;
+            //}
             GC.Collect();
         }
 

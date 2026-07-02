@@ -106,48 +106,64 @@ namespace AMARENT
 
         private void Modificar(BE_Usuario_44MM be)
         {
-            UI_Gestion_44MM ui = new UI_Gestion_44MM("Modificar", be, this);
-            this.MdiParent.Controls["menuStrip"].Enabled = false;
-            ui.MdiParent = this.MdiParent;
-            ui.Show();
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
+            if (usuario.Login != be.Login)
+            {
+                UI_Gestion_44MM ui = new UI_Gestion_44MM("Modificar", be, this);
+                this.MdiParent.Controls["menuStrip"].Enabled = false;
+                ui.MdiParent = this.MdiParent;
+                ui.Show();
+            }
+            else
+            {
+                MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto["NoSePuedeModificar"], "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Activar(BE_Usuario_44MM be)
         {
-            string login = be.Login;
-            bool activo = be.Activo;
-
-            bool activar = false;
-
-            DialogResult resultado;
-
-            if (activo == false)
+            BE_Usuario_44MM usuario = Sesion_Manager_44MM.Instancia.Get();
+            if (usuario.Login != be.Login)
             {
-                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaActivarA"]} {login}?", "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                activar = true;
-            }
-            else
-            {
-                resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesactivarA"]} {login}?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                activar = false;
-            }
+                string login = be.Login;
+                bool activo = be.Activo;
 
-            if (resultado == DialogResult.Yes)
-            {
-                bool exito = false;
-                string mensaje = string.Empty;
+                bool activar = false;
 
-                (exito, mensaje) = bll.Activar_Usuario(login, activar);
+                DialogResult resultado;
 
-                if (exito == false)
+                if (activo == false)
                 {
-                    MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaActivarA"]} {login}?", "Activar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    activar = true;
                 }
                 else
                 {
-                    MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
-                    Actualizar_Grillas();
+                    resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["DeseaDesactivarA"]} {login}?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    activar = false;
                 }
+
+                if (resultado == DialogResult.Yes)
+                {
+                    bool exito = false;
+                    string mensaje = string.Empty;
+
+                    (exito, mensaje) = bll.Activar_Usuario(login, activar);
+
+                    if (exito == false)
+                    {
+                        MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                        Actualizar_Grillas();
+                    }
+                }
+            }
+            else
+            {
+
             }
         }
 
@@ -283,6 +299,12 @@ namespace AMARENT
             button_activar_desactivar.Text = key_word["ActDesact"];
             button_desbloquear.Text = key_word["Desbloquear"];
             button_actualizar.Text = key_word["Actualizar"];
+
+            dataGridView_lista.Columns["DNI"].HeaderText = key_word["DNI"];
+            dataGridView_lista.Columns["Apellido"].HeaderText = key_word["Apellido"];
+            dataGridView_lista.Columns["Nombre"].HeaderText = key_word["Nombre"];
+            dataGridView_lista.Columns["Login"].HeaderText = key_word["NombreUsuario"];
+            dataGridView_lista.Columns["Rol"].HeaderText = key_word["Rol"];
         }
         #endregion
     }

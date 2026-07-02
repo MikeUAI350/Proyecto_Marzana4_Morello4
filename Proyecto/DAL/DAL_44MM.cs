@@ -37,11 +37,16 @@ namespace Servicios
         }
 
         //private SqlConnection _conexion = new SqlConnection($"Data Source={File.ReadAllText("Content\\Data\\DataBase")};Initial Catalog=Proyecto IS2026;Integrated Security=True");
-        private SqlConnection _conexion = new SqlConnection("Data Source=.;Initial Catalog=Proyecto IS2026;Integrated Security=True");
+        private SqlConnection _conexion = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Proyecto IS2026;Integrated Security=True");
         public SqlConnection Conexion
         {
             get { return _conexion; }
             set { _conexion = value; }
+        }
+
+        public SqlConnection Nueva_Conexion()
+        {
+            return new SqlConnection(Conexion.ConnectionString);
         }
 
         public string Conectar(string nombre_tabla)

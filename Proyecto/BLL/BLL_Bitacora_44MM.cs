@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Digito_Verificador_IS;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Servicios;
@@ -17,11 +18,14 @@ namespace BLL
     public class BLL_Bitacora_44MM
     {
         private DAL_Bitacora_44MM dal_bitacora = new DAL_Bitacora_44MM();
+        private BLL_Digito_Verificador_44MM bll_dv = new BLL_Digito_Verificador_44MM();
         private DataTable_Converter_44MM<BE_Bitacora_44MM> datatable_converter = new DataTable_Converter_44MM<BE_Bitacora_44MM>();
 
         public void Registrar_Evento(string login, DateTime fecha, string modulo, string evento, int criticidad)
         {
             dal_bitacora.Registrar_Evento(login, fecha, modulo, evento, criticidad);
+            //Digito verificador
+            bll_dv.Guardar_Calculo();
         }
 
         public List<BE_Bitacora_44MM> Gestionar_Bitacora()
