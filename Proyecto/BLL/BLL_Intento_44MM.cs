@@ -123,69 +123,6 @@ namespace BLL
                 Lista_Intentos.Add(intento);
             }
         }
-
-        /*public void Guardar_Intentos()
-        {
-            Tabla_Intentos.Rows.Clear();
-            foreach (BE_Intento_44MM intento in Lista_Intentos)
-            {
-                DataRow row = Tabla_Intentos.NewRow();
-                row["Login"] = intento.Login;
-                row["Fecha"] = intento.Fecha;
-                row["Intentos"] = intento.Intentos_Restantes;
-                Tabla_Intentos.Rows.Add(row);
-            }
-           dal_intentos.Actualizar_Intentos(Tabla_Intentos);
-        }*/
-        #endregion
-
-        #region Archivo
-        /*private void Recuperar_Intentos()
-        {
-            FileStream fs = new FileStream("Intentos_44MM.txt", FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Login");
-            dt.Columns.Add("Fecha");
-            dt.Columns.Add("Intentos");
-            dt.Columns["Login"].DataType = typeof(string);
-            dt.Columns["Fecha"].DataType = typeof(DateTime);
-            dt.Columns["Intentos"].DataType = typeof(int);
-            while (!sr.EndOfStream)
-            {
-                string linea = sr.ReadLine();
-                string[] valores = linea.Split(';');
-                dt.Rows.Add(valores);
-            }
-            Tabla_Intentos = dt;
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Intento_44MM intento = new Intento_44MM(row["Login"].ToString());
-                intento.Fecha = Convert.ToDateTime(row["Fecha"]);
-                intento.Intentos_Restantes = Convert.ToInt32(row["Intentos"]);
-                Lista_Intentos.Add(intento);
-            }
-
-            sr.Dispose();
-            sr.Close();
-
-            fs.Dispose();
-            fs.Close();
-        }
-
-        public void Guardar_Intentos()
-        {
-            FileStream fs = new FileStream("Intentos_44MM.txt", FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs);
-            foreach (Intento_44MM intento in Lista_Intentos)
-            {
-                string linea = $"{intento.Login};{intento.Fecha};{intento.Intentos_Restantes}";
-                sw.WriteLine(linea);
-            }
-            sw.Dispose();
-            sw.Close();
-        }*/
         #endregion
     }
 }

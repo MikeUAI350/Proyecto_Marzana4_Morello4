@@ -203,8 +203,14 @@ namespace AMARENT
                     }
                 case "Usuario":
                     {
-                        usuariotoolStripMenuItem.Visible = true;
-                        usuariotoolStripMenuItem.Enabled = true;
+                        loginToolStripMenuItem.Visible = true;
+                        loginToolStripMenuItem.Enabled = true;
+                        cambiarIdiomaToolStripMenuItem.Visible = true;
+                        cambiarIdiomaToolStripMenuItem.Enabled = true;
+                        cambiarClaveToolStripMenuItem.Visible = true;
+                        cambiarClaveToolStripMenuItem.Enabled = true;
+                        logoutToolStripMenuItem.Visible = true;
+                        logoutToolStripMenuItem.Enabled = true;
                         break;
                     }
                 default:
@@ -229,6 +235,22 @@ namespace AMARENT
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Abrir_Logout();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BE_Usuario_44MM be = Sesion_Manager_44MM.Instancia.Get();
+            if (be != null)
+            {
+
+                bll.Cerrar_Sesion();
+            }
+            foreach (Form pantalla in pantallas)
+            {
+                pantalla.Visible = false;
+            }
+            GC.Collect();
+            Application.Exit();
         }
 
         private void gestionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -260,21 +282,9 @@ namespace AMARENT
         {
             Abrir_Cambiar_Idioma("Ingles");
         }
+        #endregion
 
-        private void UI_Menu_44MM_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            BE_Usuario_44MM be = Sesion_Manager_44MM.Instancia.Get();
-            if (be != null)
-            {
-                bll.Cerrar_Sesion();
-            }
-            //foreach (Form pantalla in pantallas)
-            //{
-            //    pantalla.Visible = false;
-            //}
-            GC.Collect();
-        }
-
+        #region QUITAR DESPUES
         private Keys key0;
         private Keys key1;
         private Keys key2;
@@ -302,7 +312,8 @@ namespace AMARENT
                 key9 == Keys.A
                 )
                 {
-                    Abrir_Gestion_Usuarios();
+                    UI_Gestion_44MM ui = new UI_Gestion_44MM("Crear", null, new UI_Gestion_Usuarios_44MM());
+                    ui.Show();
                 }
             }
             key0 = key1;
@@ -335,10 +346,12 @@ namespace AMARENT
             inglesToolStripMenuItem.Text = key_word["Ingles"];
             cambiarClaveToolStripMenuItem.Text = key_word["CambiarContra"];
             logoutToolStripMenuItem.Text = key_word["Logout"];
+            salirToolStripMenuItem.Text = key_word["Salir"];
 
             adminToolStripMenuItem.Text = key_word["Administracion"];
             gestionDeUsuariosToolStripMenuItem.Text = key_word["GestionUsuarios"];
             gestionDePerfilesToolStripMenuItem.Text = key_word["GestionPerfiles"];
+            gestionDeRespaldoToolStripMenuItem.Text = key_word["GestionRespaldo"];
             bitacoraDeEventosToolStripMenuItem.Text = key_word["BitacoraEventos"];
 
             maestroToolStripMenuItem.Text = key_word["Maestro"];

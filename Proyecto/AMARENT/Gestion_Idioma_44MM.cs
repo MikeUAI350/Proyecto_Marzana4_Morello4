@@ -25,7 +25,7 @@ namespace Servicios
             }
         }
 
-        List<I_Idioma> lista_form = new List<I_Idioma>();
+        private List<I_Idioma> lista_form = new List<I_Idioma>();
         public Dictionary<string, string> Texto = new Dictionary<string, string>();
 
         public void Suscribir_Form(I_Idioma form)

@@ -13,6 +13,7 @@ namespace BLL
     {
         private DAL_Respaldo_44MM dal_respaldo = new DAL_Respaldo_44MM();
         private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+        private BLL_Digito_Verificador_44MM bll_dv = new BLL_Digito_Verificador_44MM();
 
         public (bool, string) Hacer_BackUp(string ruta_BK)
         {
@@ -23,6 +24,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "BackUp-Restore", "BackUp", 5);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }    
             return (exito, mensaje);
         }
@@ -36,6 +39,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "BackUp-Restore", "Restore", 5);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }

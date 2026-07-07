@@ -17,6 +17,7 @@ namespace BLL
     {
         private DAL_Perfil_44MM dal_perfil = new DAL_Perfil_44MM();
         private BLL_Bitacora_44MM bll_bitacora = new BLL_Bitacora_44MM();
+        private BLL_Digito_Verificador_44MM bll_dv = new BLL_Digito_Verificador_44MM();
 
         private DataTable_Converter_44MM<BE_Perfil_44MM> datatable_converter_perfil = new DataTable_Converter_44MM<BE_Perfil_44MM>();
         private DataTable_Converter_44MM<BE_Familia_44MM> datatable_converter_familia = new DataTable_Converter_44MM<BE_Familia_44MM>();
@@ -270,6 +271,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Crear Perfil", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }
@@ -289,6 +292,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Crear Familia", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }
@@ -310,6 +315,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Modificar Perfil", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }
@@ -329,6 +336,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Modificar Familia", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }
@@ -350,6 +359,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Eliminar Perfil", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }
@@ -369,6 +380,8 @@ namespace BLL
                 string login = Sesion_Manager_44MM.Instancia.Get().Login;
                 //Bitacora
                 bll_bitacora.Registrar_Evento(login, DateTime.Now, "Perfiles", "Eliminar Familia", 1);
+                //Digito verificador
+                bll_dv.Guardar_Calculo();
             }
             return (exito, mensaje);
         }

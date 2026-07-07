@@ -238,8 +238,14 @@ namespace AMARENT
             if (string.IsNullOrEmpty(codigo) == false && string.IsNullOrEmpty(nombre) == false)
             //if (ER_codigo.Success == true && ER_codigo.Success == true)
             {
+                //Verifica si no es ninguno de los perfiles principales
+                if (codigo == "Admin" || codigo == "Base")
+                {
+                    //No se puede modificar
+                    MessageBox.Show($"{tipo} {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //Obtiene el seleccionado
-                if (radioButton_perfil.Checked == true)
+                else if (radioButton_perfil.Checked == true)
                 {
                     tipo = Gestion_Idioma_44MM.Instancia.Texto["Perfil"];
                     //Asegura que no este vacio
@@ -253,6 +259,7 @@ namespace AMARENT
                             if (exito == true)
                             {
                                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                                Actualizar();
                             }
                             else
                             {
@@ -261,13 +268,13 @@ namespace AMARENT
                         }
                         else
                         {
-                            MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[tipo]} {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"{tipo} {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
                         //Perfil vacio
-                        MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[tipo]} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"{tipo} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (radioButton_familia.Checked == true)
@@ -284,6 +291,7 @@ namespace AMARENT
                             if (exito == true)
                             {
                                 MessageBox.Show(Gestion_Idioma_44MM.Instancia.Texto[mensaje]);
+                                Actualizar();
                             }
                             else
                             {
@@ -292,20 +300,19 @@ namespace AMARENT
                         }
                         else
                         {
-                            MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[tipo]} {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"{tipo} {Gestion_Idioma_44MM.Instancia.Texto["YaExistente"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
                         //Perfil vacio
-                        MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[tipo]} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"{tipo} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     MessageBox.Show("?", "?", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
-
             }
             else
             {
@@ -324,8 +331,14 @@ namespace AMARENT
             //Asegura que no este vacio
             if (lista_seleccionados.Count > 0)
             {
+                //Verifica si no es ninguno de los perfiles principales
+                if (perfil.Cod_Perfil == "Admin" || perfil.Cod_Perfil == "Base")
+                {
+                    //No se puede modificar
+                    MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["NoSePuedeModificar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'");
+                }
                 //Verifica el tipo
-                if (perfil.Tipo == "Perfil")
+                else if (perfil.Tipo == "Perfil")
                 {
                     //Verifica si existe una familia con ese codigo o nombre y si las cajas de texto son las mismas
                     existe = bll_perfil.Verificar_Existencia_Perfil(perfil.Cod_Perfil, perfil.Nombre);
@@ -336,7 +349,7 @@ namespace AMARENT
                         if (mismo == false)
                         {
                             //Pregunta de seguridad
-                            DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                            DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                             if (resultado == DialogResult.Yes)
                             {
                                 (exito, mensaje) = bll_perfil.Modificar_Perfil(perfil, lista_seleccionados.ToList());
@@ -379,7 +392,7 @@ namespace AMARENT
                     if (textBox_codigo.Text == perfil.Cod_Perfil && textBox_nombre.Text == perfil.Nombre && existe == true)
                     {
                         //Pregunta de seguridad
-                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeModificar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarModificacion"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                         if (resultado == DialogResult.Yes)
                         {
                             (exito, mensaje) = bll_perfil.Modificar_Familia(perfil, lista_seleccionados.ToList());
@@ -418,7 +431,7 @@ namespace AMARENT
             else
             {
                 //Sin elementos
-                MessageBox.Show($"{perfil.Tipo} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} {Gestion_Idioma_44MM.Instancia.Texto["NoPuedeEstarVacio"]}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -430,7 +443,13 @@ namespace AMARENT
             bool mismo = false;
             bool es_ultimo = false;
 
-            if (perfil.Tipo == "Perfil")
+            //Verifica si no es ninguno de los perfiles principales
+            if (perfil.Cod_Perfil == "Admin" || perfil.Cod_Perfil == "Base")
+            {
+                //No se puede eliminar
+                MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["NoSePuedeEliminar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'");
+            }
+            else if (perfil.Tipo == "Perfil")
             {
                 //Verifica si existe
                 existe = bll_perfil.Verificar_Existencia_Perfil(perfil.Cod_Perfil, perfil.Nombre);
@@ -441,7 +460,7 @@ namespace AMARENT
                     if (mismo == false)
                     {
                         //Pregunta de seguridad
-                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeEliminar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarEliminacion"], MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeEliminar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarEliminacion"], MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (resultado == DialogResult.Yes)
                         {
                             (exito, mensaje) = bll_perfil.Eliminar_Perfil(perfil);
@@ -479,7 +498,7 @@ namespace AMARENT
                     if (es_ultimo == false)
                     {
                         //Pregunta de seguridad
-                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeEliminar"]} {perfil.Tipo} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarEliminacion"], MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult resultado = MessageBox.Show($"{Gestion_Idioma_44MM.Instancia.Texto["EstaSeguroDeEliminar"]} {Gestion_Idioma_44MM.Instancia.Texto[perfil.Tipo]} '{perfil.Nombre}'?", Gestion_Idioma_44MM.Instancia.Texto["ConfirmarEliminacion"], MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (resultado == DialogResult.Yes)
                         {
                             (exito, mensaje) = bll_perfil.Eliminar_Familia(perfil);

@@ -3,10 +3,12 @@
   "Actualizar": "Update",
   "ActDesact": "Act/Deact",
   "Administracion": "Manager",
+  "Advertencia": "Warning",
   "Agregar": "Add",
   "Anular": "Cancel",
   "Apellido": "Surname",
   "Aplicar": "Apply",
+  "Atras": "Back",
   "Ayuda": "Help",
   "Bitacora": "Log",
   "BitacoraEventos": "Event Log",
@@ -39,6 +41,7 @@
   "Gestion": "Management",
   "GestionUsuarios": "User Management",
   "GestionPerfiles": "Profile Management",
+  "GestionRespaldo": "Backup Management",
   "Imprimir": "Print",
   "Ingles": "English",
   "Inactivos": "Inactives",
@@ -135,5 +138,12 @@
   "SeleccioneRutaDelBackup": "Select the Backup location",
   "RestoreExitoso": "Restoration Successfully done from",
   "ErrorRestore": "Error doing Restoration",
-  "SeleccioneRutaDelRestore": "Select the Restore file"
+  "SeleccioneRutaDelRestore": "Select the Restore file",
+
+  "InconsistenciaEnLaBaseDeDatos": "Inconsistency in the Database",
+  "EstaSeguroQueDeseaRecalcularYMantenerLosPosiblesErrores": "Are you sure you want to recalculate and maintain possible errors?",
+  "TablasAfectadas": "Affected Tables",
+  "Recalcular": "Recalculate",
+  "Recalculado": "Recalculated",
+  "MostrarErrores": "Show Errors"
 }

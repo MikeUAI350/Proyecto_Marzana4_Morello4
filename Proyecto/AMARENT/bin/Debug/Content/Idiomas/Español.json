@@ -3,10 +3,12 @@
   "Actualizar": "Actualizar",
   "ActDesact": "Act/Desact",
   "Administracion": "Administracion",
+  "Advertencia": "Advertencia",
   "Agregar": "Agregar",
   "Anular": "Anular",
   "Apellido": "Apellido",
   "Aplicar": "Aplicar",
+  "Atras": "Atras",
   "Ayuda": "Ayuda",
   "Bitacora": "Bitacora",
   "BitacoraEventos": "Bitacora de Eventos",
@@ -39,6 +41,7 @@
   "Gestion": "Gestion",
   "GestionUsuarios": "Gestion de Usuarios",
   "GestionPerfiles": "Gestion de Perfiles",
+  "GestionRespaldo": "Gestion de Respaldos",
   "Imprimir": "Imprimir",
   "Ingles": "Ingles",
   "Inactivos": "Inactivos",
@@ -135,5 +138,12 @@
   "SeleccioneRutaDelBackup": "Seleccione la ubicacion del Respaldo",
   "RestoreExitoso": "Restauracion hecha Exitosamente de",
   "ErrorRestore": "Error haciendo la Restauracion",
-  "SeleccioneRutaDelRestore": "Seleccione el archivo de Restauracion"
+  "SeleccioneRutaDelRestore": "Seleccione el archivo de Restauracion",
+
+  "InconsistenciaEnLaBaseDeDatos": "Inconsistencia en la Base de Datos",
+  "EstaSeguroQueDeseaRecalcularYMantenerLosPosiblesErrores": "¿Esta seguro que desea Recalcular y Mantener los posibles Errores?",
+  "TablasAfectadas": "Tablas Afectadas",
+  "Recalcular": "Recalcular",
+  "Recalculado": "Recalculado",
+  "MostrarErrores": "Mostrar Errores"
 }
